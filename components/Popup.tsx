@@ -12,17 +12,70 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 
-const SERVICES = [
-  "Digital Marketing",
-  "Performance Marketing",
-  "SEO Services",
-  "Social Media Marketing",
-  "Branding & Creative",
-  "Website Development",
-  "Automation & CRM",
-  "Other Requirement",
-] as const;
+const SERVICE_OPTIONS = {
+  "Digital Marketing": [
+    "Social Media Marketing Services (SMM)",
+    "Social Media Optimization Services (SMO)",
+    "Content Marketing Services",
+    "Online Reputation Management (ORM)",
+    "Influencer Marketing",
+    "WhatsApp Marketing",
+    "Email Marketing",
+  ],
+  "Performance Marketing": [
+    "Google Ads",
+    "Meta Ads",
+    "LinkedIn Ads",
+    "Search Engine Marketing (SEM)",
+    "YouTube Ads",
+    "Google Shopping Ads",
+    "Ecommerce PPC",
+    "Lead Generation Services",
+    "Remarketing Ads",
+    "Display Advertising",
+    "Landing Page Optimization",
+    "PPC Audit Services",
+  ],
+  "SEO Services": [
+    "SEO Audit Services",
+    "On-Page SEO",
+    "Technical SEO",
+    "Off-Page SEO",
+    "Link-Building Services",
+    "Local SEO Services",
+    "Ecommerce SEO Services",
+    "Enterprise SEO Services",
+    "International SEO Services",
+  ],
+  "Web Design & Development": [
+    "UI/UX Design",
+    "Web Development Services",
+    "WordPress Development",
+    "Shopify Development",
+    "E-Commerce Development",
+    "Custom Web Application Development",
+    "Mobile App Development",
+    "Website Maintenance Services",
+  ],
+  "Creative & Media Services": [
+    "Creative Design Services",
+    "Graphic Design Services",
+    "Branding Design Services",
+    "Social Media Creative Design",
+    "Ad Creative Design",
+    "Visual Content Creation",
+    "Motion Graphics Services",
+    "Short Video Editing",
+    "Reel Editing Services",
+    "Video Editing Services",
+    "Corporate Video Editing",
+    "YouTube Thumbnail Design",
+    "Presentation Design Services",
+    "Infographic Design Services",
+  ],
+} as const;
 
+type MainService = keyof typeof SERVICE_OPTIONS;
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
 type EnquiryPayload = {
@@ -30,22 +83,57 @@ type EnquiryPayload = {
   email: string;
   phone: string;
   company: string;
+  serviceCategory: MainService | "";
   service: string;
   message: string;
   source: string;
   pageUrl: string;
 };
 
+const MAIN_SERVICES = Object.keys(SERVICE_OPTIONS) as MainService[];
+
 const EMPTY_FORM: EnquiryPayload = {
   name: "",
   email: "",
   phone: "",
   company: "",
+  serviceCategory: "",
   service: "",
   message: "",
   source: "Website enquiry",
   pageUrl: "",
 };
+
+function resolveServiceSelection(value: string): {
+  serviceCategory: MainService | "";
+  service: string;
+} {
+  if (!value) {
+    return { serviceCategory: "", service: "" };
+  }
+
+  if (MAIN_SERVICES.includes(value as MainService)) {
+    return {
+      serviceCategory: value as MainService,
+      service: "",
+    };
+  }
+
+  for (const category of MAIN_SERVICES) {
+    const matchedService = SERVICE_OPTIONS[category].find(
+      (service) => service === value,
+    );
+
+    if (matchedService) {
+      return {
+        serviceCategory: category,
+        service: matchedService,
+      };
+    }
+  }
+
+  return { serviceCategory: "", service: "" };
+}
 
 export default function EnquiryPopup() {
   const [mounted, setMounted] = useState(false);
@@ -73,12 +161,14 @@ export default function EnquiryPopup() {
         trigger.dataset.enquirySource?.trim() ||
         trigger.textContent?.trim() ||
         "Website CTA";
-      const service = trigger.dataset.enquiryService?.trim() || "";
+      const requestedService = trigger.dataset.enquiryService?.trim() || "";
+      const resolvedService = resolveServiceSelection(requestedService);
 
       setForm((current) => ({
         ...current,
         source,
-        service,
+        serviceCategory: resolvedService.serviceCategory,
+        service: resolvedService.service,
         pageUrl: window.location.href,
       }));
       setStatus("idle");
@@ -131,17 +221,30 @@ export default function EnquiryPopup() {
       setForm((current) => ({ ...current, [field]: value }));
     };
 
+  const handleMainServiceChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const serviceCategory = event.target.value as MainService;
+
+    setForm((current) => ({
+      ...current,
+      serviceCategory,
+      service: "",
+    }));
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus("submitting");
     setErrorMessage("");
 
     try {
+      const { serviceCategory, ...payload } = form;
+
       const response = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...form,
+          ...payload,
+          service: `${serviceCategory} - ${form.service}`,
           pageUrl: form.pageUrl || window.location.href,
         }),
       });
@@ -171,6 +274,10 @@ export default function EnquiryPopup() {
       );
     }
   };
+
+  const selectedSubServices = form.serviceCategory
+    ? SERVICE_OPTIONS[form.serviceCategory]
+    : [];
 
   if (!mounted || !isOpen) return null;
 
@@ -343,24 +450,48 @@ export default function EnquiryPopup() {
                     </Field>
                   </div>
 
-                  <Field label="Service required *">
-                    <select
-                      name="service"
-                      value={form.service}
-                      onChange={updateField("service")}
-                      required
-                      className={inputClassName}
-                    >
-                      <option value="" disabled>
-                        Select a service
-                      </option>
-                      {SERVICES.map((service) => (
-                        <option key={service} value={service}>
-                          {service}
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <Field label="Main service *">
+                      <select
+                        name="serviceCategory"
+                        value={form.serviceCategory}
+                        onChange={handleMainServiceChange}
+                        required
+                        className={inputClassName}
+                      >
+                        <option value="" disabled>
+                          Select main service
                         </option>
-                      ))}
-                    </select>
-                  </Field>
+                        {MAIN_SERVICES.map((service) => (
+                          <option key={service} value={service}>
+                            {service}
+                          </option>
+                        ))}
+                      </select>
+                    </Field>
+
+                    <Field label="Service required *">
+                      <select
+                        name="service"
+                        value={form.service}
+                        onChange={updateField("service")}
+                        required
+                        disabled={!form.serviceCategory}
+                        className={`${inputClassName} disabled:cursor-not-allowed disabled:bg-black/[0.035] disabled:text-black/40`}
+                      >
+                        <option value="" disabled>
+                          {form.serviceCategory
+                            ? "Select a service"
+                            : "Select main service first"}
+                        </option>
+                        {selectedSubServices.map((service) => (
+                          <option key={service} value={service}>
+                            {service}
+                          </option>
+                        ))}
+                      </select>
+                    </Field>
+                  </div>
 
                   <Field label="Requirement">
                     <textarea

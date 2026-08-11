@@ -52,56 +52,56 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
       image: "/portfolio/insights2.webp",
       href: "https://comacindia.com/",
     },
-    {
-      title: "Jaskirat Exports",
-      image: "/portfolio/web/3.png",
-      href: "https://jaskiratexports.com/",
-    },
+    // {
+    //   title: "Lissico",
+    //   image: "/portfolio/vogue-india.webp",
+    //   href: "https://www.lissico.com/?srsltid=AfmBOoqAJXmONj2bljZBq2dP8yVDCshsmi0wgJX_0pS3loyRYav2bx_A",
+    // },
     {
       title: "National Engineers & Steel Fabricators",
       image: "/portfolio/national-engineers.webp",
       href: "https://nationalengrs.com/",
     },
     {
-      title: "Country Home",
-      image: "/portfolio/web/5.png",
-      href: "https://countryhome.co.in/",
+      title: "Okay Trip",
+      image: "/portfolio/okay-trip.webp",
+      href: "https://okaytrip.in/",
     },
-    {
-      title: "Rubber House India",
-      image: "/portfolio/web/6.png",
-      href: "https://rubberhoseindia.com/",
-    },
-    {
-      title: "Synergy Infra",
-      image: "/portfolio/web/7.png",
-      href: "https://synergyinfra.ltd/",
-    },
-    {
-      title: "Atlas Machine",
-      image: "/portfolio/web/8.png",
-      href: "https://atlasmachinery.co.in/",
-    },
-    {
-      title: "Silent Meadows",
-      image: "/portfolio/web/9.png",
-      href: "https://silentmeadows.in/silentmeadows/",
-    },
+    // {
+    //   title: "Rubber House India",
+    //   image: "/portfolio/web/6.png",
+    //   href: "https://rubberhoseindia.com/",
+    // },
+    // {
+    //   title: "Synergy Infra",
+    //   image: "/portfolio/web/7.png",
+    //   href: "https://synergyinfra.ltd/",
+    // },
+    // {
+    //   title: "Atlas Machine",
+    //   image: "/portfolio/web/8.png",
+    //   href: "https://atlasmachinery.co.in/",
+    // },
+    // {
+    //   title: "Silent Meadows",
+    //   image: "/portfolio/web/9.png",
+    //   href: "https://silentmeadows.in/silentmeadows/",
+    // },
   ],
   SEO: [
     {
       title: "National Engineers SEO",
-      image: "/portfolio/seo/seo-1.jpg",
+      image: "/portfolio/seo/",
       href: "https://nationalengrs.com",
     },
     {
       title: "Dairy Best Organic Reach",
-      image: "/portfolio/seo/seo-2.jpg",
+      image: "/portfolio/seo/",
       href: "https://livlite.co.in",
     },
     {
       title: "Lords Xtra Search Performance",
-      image: "/portfolio/seo/seo-3.jpg",
+      image: "/portfolio/seo/",
       href: "https://lordsxtra.in",
     },
   ],
@@ -109,32 +109,32 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
   "Instagram Profiles": [
     {
       title: "Cremica",
-      image: "/portfolio/instagram/7.png",
+      image: "/portfolio/instagram/",
       href: "https://www.instagram.com/cremicafoods/",
     },
     {
       title: "Eclectic Bay India",
-      image: "/portfolio/instagram/5.png",
+      image: "/portfolio/instagram/",
       href: "https://www.instagram.com/eclecticbayindia/",
     },
     {
       title: "Comac India",
-      image: "/portfolio/instagram/1.png",
+      image: "/portfolio/instagram/",
       href: "https://www.instagram.com/comacindia/",
     },
     {
       title: "Navin Polycon",
-      image: "/portfolio/instagram/2.png",
+      image: "/portfolio/instagram/",
       href: "https://www.instagram.com/navin.polycon/",
     },
     {
       title: "Stas Chem Group",
-      image: "/portfolio/instagram/3.png",
+      image: "/portfolio/instagram/",
       href: "https://www.instagram.com/staschemgroup/",
     },
     {
       title: "Ok Cookware",
-      image: "/portfolio/instagram/4.png",
+      image: "/portfolio/instagram/",
       href: "https://www.instagram.com/okcookware/",
     },
   ],
@@ -142,17 +142,17 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
   "Facebook Profiles": [
     {
       title: "Water Expo Campaigns",
-      image: "/portfolio/facebook/fb-1.jpg",
+      image: "/portfolio/facebook/",
       href: "https://facebook.com/",
     },
     {
       title: "Dhariwala Foods Page",
-      image: "/portfolio/facebook/fb-2.jpg",
+      image: "/portfolio/facebook/",
       href: "https://facebook.com/",
     },
     {
       title: "BrainADZ Live",
-      image: "/portfolio/facebook/fb-3.jpg",
+      image: "/portfolio/facebook/",
       href: "https://facebook.com/",
     },
   ],
@@ -160,17 +160,17 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
   "Youtube Profiles": [
     {
       title: "Exhibits Video Portfolio",
-      image: "/portfolio/youtube/yt-1.jpg",
+      image: "/portfolio/youtube/",
       href: "https://youtube.com/",
     },
     {
       title: "Product Demo Videos",
-      image: "/portfolio/youtube/yt-2.jpg",
+      image: "/portfolio/youtube/",
       href: "https://youtube.com/",
     },
     {
       title: "WAPTEMA Event Promotions",
-      image: "/portfolio/youtube/yt-3.jpg",
+      image: "/portfolio/youtube/",
       href: "https://youtube.com/",
     },
   ],
@@ -178,17 +178,17 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
   "Linkedin Profiles": [
     {
       title: "BrainADZ Corporate Branding",
-      image: "/portfolio/linkedin/li-1.jpg",
+      image: "/portfolio/linkedin/",
       href: "https://linkedin.com/",
     },
     {
       title: "Exhibition Project Showcase",
-      image: "/portfolio/linkedin/li-2.jpg",
+      image: "/portfolio/linkedin/",
       href: "https://linkedin.com/",
     },
     {
       title: "Company Updates & Milestones",
-      image: "/portfolio/linkedin/li-3.jpg",
+      image: "/portfolio/linkedin/",
       href: "https://linkedin.com/",
     },
   ],
@@ -196,27 +196,27 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
   "Graphic Design": [
     {
       title: "Graphic 1",
-      image: "/portfolio/graphic/graphic-1.jpg",
+      image: "/portfolio/graphic/",
     },
     {
       title: "Graphic 2",
-      image: "/portfolio/graphic/graphic-2.jpg",
+      image: "/portfolio/graphic/",
     },
     {
       title: "Graphic 3",
-      image: "/portfolio/graphic/graphic-3.jpg",
+      image: "/portfolio/graphic/",
     },
     {
       title: "Graphic 4",
-      image: "/portfolio/graphic/graphic-4.jpg",
+      image: "/portfolio/graphic/",
     },
     {
       title: "Graphic 5",
-      image: "/portfolio/graphic/graphic-5.jpg",
+      image: "/portfolio/graphic/",
     },
     {
       title: "Graphic 6",
-      image: "/portfolio/graphic/graphic-6.jpg",
+      image: "/portfolio/graphic/",
     },
   ],
 };

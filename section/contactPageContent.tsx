@@ -15,16 +15,70 @@ import {
   Phone,
 } from "lucide-react";
 
-const SERVICES = [
-  "Digital Marketing",
-  "Performance Marketing",
-  "SEO Services",
-  "Social Media Marketing",
-  "Branding and Creative",
-  "Website Development",
-  "Automation and CRM",
-  "Exhibitions and Live Events",
-];
+const SERVICE_OPTIONS = {
+  "Digital Marketing": [
+    "Social Media Marketing Services (SMM)",
+    "Social Media Optimization Services (SMO)",
+    "Content Marketing Services",
+    "Online Reputation Management (ORM)",
+    "Influencer Marketing",
+    "WhatsApp Marketing",
+    "Email Marketing",
+  ],
+  "Performance Marketing": [
+    "Google Ads",
+    "Meta Ads",
+    "LinkedIn Ads",
+    "Search Engine Marketing (SEM)",
+    "YouTube Ads",
+    "Google Shopping Ads",
+    "Ecommerce PPC",
+    "Lead Generation Services",
+    "Remarketing Ads",
+    "Display Advertising",
+    "Landing Page Optimization",
+    "PPC Audit Services",
+  ],
+  "SEO Services": [
+    "SEO Audit Services",
+    "On-Page SEO",
+    "Technical SEO",
+    "Off-Page SEO",
+    "Link-Building Services",
+    "Local SEO Services",
+    "Ecommerce SEO Services",
+    "Enterprise SEO Services",
+    "International SEO Services",
+  ],
+  "Web Design & Development": [
+    "UI/UX Design",
+    "Web Development Services",
+    "WordPress Development",
+    "Shopify Development",
+    "E-Commerce Development",
+    "Custom Web Application Development",
+    "Mobile App Development",
+    "Website Maintenance Services",
+  ],
+  "Creative & Media Services": [
+    "Creative Design Services",
+    "Graphic Design Services",
+    "Branding Design Services",
+    "Social Media Creative Design",
+    "Ad Creative Design",
+    "Visual Content Creation",
+    "Motion Graphics Services",
+    "Short Video Editing",
+    "Reel Editing Services",
+    "Video Editing Services",
+    "Corporate Video Editing",
+    "YouTube Thumbnail Design",
+    "Presentation Design Services",
+    "Infographic Design Services",
+  ],
+} as const;
+
+type MainService = keyof typeof SERVICE_OPTIONS;
 
 const CONTACT_FAQS = [
   {
@@ -57,6 +111,10 @@ const CONTACT_FAQS = [
 export default function ContactPageContent() {
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [selectedMainService, setSelectedMainService] = useState<
+    MainService | ""
+  >("");
+  const [selectedService, setSelectedService] = useState("");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -64,14 +122,16 @@ export default function ContactPageContent() {
     const formData = new FormData(event.currentTarget);
     const getValue = (name: string) => String(formData.get(name) ?? "").trim();
     const name = getValue("name");
+    const mainService = getValue("mainService");
     const service = getValue("service");
-    const subject = `New ${service} enquiry from ${name}`;
+    const subject = `New ${mainService} - ${service} enquiry from ${name}`;
     const body = [
       `Name: ${name}`,
       `Work email: ${getValue("email")}`,
       `Phone: ${getValue("phone")}`,
       `Company: ${getValue("company") || "Not provided"}`,
-      `Service: ${service}`,
+      `Main service: ${mainService}`,
+      `Specific service: ${service}`,
       "",
       "Project details:",
       getValue("message"),
@@ -233,31 +293,76 @@ export default function ContactPageContent() {
                     />
                   </div>
 
-                  <div>
-                    <label
-                      htmlFor="service"
-                      className="mb-2 block text-[13px] font-medium text-black/65"
-                    >
-                      Service you need
-                    </label>
-                    <div className="relative">
-                      <select
-                        id="service"
-                        name="service"
-                        required
-                        defaultValue=""
-                        className="h-14 w-full appearance-none rounded-[10px] border border-black/14 bg-white px-4 pr-12 text-[15px] text-black outline-none transition focus:border-[#E1122B]"
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    <div>
+                      <label
+                        htmlFor="mainService"
+                        className="mb-2 block text-[13px] font-medium text-black/65"
                       >
-                        <option value="" disabled>
-                          Select a service
-                        </option>
-                        {SERVICES.map((service) => (
-                          <option key={service} value={service}>
-                            {service}
+                        Main service
+                      </label>
+                      <div className="relative">
+                        <select
+                          id="mainService"
+                          name="mainService"
+                          required
+                          value={selectedMainService}
+                          onChange={(event) => {
+                            setSelectedMainService(
+                              event.target.value as MainService | "",
+                            );
+                            setSelectedService("");
+                            setSubmitted(false);
+                          }}
+                          className="h-14 w-full appearance-none rounded-[10px] border border-black/14 bg-white px-4 pr-12 text-[15px] text-black outline-none transition focus:border-[#E1122B]"
+                        >
+                          <option value="" disabled>
+                            Select main service
                           </option>
-                        ))}
-                      </select>
-                      <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-black/45" />
+                          {Object.keys(SERVICE_OPTIONS).map((service) => (
+                            <option key={service} value={service}>
+                              {service}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-black/45" />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="service"
+                        className="mb-2 block text-[13px] font-medium text-black/65"
+                      >
+                        Service you need
+                      </label>
+                      <div className="relative">
+                        <select
+                          id="service"
+                          name="service"
+                          required
+                          disabled={!selectedMainService}
+                          value={selectedService}
+                          onChange={(event) => {
+                            setSelectedService(event.target.value);
+                            setSubmitted(false);
+                          }}
+                          className="h-14 w-full appearance-none rounded-[10px] border border-black/14 bg-white px-4 pr-12 text-[15px] text-black outline-none transition focus:border-[#E1122B] disabled:cursor-not-allowed disabled:bg-black/[0.03] disabled:text-black/40"
+                        >
+                          <option value="" disabled>
+                            {selectedMainService
+                              ? "Select specific service"
+                              : "Select main service first"}
+                          </option>
+                          {selectedMainService &&
+                            SERVICE_OPTIONS[selectedMainService].map((service) => (
+                              <option key={service} value={service}>
+                                {service}
+                              </option>
+                            ))}
+                        </select>
+                        <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-black/45" />
+                      </div>
                     </div>
                   </div>
 
@@ -344,13 +449,13 @@ export default function ContactPageContent() {
                 </p>
                 <h3 className="mt-3 text-[30px] font-medium">BrainADZ Delhi</h3>
                 <p className="mt-5 max-w-[390px] text-[15px] leading-7 text-black/62">
-                  A-24/8, 1st Floor, Rathi Tower, NH-19, Mohan Cooperative
-                  Industrial Estate, New Delhi 110044
+                  Apex Square III, UGF, Plot 6, Pocket B-3, Sector-17, Dwarka,
+                  New Delhi 110075
                 </p>
               </div>
 
               <a
-                href="https://www.google.com/maps/search/?api=1&query=A-24%2F8%20Rathi%20Tower%20Mohan%20Cooperative%20Industrial%20Estate%20New%20Delhi%20110044"
+                href="https://maps.app.goo.gl/tULrPkjR4T5w2rzi8"
                 target="_blank"
                 rel="noreferrer"
                 className="mt-9 inline-flex min-h-12 items-center justify-center gap-3 self-start rounded-full border border-black/18 bg-white px-5 text-[13px] font-semibold text-black transition hover:border-[#E1122B] hover:bg-[#E1122B] hover:text-white"
@@ -363,7 +468,7 @@ export default function ContactPageContent() {
             <div className="h-[420px] bg-[#f3f3f3] sm:h-[500px]">
               <iframe
                 title="BrainADZ Delhi office location"
-                src="https://www.google.com/maps?q=A-24%2F8%20Rathi%20Tower%20Mohan%20Cooperative%20Industrial%20Estate%20New%20Delhi%20110044&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.2033368965426!2d77.02318032549942!3d28.593676175686017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b6968c75e7d%3A0x43ee66239df426e4!2sBrainADZ%20Live!5e0!3m2!1sen!2sin!4v1782885852643!5m2!1sen!2sin"
                 className="h-full w-full border-0"
                 loading="lazy"
                 allowFullScreen

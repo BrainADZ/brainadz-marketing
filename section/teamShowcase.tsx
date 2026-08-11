@@ -56,7 +56,7 @@ const PROJECT_MANAGERS: TeamMember[] = [
     designation: "Corporate Sale & Project Manager",
     image: "/teams/Sarthak.webp",
     linkedin: "https://www.linkedin.com/in/sarthak-raina-693427165/",
-    email: "cropsaales@brainadzlive.com",
+    email: "cropsales@brainadzlive.com",
     phone: "+91 92112 93332", // Replace with actual number
   },
 ];

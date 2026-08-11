@@ -8,9 +8,7 @@ import { useMemo, useState } from "react";
 type WorkCategory =
   | "Digital Marketing"
   | "Website Development"
-  | "Creative Media"
-  | "SEO"
-  | "Performance Marketing";
+  | "Creative Media";
 
 type FilterKey = "All" | WorkCategory;
 
@@ -27,8 +25,6 @@ const FILTERS: FilterKey[] = [
   "Digital Marketing",
   "Website Development",
   "Creative Media",
-  "SEO",
-  "Performance Marketing",
 ];
 
 const CASE_STUDIES: CaseStudyItem[] = [
@@ -58,12 +54,12 @@ const CASE_STUDIES: CaseStudyItem[] = [
     category: "Website Development",
     media: "/portfolio/okay-trip.webp",
     mediaType: "image",
-    href: "/case-studies",
+    href: "https://www.okaytrip.in/",
   },
 
   {
     title: "Logo Design",
-    category: "Performance Marketing",
+    category: "Creative Media",
     media: "/portfolio/logo-insight.webp",
     mediaType: "image",
     href: "/case-studies",
@@ -73,14 +69,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     category: "Website Development",
     media: "/portfolio/insights2.webp",
     mediaType: "image",
-    href: "/case-studies",
-  },
-  {
-    title: "Vogue India",
-    category: "Website Development",
-    media: "/portfolio/vogue-india.webp",
-    mediaType: "image",
-    href: "/case-studies",
+    href: "https://comacindia.com/",
   },
   {
     title: "Calendar Design",
@@ -94,11 +83,11 @@ const CASE_STUDIES: CaseStudyItem[] = [
     category: "Website Development",
     media: "/portfolio/national-engineers.webp",
     mediaType: "image",
-    href: "/case-studies",
+    href: "https://nationalengrs.com/",
   },
   {
     title: "Newspaper Design",
-    category: "SEO",
+    category: "Creative Media",
     media: "/portfolio/news-insight.webp",
     mediaType: "image",
     href: "/case-studies",
@@ -111,11 +100,11 @@ const CASE_STUDIES: CaseStudyItem[] = [
     href: "/case-studies",
   },
   {
-    title: "E-Commerce Website Design",
+    title: "Mewa Hub",
     category: "Website Development",
     media: "/portfolio/web-insight1.webp",
     mediaType: "image",
-    href: "/case-studies",
+    href: "https://mewahub.com/",
   },
   {
     title: "In-House Studio Setup",
