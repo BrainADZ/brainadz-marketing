@@ -162,7 +162,6 @@ export default function FaqSection() {
         dangerouslySetInnerHTML={{
           __html: `
             .faq-panel-scroll {
-              overscroll-behavior: contain;
               scrollbar-gutter: stable;
               scrollbar-width: thin;
               scrollbar-color: rgba(225, 18, 43, 0.55) transparent;

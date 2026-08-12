@@ -18,7 +18,7 @@ type TabKey =
   | "Facebook Profiles"
   | "Youtube Profiles"
   | "Linkedin Profiles"
-  | "Graphic Design";
+  | "Creative Media";
 
 const TABS: TabKey[] = [
   "Web Design",
@@ -28,14 +28,15 @@ const TABS: TabKey[] = [
   "Youtube Profiles",
   "Linkedin Profiles",
 
-  "Graphic Design",
+  "Creative Media",
 ];
 
 /* ========================= DATA ========================= */
 
 type PortfolioItem = {
   title: string;
-  image: string;
+  image?: string;
+  video?: string;
   href?: string;
 };
 
@@ -193,30 +194,30 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
     },
   ],
 
-  "Graphic Design": [
+  "Creative Media": [
     {
-      title: "Graphic 1",
-      image: "/portfolio/graphic/",
+      title: "In-House Studio Setup",
+      image: "/portfolio/inhouse-studio.webp",
     },
     {
-      title: "Graphic 2",
-      image: "/portfolio/graphic/",
+      title: "Classic Hotel",
+      video: "/portfolio/classic-video.mp4",
     },
     {
-      title: "Graphic 3",
-      image: "/portfolio/graphic/",
+      title: "Social Media Design",
+      image: "/portfolio/social-media-design.webp",
     },
     {
-      title: "Graphic 4",
-      image: "/portfolio/graphic/",
+      title: "Video Editing",
+      video: "/portfolio/video1.mp4",
     },
     {
-      title: "Graphic 5",
-      image: "/portfolio/graphic/",
+      title: "Stall Design",
+      image: "/portfolio/stall-insight.webp",
     },
     {
-      title: "Graphic 6",
-      image: "/portfolio/graphic/",
+      title: "Logo Design",
+      image: "/portfolio/logo-insight.webp",
     },
   ],
 };
@@ -500,8 +501,8 @@ function PortfolioTabsSection() {
         desc: "B2B positioning, profile revamps, and content frameworks.",
       },
 
-      "Graphic Design": {
-        title: "Graphic Design",
+      "Creative Media": {
+        title: "Creative Media",
         desc: "Branding, ad creatives, and visual-first design output.",
       },
     };
@@ -560,7 +561,7 @@ function PortfolioTabsSection() {
             {activeMeta.desc}
           </p>
 
-          {active === "Graphic Design" ? (
+          {active === "Creative Media" ? (
             <GraphicGrid items={items} category={active} />
           ) : (
             <BrowserGrid items={items} category={active} />
@@ -629,13 +630,27 @@ function PortfolioCard({
   const content = (
     <>
       <div className="overflow-hidden bg-white shadow-[0_12px_36px_rgba(0,0,0,0.08)] transition-[border-radius] duration-500 ease-out group-hover:rounded-lg">
-        <img
-          src={item.image}
-          alt={item.title}
-          loading="lazy"
-          decoding="async"
-          className="block h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:rotate-1"
-        />
+        {item.video ? (
+          <video
+            aria-label={`${item.title} project video`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="block h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:rotate-1"
+          >
+            <source src={item.video} type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src={item.image}
+            alt={item.title}
+            loading="lazy"
+            decoding="async"
+            className="block h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:rotate-1"
+          />
+        )}
       </div>
 
       <div className="pt-4">
