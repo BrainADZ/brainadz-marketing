@@ -59,23 +59,24 @@ const FOOTER_LINKS = [
     links: [
       { label: "Digital Marketing", href: "/services/digital-marketing" },
       { label: "Performance Marketing", href: "/services/performance-marketing" },
-      { label: "Web Development", href: "/services/web-design-development" },
-      { label: "Branding & Creative", href: "/services/graphic-design" },
+      { label: "Web Design & Development", href: "/services/web-design-development" },
+      { label: "Creative & Media Services", href: "/services/creative-media" },
+      { label: "SEO Services", href: "/services/seo-services" },
     ],
   },
   {
     title: "Portfolio",
     links: [
-      { label: "Website Projects", href: "/portfolio#portfolio" },
-      { label: "Social Media", href: "/portfolio#portfolio" },
-      { label: "Graphic Design", href: "/portfolio#portfolio" },
-      { label: "Videos & Exhibits", href: "/portfolio#portfolio" },
+      { label: "Website Projects", href: "/#casestudies" },
+      { label: "Social Media", href: "/#portfolio" },
+      { label: "Graphic Design", href: "/#portfolio" },
+      { label: "Videos & Exhibits", href: "/#casestudies" },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Case Studies", href: "/#case-studies" },
+      { label: "Case Studies", href: "/case-studies" },
       { label: "Client Testimonials", href: "/#testimonials" },
       { label: "FAQs", href: "/faqs" },
       { label: "Growth Insights", href: "/#insights" },
@@ -92,12 +93,12 @@ const BUSINESS_UNITS = [
   {
     name: "BrainADZ Live",
     logo: "/logo/live-optimized.webp",
-    href: "#",
+    href: "https://brainadzlive.com/",
   },
   {
     name: "BrainADZ Exhibits",
     logo: "/logo/Exhibits-Logo.jpg",
-    href: "#",
+    href: "https://brainadzexhibits.com/",
   },
 ];
 
