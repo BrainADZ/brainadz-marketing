@@ -534,7 +534,7 @@ export default function GoogleAdsServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/banner/google-ads-services.webp"
+          src="/banner/google-ads.webp"
           alt="Google Ads search campaign management and PPC performance optimisation"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

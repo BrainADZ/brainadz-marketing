@@ -599,7 +599,7 @@ export default function LandingPageOptimizationServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/banner/landing-page-optimization-services.webp"
+          src="/banner/landing-page-optimization.webp"
           alt="Landing page optimization for paid campaign conversion and qualified leads"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
