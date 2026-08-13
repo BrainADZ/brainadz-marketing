@@ -421,7 +421,7 @@ export default function SmoServicesPage() {
       {/* Hero Section */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/about/about.avif"
+          src="/banner/social-media-optimization-services.webp"
           alt="BrainADZ Marketing social media optimization team"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

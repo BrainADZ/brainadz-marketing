@@ -599,7 +599,7 @@ export default function RemarketingAdsServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/performance-marketing/remarketing-ads-hero.jpg"
+          src="/banner/remarketing-ads.webp"
           alt="Remarketing Ads campaign strategy for visitors, viewers, cart users and customers"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

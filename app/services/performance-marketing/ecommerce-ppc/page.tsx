@@ -567,7 +567,7 @@ export default function EcommercePpcServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/performance-marketing/ecommerce-ppc-hero.jpg"
+          src="/banner/ecommerce-ppc-services.webp"
           alt="Ecommerce PPC campaign management for product sales and profitable growth"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

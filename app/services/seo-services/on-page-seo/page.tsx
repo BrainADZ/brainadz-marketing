@@ -458,7 +458,7 @@ export default function OnPageSeoServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/seo/on-page-seo-hero.jpg"
+          src="/banner/onpage-seo.webp"
           alt="On Page SEO strategy for content structure, relevance and organic growth"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

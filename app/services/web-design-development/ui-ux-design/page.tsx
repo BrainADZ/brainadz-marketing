@@ -623,7 +623,7 @@ export default function UIUXDesignPage() {
       {/* Hero Section */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/about/about.avif"
+          src="/banner/uiux-design.webp"
           alt="BrainADZ UI UX design and digital product team"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

@@ -573,7 +573,7 @@ export default function YouTubeAdsServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/performance-marketing/youtube-ads-hero.jpg"
+          src="/banner/youtube-ads.webp"
           alt="YouTube Ads campaign management across video formats and devices"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

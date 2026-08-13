@@ -463,7 +463,7 @@ export default function LocalSeoServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/seo/local-seo-hero.jpg"
+          src="/banner/local-seo-services.webp"
           alt="Local SEO visibility across Google Maps and local search results"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

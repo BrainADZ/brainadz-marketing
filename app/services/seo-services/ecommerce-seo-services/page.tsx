@@ -503,7 +503,7 @@ export default function EcommerceSeoServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/seo/ecommerce-seo-hero.jpg"
+          src="/banner/ecommerce-seo-services.webp"
           alt="Ecommerce SEO strategy for category pages, product pages and organic revenue growth"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

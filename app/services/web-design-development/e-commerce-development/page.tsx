@@ -594,7 +594,7 @@ export default function EcommerceDevelopmentPage() {
       {/* Hero Section */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/about/about.avif"
+          src="/banner/ecommerce-development.webp"
           alt="BrainADZ ecommerce development and engineering team"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

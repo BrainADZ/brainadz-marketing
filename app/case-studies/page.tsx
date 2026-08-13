@@ -44,20 +44,20 @@ type PortfolioItem = {
 const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
   "Web Design": [
     {
-      title: "Khadi Organic",
-      image: "/portfolio/web-insight1.webp",
+      title: "Khadi Organique",
+      image: "/portfolio/khadi-organique.webp",
       href: "http://khadiorganique.com/",
+    },
+    {
+      title: "Mewa Hub",
+      image: "/portfolio/web-insight1.webp",
+      href: "https://mewahub.com/",
     },
     {
       title: "Comac India",
       image: "/portfolio/insights2.webp",
       href: "https://comacindia.com/",
     },
-    // {
-    //   title: "Lissico",
-    //   image: "/portfolio/vogue-india.webp",
-    //   href: "https://www.lissico.com/?srsltid=AfmBOoqAJXmONj2bljZBq2dP8yVDCshsmi0wgJX_0pS3loyRYav2bx_A",
-    // },
     {
       title: "National Engineers & Steel Fabricators",
       image: "/portfolio/national-engineers.webp",
@@ -68,26 +68,26 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
       image: "/portfolio/okay-trip.webp",
       href: "https://okaytrip.in/",
     },
-    // {
-    //   title: "Rubber House India",
-    //   image: "/portfolio/web/6.png",
-    //   href: "https://rubberhoseindia.com/",
-    // },
-    // {
-    //   title: "Synergy Infra",
-    //   image: "/portfolio/web/7.png",
-    //   href: "https://synergyinfra.ltd/",
-    // },
-    // {
-    //   title: "Atlas Machine",
-    //   image: "/portfolio/web/8.png",
-    //   href: "https://atlasmachinery.co.in/",
-    // },
-    // {
-    //   title: "Silent Meadows",
-    //   image: "/portfolio/web/9.png",
-    //   href: "https://silentmeadows.in/silentmeadows/",
-    // },
+    {
+      title: "Rubber Hose India",
+      image: "/portfolio/rubber-hose-india.webp",
+      href: "https://rubberhoseindia.com/",
+    },
+    {
+      title: "Synergy Infra",
+      image: "/portfolio/synergy-infra.webp",
+      href: "https://synergyinfra.ltd/",
+    },
+    {
+      title: "Country Home",
+      image: "/portfolio/country-home.webp",
+      href: "https://atlasmachinery.co.in/",
+    },
+    {
+      title: "Silent Meadows",
+      image: "/portfolio/silent-meadows.webp",
+      href: "https://silentmeadows.in/silentmeadows/",
+    },
   ],
   SEO: [
     {

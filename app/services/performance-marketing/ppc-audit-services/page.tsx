@@ -560,7 +560,7 @@ export default function PpcAuditServicesPage() {
 
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/performance-marketing/ppc-audit-services-hero.jpg"
+          src="/banner/ppc-audit-services.webp"
           alt="PPC account audit across campaigns, tracking, budgets and conversions"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

@@ -467,7 +467,7 @@ export default function AdCreativeDesignPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/about/about.avif"
+          src="/banner/ad-creative-design.webp"
           alt="BrainADZ advertising creative design team and workspace"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

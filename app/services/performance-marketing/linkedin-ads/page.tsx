@@ -643,7 +643,7 @@ export default function LinkedInAdsServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/performance-marketing/linkedin-ads-hero.jpg"
+          src="/banner/linkedin-ads-services.webp"
           alt="LinkedIn Ads campaign management for B2B audiences, leads and pipeline"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

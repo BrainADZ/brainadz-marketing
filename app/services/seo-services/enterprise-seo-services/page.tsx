@@ -541,7 +541,7 @@ export default function EnterpriseSeoServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/seo/enterprise-seo-hero.jpg"
+          src="/banner/enterprise-seo-services.webp"
           alt="Enterprise SEO strategy for large websites, complex platforms and multiple teams"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

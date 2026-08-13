@@ -628,7 +628,7 @@ export default function DisplayAdsServicesPage() {
 
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/performance-marketing/display-ads-hero.jpg"
+          src="/banner/display-ads-services.webp"
           alt="Google Display Ads campaign management across websites, apps and devices"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

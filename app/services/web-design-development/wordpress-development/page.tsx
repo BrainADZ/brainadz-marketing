@@ -641,7 +641,7 @@ export default function WordPressDevelopmentPage() {
       {/* Hero Section */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/about/about.avif"
+          src="/banner/wordpress-development.webp"
           alt="BrainADZ WordPress website development team"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

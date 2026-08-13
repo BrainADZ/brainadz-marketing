@@ -546,7 +546,7 @@ export default function InternationalSeoServicesPage() {
 
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/seo/international-seo-hero.jpg"
+          src="/banner/international-seo-services.webp"
           alt="International SEO strategy for countries, languages and global search growth"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

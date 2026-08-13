@@ -340,7 +340,7 @@ export default function GraphicDesignServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/about/about.avif"
+          src="/banner/graphic-design-services.webp"
           alt="BrainADZ creative and graphic design team workspace"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

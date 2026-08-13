@@ -591,7 +591,7 @@ export default function LeadGenerationServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/performance-marketing/lead-generation-hero.jpg"
+          src="/banner/lead-generation-services.webp"
           alt="Lead generation campaign management connecting paid media, forms and CRM"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

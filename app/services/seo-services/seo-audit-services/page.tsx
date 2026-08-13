@@ -472,7 +472,7 @@ export default function SeoAuditServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/seo/seo-audit-services-hero.jpg"
+          src="/banner/seo-audit-services.webp"
           alt="SEO audit analysis covering technical, content and authority issues"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

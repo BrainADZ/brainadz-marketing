@@ -405,7 +405,7 @@ export default function LinkBuildingSeoServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[440px] overflow-hidden bg-black sm:min-h-[520px] lg:min-h-[580px]">
         <img
-          src="/seo/link-building-hero.jpg"
+          src="/banner/link-building-services.webp"
           alt="Link building strategy with editorial outreach and authority growth"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

@@ -480,7 +480,7 @@ export default function OffPageSeoServicesPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/seo/off-page-seo-hero.jpg"
+          src="/banner/offpage-seo.webp"
           alt="Off Page SEO strategy using editorial links, digital PR and brand authority"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

@@ -467,7 +467,7 @@ export default function VideoEditingServicesPage() {
       {/* Hero section */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/about/about.avif"
+          src="/banner/video-editing-services.webp"
           alt="Professional video editing and post-production workspace"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

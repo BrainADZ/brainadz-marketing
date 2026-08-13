@@ -455,7 +455,7 @@ export default function YouTubeThumbnailDesignPage() {
       {/* Hero */}
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/about/about.avif"
+          src="/banner/youtube-thumbnail-design.webp"
           alt="YouTube thumbnail design team and creative workspace at BrainADZ"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

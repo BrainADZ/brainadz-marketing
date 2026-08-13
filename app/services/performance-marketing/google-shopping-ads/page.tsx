@@ -658,7 +658,7 @@ export default function GoogleShoppingAdsServicesPage() {
 
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
-          src="/performance-marketing/google-shopping-ads-hero.jpg"
+          src="/banner/google-shopping-ads-services.webp"
           alt="Google Shopping Ads campaign management using Merchant Center product data"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
