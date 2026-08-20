@@ -4,9 +4,37 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 const ACTIVE_ATTRIBUTE = "data-active-service-nav";
+const SERVICE_IMAGE_FALLBACK = "/poster/poster-img.jpeg";
 
 export default function ServicePageInteractions() {
   const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname !== "/services" && !pathname.startsWith("/services/")) return;
+
+    const applyFallback = (image: HTMLImageElement) => {
+      if (image.dataset.serviceImageFallback === "true") return;
+
+      image.dataset.serviceImageFallback = "true";
+      image.src = SERVICE_IMAGE_FALLBACK;
+    };
+
+    const handleImageError = (event: Event) => {
+      if (event.target instanceof HTMLImageElement) {
+        applyFallback(event.target);
+      }
+    };
+
+    document.addEventListener("error", handleImageError, true);
+
+    document.querySelectorAll<HTMLImageElement>("img").forEach((image) => {
+      if (image.complete && image.naturalWidth === 0) applyFallback(image);
+    });
+
+    return () => {
+      document.removeEventListener("error", handleImageError, true);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     if (!pathname.startsWith("/services/")) return;
