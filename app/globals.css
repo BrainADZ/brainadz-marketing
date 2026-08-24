@@ -71,3 +71,84 @@ button:disabled,
   -ms-overflow-style: none; /* IE/Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* Careers follows the same light, red-accented visual system as contact/services. */
+.career-theme > section:not(:first-child) {
+  background: #ffffff !important;
+  border-color: rgb(0 0 0 / 10%) !important;
+  color: #111111;
+}
+
+.career-theme > section:nth-child(odd):not(:first-child) {
+  background: #fbfbfb !important;
+}
+
+.career-theme > .career-hero-stats {
+  background: #fbfbfb !important;
+}
+
+.career-theme > section:not(:first-child) [class*="bg-[#0"],
+.career-theme > section:not(:first-child) [class*="bg-white/["],
+.career-theme > section:not(:first-child) [class*="bg-white"] {
+  background-color: #ffffff !important;
+}
+
+.career-theme > section:not(:first-child) [class*="text-white"] {
+  color: rgb(17 17 17 / 62%) !important;
+}
+
+.career-theme > section:not(:first-child) h2[class*="text-white"],
+.career-theme > section:not(:first-child) h3[class*="text-white"],
+.career-theme > section:not(:first-child) [class*="font-semibold"][class*="text-white"],
+.career-theme > section:not(:first-child) [class*="font-medium"][class*="text-white"] {
+  color: #111111 !important;
+}
+
+.career-theme > section:not(:first-child) [class*="border-white"] {
+  border-color: rgb(0 0 0 / 10%) !important;
+}
+
+.career-theme [class*="text-[#78a2ff]"],
+.career-theme [class*="text-[#1467f5]"] {
+  color: #e1122b !important;
+}
+
+.career-theme [class*="bg-[#1467f5]"] {
+  background-color: #e1122b !important;
+}
+
+.career-theme [class*="border-[#1467f5]"] {
+  border-color: #e1122b !important;
+}
+
+.career-theme > section:not(:first-child) [class*="bg-[#1467f5]"] {
+  color: #ffffff !important;
+}
+
+.career-theme > section:not(:first-child) input,
+.career-theme > section:not(:first-child) select,
+.career-theme > section:not(:first-child) textarea {
+  background: #ffffff !important;
+  border-color: rgb(0 0 0 / 14%) !important;
+  color: #111111 !important;
+}
+
+.career-theme > section:not(:first-child) input::placeholder,
+.career-theme > section:not(:first-child) textarea::placeholder {
+  color: rgb(0 0 0 / 35%) !important;
+}
+
+.career-theme > section:not(:first-child) [class*="shadow-"] {
+  box-shadow: 0 16px 45px rgb(0 0 0 / 6%) !important;
+}
+
+.career-theme a[class*="bg-[#1467f5]"],
+.career-theme button[class*="bg-[#1467f5]"] {
+  border-radius: 9999px !important;
+  color: #ffffff !important;
+}
+
+.career-theme a[class*="bg-[#1467f5]"]:hover,
+.career-theme button[class*="bg-[#1467f5]"]:hover {
+  background-color: #111111 !important;
+}

@@ -743,7 +743,7 @@ export default function DisplayAdsServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/display-ads-overview.jpg"
+                  src="/poster/DisplayAds-Overview.webp"
                   alt="Display Ads dashboard showing audience, placement and conversion performance"
                   className="h-full w-full object-cover object-center"
                 />
@@ -903,7 +903,7 @@ export default function DisplayAdsServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/performance-marketing/display-ads-creative-strategy.jpg"
+                src="/poster/DisplayAds-Framework.webp"
                 alt="Responsive Display Ads creative strategy using images, headlines and logos"
                 className="h-full w-full object-cover object-center"
               />
@@ -1102,7 +1102,7 @@ export default function DisplayAdsServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/performance-marketing/display-ads-measurement.jpg"
+                src="/poster/DisplayAds-Measure.webp"
                 alt="Display Ads measurement across reach, engagement and conversions"
                 className="h-full w-full object-cover object-center"
               />
@@ -1228,7 +1228,7 @@ export default function DisplayAdsServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/display-ads-reporting-dashboard.jpg"
+                  src="/poster/DisplayAds-Report.webp"
                   alt="Display Ads reporting dashboard for audiences, placements, creative and conversions"
                   className="h-full w-full object-cover object-center"
                 />

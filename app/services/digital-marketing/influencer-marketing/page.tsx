@@ -622,7 +622,7 @@ export default function InfluencerMarketingPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/influencer-marketing/campaign-dashboard.jpg"
+                  src="/poster/Influencer-Overview.webp"
                   alt="Influencer marketing campaign management and creator performance"
                   className="h-full w-full object-cover object-top"
                 />
@@ -725,7 +725,7 @@ export default function InfluencerMarketingPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/influencer-marketing/creator-campaign.jpg"
+                  src="/poster/Influencer-Capabilities.webp"
                   alt="Creator collaboration and influencer campaign planning"
                   className="h-full w-full object-cover object-top"
                 />

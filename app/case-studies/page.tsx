@@ -3,8 +3,9 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FiArrowRight, FiExternalLink } from "react-icons/fi";
 
 const ACCENT = "#E1122B";
@@ -14,22 +15,33 @@ const ACCENT = "#E1122B";
 type TabKey =
   | "Web Design"
   | "SEO"
-  | "Instagram Profiles"
-  | "Facebook Profiles"
-  | "Youtube Profiles"
-  | "Linkedin Profiles"
+  | "Digital Marketing"
+  | "Performance Marketing"
   | "Creative Media";
 
 const TABS: TabKey[] = [
   "Web Design",
   "SEO",
-  "Instagram Profiles",
-  "Facebook Profiles",
-  "Youtube Profiles",
-  "Linkedin Profiles",
-
+  "Digital Marketing",
+  "Performance Marketing",
   "Creative Media",
 ];
+
+const CATEGORY_TO_TAB: Record<string, TabKey> = {
+  "web-design": "Web Design",
+  seo: "SEO",
+  "digital-marketing": "Digital Marketing",
+  "performance-marketing": "Performance Marketing",
+  "creative-media": "Creative Media",
+};
+
+const TAB_TO_CATEGORY: Record<TabKey, string> = {
+  "Web Design": "web-design",
+  SEO: "seo",
+  "Digital Marketing": "digital-marketing",
+  "Performance Marketing": "performance-marketing",
+  "Creative Media": "creative-media",
+};
 
 /* ========================= DATA ========================= */
 
@@ -107,7 +119,7 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
     },
   ],
 
-  "Instagram Profiles": [
+  "Digital Marketing": [
     {
       title: "Cremica",
       image: "/portfolio/instagram/",
@@ -140,7 +152,7 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
     },
   ],
 
-  "Facebook Profiles": [
+  "Performance Marketing": [
     {
       title: "Water Expo Campaigns",
       image: "/portfolio/facebook/",
@@ -155,42 +167,6 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
       title: "BrainADZ Live",
       image: "/portfolio/facebook/",
       href: "https://facebook.com/",
-    },
-  ],
-
-  "Youtube Profiles": [
-    {
-      title: "Exhibits Video Portfolio",
-      image: "/portfolio/youtube/",
-      href: "https://youtube.com/",
-    },
-    {
-      title: "Product Demo Videos",
-      image: "/portfolio/youtube/",
-      href: "https://youtube.com/",
-    },
-    {
-      title: "WAPTEMA Event Promotions",
-      image: "/portfolio/youtube/",
-      href: "https://youtube.com/",
-    },
-  ],
-
-  "Linkedin Profiles": [
-    {
-      title: "BrainADZ Corporate Branding",
-      image: "/portfolio/linkedin/",
-      href: "https://linkedin.com/",
-    },
-    {
-      title: "Exhibition Project Showcase",
-      image: "/portfolio/linkedin/",
-      href: "https://linkedin.com/",
-    },
-    {
-      title: "Company Updates & Milestones",
-      image: "/portfolio/linkedin/",
-      href: "https://linkedin.com/",
     },
   ],
 
@@ -226,7 +202,9 @@ export default function Page() {
   return (
     <main className="dm-sans w-full overflow-x-hidden bg-white text-[#111111]">
       <CaseStudiesHero />
-      <PortfolioTabsSection />
+      <Suspense fallback={<PortfolioTabsFallback />}>
+        <PortfolioTabsSection />
+      </Suspense>
     </main>
   );
 }
@@ -237,7 +215,7 @@ function CaseStudiesHero() {
   return (
     <section className="relative min-h-[460px] overflow-hidden bg-black sm:min-h-[520px] lg:min-h-[580px]">
       <Image
-        src="/portfolio/web/1.png"
+        src="/banner/case-study.webp"
         alt="Selected website project delivered by BrainADZ"
         fill
         priority
@@ -471,8 +449,79 @@ function MiniStat({ label, value }: { label: string; value: string }) {
 
 /* ========================= TABS SECTION ========================= */
 
+function PortfolioTabsFallback() {
+  return (
+    <section
+      id="portfolio"
+      className="w-full scroll-mt-24 bg-[#fbfbfb] text-black"
+    >
+      <div className="mx-auto max-w-[1800px] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          {TABS.map((tab, index) => (
+            <div
+              key={tab}
+              className={[
+                "min-h-12 rounded-full border px-5 py-3 text-sm font-semibold",
+                index === 0
+                  ? "border-[#E1122B] bg-[#E1122B] text-white"
+                  : "border-black/10 bg-white text-black/70",
+              ].join(" ")}
+            >
+              {tab}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function PortfolioTabsSection() {
-  const [active, setActive] = useState<TabKey>("Web Design");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const categoryFromUrl = useMemo<TabKey>(() => {
+    const category = searchParams.get("category")?.toLowerCase().trim();
+
+    if (!category) return "Web Design";
+
+    return CATEGORY_TO_TAB[category] ?? "Web Design";
+  }, [searchParams]);
+
+  const [active, setActive] = useState<TabKey>(categoryFromUrl);
+
+  useEffect(() => {
+    const category = searchParams.get("category")?.toLowerCase().trim();
+
+    if (!category) return;
+
+    const selectedCategory = CATEGORY_TO_TAB[category];
+
+    if (!selectedCategory) return;
+
+    setActive(selectedCategory);
+
+    const frame = requestAnimationFrame(() => {
+      document.getElementById("portfolio")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [searchParams]);
+
+  const handleTabChange = (tab: TabKey) => {
+    setActive(tab);
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("category", TAB_TO_CATEGORY[tab]);
+
+    router.replace(`${pathname}?${params.toString()}#portfolio`, {
+      scroll: false,
+    });
+  };
 
   const activeMeta = useMemo(() => {
     const map: Record<TabKey, { title: string; desc: string }> = {
@@ -484,23 +533,14 @@ function PortfolioTabsSection() {
         title: "SEO",
         desc: "Audits, growth systems, content ops, and performance improvements.",
       },
-      "Instagram Profiles": {
-        title: "Instagram Profiles",
+      "Digital Marketing": {
+        title: "Digital Marketing",
         desc: "Content systems, profile growth, and creative consistency.",
       },
-      "Facebook Profiles": {
-        title: "Facebook Profiles",
+      "Performance Marketing": {
+        title: "Performance Marketing",
         desc: "Page management, campaigns support, and content publishing.",
       },
-      "Youtube Profiles": {
-        title: "YouTube Profiles",
-        desc: "Channel optimization, content planning, thumbnails, and reels.",
-      },
-      "Linkedin Profiles": {
-        title: "LinkedIn Profiles",
-        desc: "B2B positioning, profile revamps, and content frameworks.",
-      },
-
       "Creative Media": {
         title: "Creative Media",
         desc: "Branding, ad creatives, and visual-first design output.",
@@ -524,7 +564,7 @@ function PortfolioTabsSection() {
               <button
                 key={t}
                 type="button"
-                onClick={() => setActive(t)}
+                onClick={() => handleTabChange(t)}
                 className={[
                   "min-h-12 rounded-full border px-5 text-sm font-semibold transition-all duration-200",
                   isActive

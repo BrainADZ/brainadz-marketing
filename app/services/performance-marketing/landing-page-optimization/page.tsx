@@ -718,7 +718,7 @@ export default function LandingPageOptimizationServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/landing-page-optimization-overview.jpg"
+                  src="/poster/Landing-Overview.webp"
                   alt="Landing page optimization overview showing campaign, page and conversion alignment"
                   className="h-full w-full object-cover object-center"
                 />
@@ -953,7 +953,7 @@ export default function LandingPageOptimizationServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/performance-marketing/landing-page-ux-mobile.jpg"
+                src="/poster/Landing-Ux.webp"
                 alt="Mobile landing page UX, visual hierarchy and conversion interaction"
                 className="h-full w-full object-cover object-center"
               />
@@ -1266,7 +1266,7 @@ export default function LandingPageOptimizationServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/landing-page-testing-dashboard.jpg"
+                  src="/poster/Landing-Report.webp"
                   alt="Landing page optimization dashboard for traffic, conversion and experiments"
                   className="h-full w-full object-cover object-center"
                 />

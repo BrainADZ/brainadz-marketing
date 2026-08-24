@@ -366,7 +366,6 @@ export default function FAQsPage() {
         }
       />
 
-      <FAQCTASection />
     </main>
   );
 }
@@ -785,49 +784,6 @@ function FAQListingSection({
                 </button>
               </div>
             )}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FAQCTASection() {
-  return (
-    <section className="bg-white py-16 text-black sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-10">
-        <div className="relative overflow-hidden rounded-[18px] bg-black px-6 py-12 text-white sm:px-10 sm:py-16 lg:px-16 lg:py-20">
-          <div className="absolute -right-24 -top-32 h-[360px] w-[360px] rounded-full bg-[#E1122B]/25 blur-[100px]" />
-          <div className="absolute -bottom-40 left-[25%] h-[320px] w-[320px] rounded-full bg-[#E1122B]/15 blur-[110px]" />
-
-          <div className="relative z-10 flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
-            <div>
-              <div className="flex items-center gap-3">
-                <span className="h-0.5 w-8 bg-[#E1122B]" />
-                <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#E1122B]">
-                  Need more clarity?
-                </p>
-              </div>
-
-              <h2 className="mt-5 max-w-[920px] text-[38px] font-semibold leading-[1.08] tracking-[-0.04em] text-white sm:text-[48px] lg:text-[58px]">
-                Let&apos;s discuss the right marketing solution for your
-                business.
-              </h2>
-
-              <p className="mt-6 max-w-[760px] text-[16px] leading-8 text-white/60">
-                Tell us about your goals, current challenges and target
-                audience. Our team will help you understand the most practical
-                next step.
-              </p>
-            </div>
-
-            <Link
-              href="/contact" data-enquiry-trigger data-enquiry-source="Page CTA"
-              className="inline-flex min-h-14 shrink-0 items-center justify-center gap-5 rounded-full bg-[#E1122B] px-7 text-[13px] font-semibold text-white transition hover:bg-white hover:text-black"
-            >
-              Enquire Now
-              <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
-            </Link>
           </div>
         </div>
       </div>

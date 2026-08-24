@@ -197,6 +197,10 @@ const normalLinks = [
     href: "/consulting",
   },
   {
+    label: "Careers",
+    href: "/career",
+  },
+  {
     label: "About Us",
     href: "/about-us",
   },
@@ -247,6 +251,13 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden items-center justify-end gap-8 xl:flex">
+            <Link
+              href="/"
+              className="text-[15px] font-medium text-[#111111] transition hover:text-[#e50914]"
+            >
+              Home
+            </Link>
+
             <div
               className="relative"
               onMouseEnter={() => setShowMegaMenu(true)}
@@ -459,6 +470,14 @@ export default function Navbar() {
               />
             </div>
           </div>
+
+          <Link
+            href="/"
+            onClick={closeMobileMenu}
+            className="border-b border-black/10 px-5 py-5 text-[18px] font-normal text-[#111111]"
+          >
+            Home
+          </Link>
 
           <button
             type="button"

@@ -708,7 +708,7 @@ export default function LeadGenerationServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/lead-generation-overview.jpg"
+                  src="/poster/Lead-Overview.webp"
                   alt="Lead generation funnel from paid media to qualified CRM opportunities"
                   className="h-full w-full object-cover object-center"
                 />
@@ -943,7 +943,7 @@ export default function LeadGenerationServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/performance-marketing/lead-generation-conversion-paths.jpg"
+                src="/poster/Lead-Path.webp"
                 alt="Lead generation through website forms, native forms, calls and messages"
                 className="h-full w-full object-cover object-center"
               />
@@ -1261,7 +1261,7 @@ export default function LeadGenerationServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/lead-generation-reporting-dashboard.jpg"
+                  src="/poster/Lead-Report.webp"
                   alt="Lead generation reporting dashboard for channels, qualification and pipeline"
                   className="h-full w-full object-cover object-center"
                 />

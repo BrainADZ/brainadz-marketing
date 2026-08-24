@@ -550,7 +550,7 @@ export default function SemServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/sem/dashboard.jpg"
+                  src="/poster/SEM-Overview.webp"
                   alt="Search engine marketing campaign dashboard and reporting"
                   className="h-full w-full object-cover object-top"
                 />
@@ -652,7 +652,7 @@ export default function SemServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/sem/campaign.jpg"
+                  src="/poster/SEM-Features.webp"
                   alt="Paid search campaign management by BrainADZ Marketing"
                   className="h-full w-full object-cover object-top"
                 />

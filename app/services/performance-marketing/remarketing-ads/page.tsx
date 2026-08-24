@@ -716,7 +716,7 @@ export default function RemarketingAdsServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/remarketing-ads-overview.jpg"
+                  src="/poster/Remarketing-Overview.webp"
                   alt="Remarketing audience journey from engagement to conversion and customer retention"
                   className="h-full w-full object-cover object-center"
                 />
@@ -951,7 +951,7 @@ export default function RemarketingAdsServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/performance-marketing/remarketing-dynamic-ads.jpg"
+                src="/poster/Remarketing-Dynamic.webp"
                 alt="Dynamic remarketing using product feeds and visitor events"
                 className="h-full w-full object-cover object-center"
               />
@@ -1266,7 +1266,7 @@ export default function RemarketingAdsServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/remarketing-ads-reporting-dashboard.jpg"
+                  src="/poster/Remarketing-Report.webp"
                   alt="Remarketing Ads reporting dashboard for audiences, frequency and recovered conversions"
                   className="h-full w-full object-cover object-center"
                 />

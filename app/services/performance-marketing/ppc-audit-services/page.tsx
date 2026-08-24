@@ -674,7 +674,7 @@ export default function PpcAuditServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/ppc-audit-overview.jpg"
+                  src="/poster/PPC-Overview.webp"
                   alt="PPC audit dashboard showing campaign health, tracking and spend"
                   className="h-full w-full object-cover object-center"
                 />
@@ -890,7 +890,7 @@ export default function PpcAuditServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/performance-marketing/ppc-audit-measurement.jpg"
+                src="/poster/PPC-Audit.webp"
                 alt="PPC conversion tracking and attribution audit"
                 className="h-full w-full object-cover object-center"
               />

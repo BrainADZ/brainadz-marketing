@@ -773,7 +773,7 @@ export default function GoogleShoppingAdsServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/google-shopping-ads-overview.jpg"
+                  src="/poster/Shopping-Overview.webp"
                   alt="Google Shopping campaign dashboard with product-level performance"
                   className="h-full w-full object-cover object-center"
                 />
@@ -944,7 +944,7 @@ export default function GoogleShoppingAdsServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/performance-marketing/google-shopping-product-feed.jpg"
+                src="/poster/Shopping-Products.webp"
                 alt="Google Merchant Center product feed optimization for titles, images and attributes"
                 className="h-full w-full object-cover object-center"
               />
@@ -1305,7 +1305,7 @@ export default function GoogleShoppingAdsServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/google-shopping-reporting-dashboard.jpg"
+                  src="/poster/Shopping-Report.webp"
                   alt="Google Shopping reporting dashboard for product health, revenue and budget"
                   className="h-full w-full object-cover object-center"
                 />

@@ -3,24 +3,39 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import {
+  type FormEvent,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import {
+  ArrowRight,
+  BadgeCheck,
   Briefcase,
-  MapPin,
+  CheckCircle2,
+  ChevronDown,
   Clock,
+  FileText,
+  Gauge,
   GraduationCap,
   IndianRupee,
-  CheckCircle2,
-  Upload,
-  Phone,
+  Layers3,
   Mail,
-  User,
-  FileText,
-  ChevronDown,
-  ArrowRight,
+  MapPin,
   MessageCircle,
+  Phone,
+  Rocket,
+  Sparkles,
+  Target,
+  Upload,
+  User,
+  Users,
 } from "lucide-react";
-import Link from "next/link";
 
 type ApiJob = {
   _id: string;
@@ -54,29 +69,89 @@ type Job = {
   skillsGoodToHave: string[];
 };
 
-function formatType(t: ApiJob["type"]) {
-  if (t === "full-time") return "Full-time";
-  if (t === "part-time") return "Part-time";
+const WHY_JOIN_ITEMS = [
+  {
+    icon: Sparkles,
+    number: "01",
+    title: "Creative ownership",
+    desc: "Turn ideas into live campaigns, brand assets and digital experiences that people actually see.",
+  },
+  {
+    icon: Target,
+    number: "02",
+    title: "Outcome-led work",
+    desc: "Understand the goal behind every task and see how your work contributes to client growth.",
+  },
+  {
+    icon: Layers3,
+    number: "03",
+    title: "Cross-functional exposure",
+    desc: "Collaborate across strategy, SEO, paid media, development, design, content and video.",
+  },
+  {
+    icon: Rocket,
+    number: "04",
+    title: "Performance-based growth",
+    desc: "Progress through consistency, ownership, problem solving and the quality of your execution.",
+  },
+  {
+    icon: Users,
+    number: "05",
+    title: "Strong team collaboration",
+    desc: "Work closely with specialists instead of operating in silos, with clearer communication and feedback.",
+  },
+  {
+    icon: Gauge,
+    number: "06",
+    title: "Fast learning environment",
+    desc: "Build practical skill through real briefs, real timelines and real-world marketing challenges.",
+  },
+];
+
+const HOW_WE_WORK = [
+  {
+    number: "01",
+    title: "Understand the brief",
+    desc: "Start with the client, audience, business goal and the outcome that matters.",
+  },
+  {
+    number: "02",
+    title: "Build the right solution",
+    desc: "Bring strategy, creative and technology together instead of solving problems in isolation.",
+  },
+  {
+    number: "03",
+    title: "Execute with ownership",
+    desc: "Move with clarity, communicate early and take responsibility for quality and timelines.",
+  },
+  {
+    number: "04",
+    title: "Learn and improve",
+    desc: "Use feedback and performance data to sharpen the next version of the work.",
+  },
+];
+
+function formatType(type: ApiJob["type"]) {
+  if (type === "full-time") return "Full-time";
+  if (type === "part-time") return "Part-time";
   return "Internship";
 }
 
 function formatExp(min: number, max: number) {
-  if (min === max) return `${min} years`;
+  if (min === max) return `${min} ${min === 1 ? "year" : "years"}`;
   return `${min}-${max} years`;
 }
 
 export default function CareersPage() {
   const API = process.env.NEXT_PUBLIC_API_BASE_URL;
-
   const bulletIconClass = "mt-1 h-4 w-4 shrink-0 text-[#1467f5]";
 
   const [jobs, setJobs] = useState<Job[]>([]);
   const [jobsLoading, setJobsLoading] = useState(true);
   const [jobsError, setJobsError] = useState<string | null>(null);
-
   const [activeJobId, setActiveJobId] = useState<string | null>(null);
 
-  const [jobAppliedFor, setJobAppliedFor] = useState<string>("");
+  const [jobAppliedFor, setJobAppliedFor] = useState("");
   const [jobAppliedForId, setJobAppliedForId] = useState<string | null>(null);
 
   const [fullName, setFullName] = useState("");
@@ -94,9 +169,10 @@ export default function CareersPage() {
 
   const resumeInputRef = useRef<HTMLInputElement | null>(null);
 
-  const selectedJob = useMemo(() => {
-    return jobs.find((j) => j.title === jobAppliedFor);
-  }, [jobs, jobAppliedFor]);
+  const selectedJob = useMemo(
+    () => jobs.find((job) => job.id === activeJobId) ?? null,
+    [jobs, activeJobId],
+  );
 
   const resetForm = () => {
     setFullName("");
@@ -113,8 +189,8 @@ export default function CareersPage() {
   };
 
   const validatePhone = (value: string) => {
-    const cleaned = value.replace(/\s/g, "");
-    return /^[0-9+]{10,15}$/.test(cleaned);
+    const cleaned = value.replace(/[\s()-]/g, "");
+    return /^\+?[0-9]{10,15}$/.test(cleaned);
   };
 
   const fetchJobs = useCallback(async () => {
@@ -123,8 +199,10 @@ export default function CareersPage() {
 
     try {
       if (!API) {
-        setJobsError("NEXT_PUBLIC_API_BASE_URL is missing.");
-        setJobsLoading(false);
+        console.error("Career API is not configured: NEXT_PUBLIC_API_BASE_URL is missing.");
+        setJobsError(
+          "Current openings are temporarily unavailable. Please try again shortly or contact our HR team."
+        );
         return;
       }
 
@@ -132,38 +210,50 @@ export default function CareersPage() {
       const data = await res.json().catch(() => null);
 
       if (!res.ok) {
-        setJobsError(data?.message || "Failed to load jobs.");
-        setJobsLoading(false);
+        console.error("Failed to load career openings", {
+          status: res.status,
+          message: data?.message,
+        });
+        setJobsError(
+          "Current openings are temporarily unavailable. Please try again shortly or contact our HR team."
+        );
         return;
       }
 
       const list: ApiJob[] = Array.isArray(data?.data) ? data.data : [];
-      const active = list.filter((j) => j.isActive);
+      const active = list.filter((job) => job.isActive);
 
-      const mapped: Job[] = active.map((j) => ({
-        id: j._id,
-        title: j.title,
+      const mapped: Job[] = active.map((job) => ({
+        id: job._id,
+        title: job.title,
         department: "General",
-        location: j.location,
-        type: formatType(j.type),
-        experience: formatExp(j.experienceMin, j.experienceMax),
-        salary: j.salaryLabel || "Not disclosed",
-        summary: j.description,
-        qualificationAndExperience: j.qualificationAndExperience || "",
-        responsibilities: j.responsibilities || [],
-        requirements: j.requirements || [],
-        skillsGoodToHave: j.goodToHave || [],
+        location: job.location,
+        type: formatType(job.type),
+        experience: formatExp(job.experienceMin, job.experienceMax),
+        salary: job.salaryLabel || "Not disclosed",
+        summary: job.description,
+        qualificationAndExperience: job.qualificationAndExperience || "",
+        responsibilities: job.responsibilities || [],
+        requirements: job.requirements || [],
+        skillsGoodToHave: job.goodToHave || [],
       }));
 
       setJobs(mapped);
 
       if (mapped.length > 0) {
-        setActiveJobId((prev) => prev ?? mapped[0].id);
-        setJobAppliedFor((prev) => prev || mapped[0].title);
-        setJobAppliedForId((prev) => prev ?? mapped[0].id);
+        setActiveJobId((previous) => previous ?? mapped[0].id);
+        setJobAppliedFor((previous) => previous || mapped[0].title);
+        setJobAppliedForId((previous) => previous ?? mapped[0].id);
+      } else {
+        setActiveJobId(null);
+        setJobAppliedFor("General Application");
+        setJobAppliedForId(null);
       }
-    } catch {
-      setJobsError("Server not reachable.");
+    } catch (error) {
+      console.error("Career jobs request failed", error);
+      setJobsError(
+        "Current openings are temporarily unavailable. Please try again shortly or contact our HR team."
+      );
     } finally {
       setJobsLoading(false);
     }
@@ -173,21 +263,65 @@ export default function CareersPage() {
     fetchJobs();
   }, [fetchJobs]);
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const selectJob = (job: Job, scrollToApply = false) => {
+    setActiveJobId(job.id);
+    setJobAppliedFor(job.title);
+    setJobAppliedForId(job.id);
+
+    if (scrollToApply) {
+      requestAnimationFrame(() => {
+        document.getElementById("apply")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
+    }
+  };
+
+  const selectGeneralApplication = () => {
+    setJobAppliedFor("General Application");
+    setJobAppliedForId(null);
+    requestAnimationFrame(() => {
+      document.getElementById("apply")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  };
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setSuccess(false);
     setFormError(null);
 
-    if (!API) return setFormError("NEXT_PUBLIC_API_BASE_URL is missing.");
+    if (!API) {
+      console.error("Career API is not configured: NEXT_PUBLIC_API_BASE_URL is missing.");
+      return setFormError(
+        "Online applications are temporarily unavailable. Please contact our HR team using the details on this page."
+      );
+    }
     if (!fullName.trim()) return setFormError("Please enter your full name.");
     if (!phone.trim() || !validatePhone(phone)) {
       return setFormError("Please enter a valid phone number.");
     }
     if (!email.trim() || !/^\S+@\S+\.\S+$/.test(email)) {
-      return setFormError("Please enter a valid email.");
+      return setFormError("Please enter a valid email address.");
     }
+    if (!jobAppliedFor) return setFormError("Please select a role.");
     if (!resume) return setFormError("Please upload your resume.");
-    if (resume.size > 5 * 1024 * 1024) return setFormError("Resume file must be under 5MB.");
+    if (resume.size > 5 * 1024 * 1024) {
+      return setFormError("Resume file must be under 5 MB.");
+    }
+
+    const allowedResumeTypes = [
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ];
+
+    if (resume.type && !allowedResumeTypes.includes(resume.type)) {
+      return setFormError("Please upload a PDF, DOC, or DOCX resume.");
+    }
 
     try {
       setSubmitting(true);
@@ -195,15 +329,14 @@ export default function CareersPage() {
       const fd = new FormData();
       if (jobAppliedForId) fd.append("jobId", jobAppliedForId);
       fd.append("jobTitle", jobAppliedFor);
+      fd.append("fullName", fullName.trim());
+      fd.append("phone", phone.trim());
+      fd.append("email", email.trim());
 
-      fd.append("fullName", fullName);
-      fd.append("phone", phone);
-      fd.append("email", email);
-
-      if (experience) fd.append("experience", experience);
-      if (location) fd.append("location", location);
-      if (noticePeriod) fd.append("noticePeriod", noticePeriod);
-      if (message) fd.append("message", message);
+      if (experience.trim()) fd.append("experience", experience.trim());
+      if (location.trim()) fd.append("location", location.trim());
+      if (noticePeriod.trim()) fd.append("noticePeriod", noticePeriod.trim());
+      if (message.trim()) fd.append("message", message.trim());
 
       fd.append("resume", resume);
 
@@ -215,119 +348,178 @@ export default function CareersPage() {
       const data = await res.json().catch(() => null);
 
       if (!res.ok) {
-        setFormError(data?.message || "Failed to submit application.");
+        console.error("Career application submission failed", {
+          status: res.status,
+          message: data?.message,
+        });
+        setFormError(
+          "We could not submit your application right now. Please try again or contact our HR team."
+        );
         return;
       }
 
       setSuccess(true);
       resetForm();
-      document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" });
-    } catch {
-      setFormError("Something went wrong. Please try again.");
+      document.getElementById("apply")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } catch (error) {
+      console.error("Career application request failed", error);
+      setFormError(
+        "We could not submit your application right now. Please try again or contact our HR team."
+      );
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <main className="career-theme dm-sans min-h-screen bg-white text-[#111111]">
       {/* HERO */}
-      <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
+      <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[560px]">
         <img
-          src="/about/about.avif"
+          src="/banner/career.webp"
           alt="BrainADZ office and team workspace"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
 
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.78)_30%,rgba(0,0,0,0.38)_55%,rgba(0,0,0,0.02)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.22)_0%,rgba(0,0,0,0.06)_48%,rgba(0,0,0,0.26)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.94)_0%,rgba(0,0,0,0.82)_32%,rgba(0,0,0,0.48)_62%,rgba(0,0,0,0.12)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.24)_0%,rgba(0,0,0,0.06)_48%,rgba(0,0,0,0.38)_100%)]" />
 
-        <div className="relative z-10 mx-auto flex min-h-[420px] max-w-[1800px] flex-col px-5 py-8 sm:min-h-[500px] sm:px-8 lg:min-h-[540px] lg:px-10">
+        <div className="relative z-10 mx-auto flex min-h-[420px] max-w-[1800px] flex-col px-5 py-8 sm:min-h-[500px] sm:px-8 lg:min-h-[560px] lg:px-10">
           <nav
             aria-label="Breadcrumb"
             className="flex items-center gap-2 text-[14px] font-medium leading-none"
           >
-            <Link href="/" className="text-[#1467f5] transition hover:text-white">
+            <Link href="/" className="text-[#E1122B] transition hover:text-white">
               Home
             </Link>
             <span className="text-white/70">/</span>
-            <span className="text-white">Career</span>
+            <span className="text-white">Careers</span>
           </nav>
 
-          <h1 className="mt-7 max-w-[760px] text-[32px] font-normal leading-[1.04] tracking-[-0.045em] text-white sm:text-[42px] lg:text-[52px]">
-            Build your career with a team that grows brands online & on-ground.
+          <h1 className="mt-7 max-w-[900px] text-[38px] font-semibold leading-[1.06] tracking-[-0.04em] text-white sm:text-[48px] lg:text-[58px]">
+            Build work that moves brands — and your career — forward.
           </h1>
 
-          <div className="mt-auto max-w-[650px] pb-6 sm:pb-10 lg:pb-12">
-            <p className="text-[16px] font-normal leading-[1.38] tracking-[-0.02em] text-white sm:text-[18px] lg:text-[22px]">
-              Creators, partners and clients putting digital growth to work in
-              the real world
+          <div className="mt-auto max-w-[760px] pb-6 sm:pb-10 lg:pb-12">
+            <p className="text-[18px] font-normal leading-[1.5] tracking-[-0.02em] text-white/88 sm:text-[22px] lg:text-[25px]">
+              Join a team where strategy, creativity, technology and performance come together on
+              real client challenges. Learn fast, take ownership and see your work go live.
             </p>
 
-            <Link
-              href="/contact" data-enquiry-trigger data-enquiry-source="Page CTA"
-              className="mt-8 inline-flex min-h-12 items-center justify-center gap-9 rounded-[4px] bg-[#1467f5] px-5 text-[15px] font-medium text-white transition hover:bg-[#0f56d6] sm:min-h-14 sm:px-6"
-            >
-              Enquire Now
-              <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
-            </Link>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="#openings"
+                className="inline-flex min-h-14 items-center justify-center gap-5 rounded-full bg-[#E1122B] px-7 text-[13px] font-semibold text-white transition hover:bg-black"
+              >
+                View open positions
+                <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
+              </a>
+
+              <button
+                type="button"
+                onClick={selectGeneralApplication}
+                className="inline-flex min-h-14 items-center justify-center gap-5 rounded-full border border-white/45 bg-black/25 px-7 text-[13px] font-semibold text-white transition hover:border-[#E1122B] hover:bg-[#E1122B]"
+              >
+                Send your profile
+                <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* CAREER STATS SECTION — matched to Consulting hero layout */}
+      <section className="border-y border-black/10 bg-[#fbfbfb] text-black">
+        <div className="mx-auto grid max-w-[1800px] px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-4 lg:px-10">
+          {[
+            ["150+", "Full-time experts"],
+            ["600+", "Projects delivered"],
+            ["550+", "Clients served"],
+            ["10+", "Years of experience"],
+          ].map(([value, label], index) => (
+            <div
+              key={label}
+              className={`border-b border-black/10 py-7 sm:px-8 ${
+                index < 2 ? "sm:border-b" : "sm:border-b-0"
+              } ${index % 2 === 0 ? "sm:border-r" : "sm:border-r-0"} ${
+                index < 3 ? "lg:border-r" : "lg:border-r-0"
+              } lg:border-b-0 first:sm:pl-0 last:sm:pr-0`}
+            >
+              <p className="text-[38px] font-medium leading-none tracking-[-0.05em] text-[#E1122B] sm:text-[48px]">
+                {value}
+              </p>
+              <p className="mt-3 max-w-[360px] text-[15px] leading-6 text-black/60">
+                {label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* CULTURE */}
-      <section className="border-b border-white/10 bg-black py-16 sm:py-20 lg:py-24">
+      <section className="border-b border-white/10 bg-[#050505] py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-10">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-24">
+          <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 xl:gap-24">
             <div className="relative">
-              <div className="overflow-hidden rounded-[6px] border border-white/10 bg-[#101010]">
+              <div className="absolute -left-6 -top-6 hidden h-28 w-28 border-l border-t border-[#1467f5]/50 lg:block" />
+              <div className="overflow-hidden rounded-[10px] border border-white/10 bg-[#0d0d0d]">
                 <Image
                   src="/teams/teams.png"
-                  alt="BrainADZ Marketing Team"
-                  width={900}
-                  height={520}
-                  className="h-[360px] w-full object-cover sm:h-[500px]"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  alt="BrainADZ Marketing team collaborating"
+                  width={1000}
+                  height={720}
+                  className="h-[420px] w-full object-cover sm:h-[560px] lg:h-[620px]"
+                  sizes="(max-width: 1024px) 100vw, 48vw"
+                  priority={false}
                 />
+              </div>
+
+              <div className="relative -mt-16 ml-auto mr-4 max-w-[320px] rounded-[8px] border border-white/12 bg-[#0c0c0c]/95 p-5 shadow-2xl backdrop-blur sm:mr-7 lg:mr-[-18px]">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#78a2ff]">
+                  What matters here
+                </p>
+                <p className="mt-3 text-[18px] font-semibold leading-7 text-white">
+                  Clear thinking. Strong execution. Real ownership.
+                </p>
               </div>
             </div>
 
             <div className="max-w-[760px]">
-              <div className="flex items-center gap-3 text-[13px] font-semibold uppercase text-[#6995ff]">
-                <span className="h-2 w-2 rounded-full bg-[#1467f5]" />
-                Career Growth
-              </div>
-
-              <h2 className="mt-6 text-[40px] font-medium leading-[1.08] text-white sm:text-[50px] lg:text-[56px]">
-                Work where strategy, creativity and execution come together.
+              <SectionEyebrow>Career growth</SectionEyebrow>
+              <h2 className="mt-5 text-[38px] font-medium leading-[1.02] tracking-[-0.045em] text-white sm:text-[50px] lg:text-[62px]">
+                Work where ideas become outcomes, not just presentations.
               </h2>
 
-              <p className="mt-7 text-[16px] leading-8 text-white/65">
-                At BrainADZ Marketing, every role connects to real client growth. Our team works
-                across websites, social media, branding, ad campaigns, videos, creative design,
-                exhibitions, and content. You don’t just work on tasks here — you contribute to
-                visible outcomes.
+              <p className="mt-7 text-[16px] leading-8 text-white/58">
+                BrainADZ works across marketing, design, media, websites, SEO, performance,
+                automation and brand experiences. That means your role sits close to real business
+                problems and real execution — giving you practical exposure across the full growth
+                journey.
               </p>
 
-              <p className="mt-4 text-[16px] leading-8 text-white/65">
-                We look for people who are sharp, responsible, creative, and ready to move with
-                speed. Whether you’re joining as a designer, marketer, developer, editor, content
-                writer, or business development executive, you get room to learn and perform.
+              <p className="mt-4 text-[16px] leading-8 text-white/58">
+                We value people who ask better questions, communicate clearly, care about quality
+                and can take a task from brief to completion with responsibility.
               </p>
 
-              <div className="mt-10 grid border-y border-white/10 sm:grid-cols-3">
-                <div className="border-b border-white/10 py-5 sm:border-b-0 sm:border-r sm:pr-5">
-                  <p className="text-[12px] font-medium uppercase text-white/38">Work Culture</p>
-                  <p className="mt-2 text-[15px] font-semibold leading-6 text-white">Practical & Collaborative</p>
-                </div>
-                <div className="border-b border-white/10 py-5 sm:border-b-0 sm:border-r sm:px-5">
-                  <p className="text-[12px] font-medium uppercase text-white/38">Learning</p>
-                  <p className="mt-2 text-[15px] font-semibold leading-6 text-white">Live Project Exposure</p>
-                </div>
-                <div className="py-5 sm:pl-5">
-                  <p className="text-[12px] font-medium uppercase text-white/38">Growth</p>
-                  <p className="mt-2 text-[15px] font-semibold leading-6 text-white">Performance Driven</p>
-                </div>
+              <div className="mt-10 grid gap-3 sm:grid-cols-2">
+                {[
+                  "Live client project exposure",
+                  "Cross-team collaboration",
+                  "Direct feedback and learning",
+                  "Performance-led career growth",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-3 rounded-[6px] border border-white/10 bg-white/[0.025] px-4 py-4"
+                  >
+                    <BadgeCheck className="h-5 w-5 shrink-0 text-[#1467f5]" strokeWidth={1.9} />
+                    <span className="text-[14px] font-medium text-white/78">{item}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -335,71 +527,69 @@ export default function CareersPage() {
       </section>
 
       {/* WHY JOIN */}
-      <section className="border-b border-white/10 bg-[#080808] py-16 sm:py-20 lg:py-24">
+      <section className="border-b border-white/10 bg-[#090909] py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-10">
-          <p className="text-[13px] font-semibold uppercase text-[#6995ff]">
-            Why BrainADZ
-          </p>
-          <h2 className="mt-4 text-[42px] font-medium leading-[1.08] text-white sm:text-[54px]">
-            Why Join BrainADZ Marketing?
-          </h2>
-          <p className="mt-5 max-w-[820px] text-[16px] leading-8 text-white/58">
-            We are building a team that values clarity, ownership, design quality, performance,
-            communication, and execution speed.
-          </p>
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+            <div>
+              <SectionEyebrow>Why BrainADZ</SectionEyebrow>
+              <h2 className="mt-5 text-[40px] font-medium leading-[1.02] tracking-[-0.045em] text-white sm:text-[52px]">
+                A place to build sharper skills and stronger work.
+              </h2>
+            </div>
+            <p className="max-w-[700px] text-[16px] leading-8 text-white/52 lg:ml-auto">
+              The best learning happens when expectations are clear, work is meaningful and people
+              are trusted with responsibility. Our environment is designed around exactly that.
+            </p>
+          </div>
 
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {[
-              {
-                img: "/icons/1.png",
-                title: "Creative Ownership",
-                desc: "Work on brand communication, visual design, and concepts that go live.",
-              },
-              {
-                img: "/icons/2.png",
-                title: "Digital-First Exposure",
-                desc: "Contribute across websites, SEO, ad creatives, UI, and social platforms.",
-              },
-              {
-                img: "/icons/3.png",
-                title: "Campaign Experience",
-                desc: "Be part of real marketing campaigns with measurable outcomes.",
-              },
-              {
-                img: "/icons/4.png",
-                title: "Performance-Based Growth",
-                desc: "Your consistency, output, and thinking directly influence your growth.",
-              },
-              {
-                img: "/icons/5.png",
-                title: "Team Collaboration",
-                desc: "Work closely with designers, strategists, developers, and marketers.",
-              },
-              {
-                img: "/icons/6.png",
-                title: "Structured Environment",
-                desc: "Clear processes, defined tasks, and execution-focused culture.",
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="min-h-[260px] rounded-[6px] border border-white/10 bg-[#111111] p-6 transition hover:border-[#1467f5] sm:p-7"
-              >
-                <Image
-                  src={item.img}
-                  alt={item.title}
-                  width={72}
-                  height={72}
-                  className="h-16 w-16 object-contain"
-                  sizes="64px"
-                />
+          <div className="mt-12 grid border-l border-t border-white/10 sm:grid-cols-2 xl:grid-cols-3">
+            {WHY_JOIN_ITEMS.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article
+                  key={item.title}
+                  className="group min-h-[300px] border-b border-r border-white/10 bg-[#0b0b0b] p-6 transition duration-300 hover:bg-[#101010] sm:p-8"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-[6px] border border-white/12 bg-white/[0.03] transition group-hover:border-[#1467f5]/50 group-hover:bg-[#1467f5]/10">
+                      <Icon className="h-5 w-5 text-[#78a2ff]" strokeWidth={1.8} />
+                    </div>
+                    <span className="text-[11px] font-semibold tracking-[0.18em] text-white/22">
+                      {item.number}
+                    </span>
+                  </div>
 
-                <h3 className="mt-8 text-[22px] font-semibold leading-tight text-white">
-                  {item.title}
-                </h3>
-                <p className="mt-4 max-w-[430px] text-[15px] leading-7 text-white/55">
-                  {item.desc}
+                  <h3 className="mt-10 text-[22px] font-semibold tracking-[-0.025em] text-white">
+                    {item.title}
+                  </h3>
+                  <p className="mt-4 max-w-[420px] text-[14px] leading-7 text-white/48">
+                    {item.desc}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* HOW WE WORK */}
+      <section className="border-b border-white/10 bg-[#050505] py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-10">
+          <div className="max-w-[820px]">
+            <SectionEyebrow>How we work</SectionEyebrow>
+            <h2 className="mt-5 text-[40px] font-medium leading-[1.02] tracking-[-0.045em] text-white sm:text-[52px] lg:text-[58px]">
+              A simple standard: understand deeply, execute clearly, improve continuously.
+            </h2>
+          </div>
+
+          <div className="mt-12 grid gap-px overflow-hidden rounded-[8px] border border-white/10 bg-white/10 md:grid-cols-2 xl:grid-cols-4">
+            {HOW_WE_WORK.map((item) => (
+              <div key={item.number} className="bg-[#090909] p-6 sm:p-8">
+                <p className="text-[12px] font-semibold tracking-[0.16em] text-[#78a2ff]">
+                  {item.number}
                 </p>
+                <h3 className="mt-8 text-[20px] font-semibold text-white">{item.title}</h3>
+                <p className="mt-4 text-[14px] leading-7 text-white/48">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -407,447 +597,582 @@ export default function CareersPage() {
       </section>
 
       {/* OPENINGS */}
-      <section id="openings" className="scroll-mt-24 bg-black py-16 sm:py-20 lg:py-24">
+      <section id="openings" className="scroll-mt-24 bg-[#080808] py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-10">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <div className="text-[13px] font-semibold uppercase text-[#6995ff]">
-                Open Positions
-              </div>
-
-              <h2 className="mt-4 text-[42px] font-medium leading-[1.08] text-white sm:text-[54px]">
-                Current Career Opportunities
+              <SectionEyebrow>Open positions</SectionEyebrow>
+              <h2 className="mt-5 text-[40px] font-medium leading-[1.02] tracking-[-0.045em] text-white sm:text-[52px] lg:text-[58px]">
+                Find the role where you can do your best work.
               </h2>
-
-              <p className="mt-5 max-w-[900px] text-[16px] leading-8 text-white/58">
-                Explore active roles in Graphic Design, Website Development, SEO, Social Media,
-                Content Writing, Video Editing, Digital Marketing, Business Development, and more.
+              <p className="mt-5 max-w-[850px] text-[16px] leading-8 text-white/52">
+                Explore current opportunities across design, development, SEO, social media,
+                content, performance marketing, video and business growth.
               </p>
-
-              {jobsError && <p className="mt-4 text-sm font-semibold text-red-400">{jobsError}</p>}
-              {jobsLoading && <p className="mt-4 text-sm text-white/45">Loading jobs...</p>}
-              {!jobsLoading && !jobsError && jobs.length === 0 && (
-                <p className="mt-4 text-sm text-white/45">No openings available right now.</p>
-              )}
             </div>
 
-            <a
-              href="#apply"
-              onClick={() => {
-                setJobAppliedFor("General Application");
-                setJobAppliedForId(null);
-              }}
-              className="inline-flex min-h-12 items-center justify-center rounded-[4px] border border-white/20 px-6 text-[13px] font-semibold text-white transition hover:border-[#1467f5] hover:bg-[#1467f5]"
+            <button
+              type="button"
+              onClick={selectGeneralApplication}
+              className="inline-flex min-h-12 shrink-0 items-center justify-center gap-3 rounded-[5px] border border-white/16 px-5 text-[13px] font-semibold text-white transition hover:border-[#1467f5] hover:bg-[#1467f5]"
             >
-              Submit General Profile
-            </a>
+              No perfect match? Send profile
+              <ArrowRight className="h-4 w-4" />
+            </button>
           </div>
 
-          <div className="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start xl:gap-8">
-            <div className="space-y-3">
-              {jobs.map((job) => {
-                const active = activeJobId === job.id;
+          <div className="mt-10 flex flex-wrap items-center gap-3 text-[12px]">
+            <span className="rounded-full border border-white/10 bg-white/[0.035] px-3.5 py-2 text-white/55">
+              {jobsLoading
+                ? "Checking openings..."
+                : jobsError
+                  ? "Openings temporarily unavailable"
+                  : `${jobs.length} active opening${jobs.length === 1 ? "" : "s"}`}
+            </span>
+            <span className="rounded-full border border-white/10 bg-white/[0.035] px-3.5 py-2 text-white/55">
+              Full-time · Part-time · Internship
+            </span>
+          </div>
 
-                return (
-                  <button
-                    key={job.id}
-                    type="button"
-                    onClick={() => {
-                      setActiveJobId(job.id);
-                      setJobAppliedFor(job.title);
-                      setJobAppliedForId(job.id);
-                    }}
-                    className={`w-full rounded-[6px] border p-5 text-left transition sm:p-6 ${active
-                        ? "border-[#1467f5] bg-[#101827]"
-                        : "border-white/10 bg-[#0d0d0d] hover:border-white/25"
+          {jobsError && (
+            <div className="mt-6 rounded-[8px] border border-white/10 bg-white/[0.035] px-5 py-4">
+              <p className="text-[14px] font-semibold text-white">
+                We’re updating our current openings.
+              </p>
+              <p className="mt-1.5 max-w-[760px] text-[13px] leading-6 text-white/50">
+                {jobsError}
+              </p>
+            </div>
+          )}
+
+          {!jobsLoading && !jobsError && jobs.length === 0 && (
+            <div className="mt-8 rounded-[8px] border border-white/10 bg-[#0d0d0d] p-8 sm:p-10">
+              <p className="text-[22px] font-semibold text-white">No active openings right now.</p>
+              <p className="mt-3 max-w-[620px] text-[14px] leading-7 text-white/50">
+                We still review strong profiles for future opportunities. Send us your resume and
+                tell us what kind of role you are interested in.
+              </p>
+              <button
+                type="button"
+                onClick={selectGeneralApplication}
+                className="mt-6 inline-flex min-h-12 items-center justify-center rounded-[5px] bg-[#1467f5] px-5 text-[13px] font-semibold text-white transition hover:bg-[#0f56d6]"
+              >
+                Submit general application
+              </button>
+            </div>
+          )}
+
+          {jobs.length > 0 && (
+            <div className="mt-10 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start xl:gap-8">
+              <div className="space-y-3">
+                {jobs.map((job) => {
+                  const active = activeJobId === job.id;
+
+                  return (
+                    <button
+                      key={job.id}
+                      type="button"
+                      aria-expanded={active}
+                      onClick={() => selectJob(job)}
+                      className={`group w-full rounded-[8px] border p-5 text-left transition duration-300 sm:p-6 ${
+                        active
+                          ? "border-[#1467f5]/70 bg-[#0d1628] shadow-[0_16px_50px_rgba(20,103,245,0.08)]"
+                          : "border-white/10 bg-[#0d0d0d] hover:border-white/22 hover:bg-[#101010]"
                       }`}
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p className="text-[19px] font-semibold text-white">{job.title}</p>
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="min-w-0">
+                          <p className="text-[19px] font-semibold tracking-[-0.02em] text-white sm:text-[21px]">
+                            {job.title}
+                          </p>
+                          <p className="mt-2 line-clamp-2 text-[13px] leading-6 text-white/44">
+                            {job.summary}
+                          </p>
+                        </div>
+
+                        <div
+                          className={`mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition ${
+                            active
+                              ? "border-[#1467f5]/60 bg-[#1467f5]/12"
+                              : "border-white/10 bg-white/[0.02]"
+                          }`}
+                        >
+                          <ChevronDown
+                            className={`h-4 w-4 transition ${
+                              active ? "rotate-180 text-[#78a2ff]" : "text-white/36"
+                            }`}
+                          />
+                        </div>
                       </div>
-                      <ChevronDown
-                        className={`h-5 w-5 text-white/42 transition ${active ? "rotate-180 text-[#6995ff]" : ""}`}
+
+                      <div className="mt-5 flex flex-wrap gap-x-5 gap-y-3 text-[12px] text-white/46">
+                        <span className="inline-flex items-center gap-2">
+                          <MapPin className="h-4 w-4 text-[#78a2ff]" />
+                          {job.location}
+                        </span>
+                        <span className="inline-flex items-center gap-2">
+                          <Clock className="h-4 w-4 text-[#78a2ff]" />
+                          {job.type}
+                        </span>
+                        <span className="inline-flex items-center gap-2">
+                          <Briefcase className="h-4 w-4 text-[#78a2ff]" />
+                          {job.experience}
+                        </span>
+                        <span className="inline-flex items-center gap-2">
+                          <IndianRupee className="h-4 w-4 text-[#78a2ff]" />
+                          {job.salary}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="rounded-[8px] border border-white/12 bg-[#0d0d0d] p-6 sm:p-8 lg:sticky lg:top-28 lg:p-9">
+                {selectedJob ? (
+                  <>
+                    <div className="flex flex-col gap-5 border-b border-white/10 pb-7 sm:flex-row sm:items-start sm:justify-between">
+                      <div>
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#78a2ff]">
+                          Role details
+                        </p>
+                        <h3 className="mt-3 text-[28px] font-semibold leading-tight tracking-[-0.03em] text-white sm:text-[32px]">
+                          {selectedJob.title}
+                        </h3>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => selectJob(selectedJob, true)}
+                        className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-[5px] bg-[#1467f5] px-5 text-[12px] font-semibold text-white transition hover:bg-[#0f56d6]"
+                      >
+                        Apply now
+                        <ArrowRight className="h-4 w-4" />
+                      </button>
+                    </div>
+
+                    <p className="mt-6 text-[15px] leading-7 text-white/56">{selectedJob.summary}</p>
+
+                    <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                      <JobMeta icon={<MapPin />} label="Location" value={selectedJob.location} />
+                      <JobMeta icon={<Clock />} label="Job type" value={selectedJob.type} />
+                      <JobMeta icon={<Briefcase />} label="Experience" value={selectedJob.experience} />
+                      <JobMeta icon={<IndianRupee />} label="Salary" value={selectedJob.salary} />
+                    </div>
+
+                    {selectedJob.qualificationAndExperience?.trim() && (
+                      <div className="mt-8 border-t border-white/10 pt-7">
+                        <h4 className="flex items-center gap-2 text-[14px] font-semibold text-white">
+                          <GraduationCap className="h-4 w-4 text-[#78a2ff]" />
+                          Qualification & experience
+                        </h4>
+                        <p className="mt-3 whitespace-pre-line text-[14px] leading-7 text-white/52">
+                          {selectedJob.qualificationAndExperience}
+                        </p>
+                      </div>
+                    )}
+
+                    <div className="mt-8 grid gap-8 border-t border-white/10 pt-7 xl:grid-cols-2">
+                      <JobBulletList
+                        title="What you will do"
+                        items={selectedJob.responsibilities}
+                        bulletIconClass={bulletIconClass}
+                      />
+                      <JobBulletList
+                        title="What we are looking for"
+                        items={selectedJob.requirements}
+                        bulletIconClass={bulletIconClass}
                       />
                     </div>
 
-                    <div className="mt-5 grid grid-cols-2 gap-4 text-[12px] text-white/48 sm:grid-cols-4">
-                      <span className="inline-flex items-center gap-2">
-                        <MapPin className="h-4 w-4 text-[#6995ff]" />
-                        {job.location}
-                      </span>
-                      <span className="inline-flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-[#6995ff]" />
-                        {job.type}
-                      </span>
-                      <span className="inline-flex items-center gap-2">
-                        <Briefcase className="h-4 w-4 text-[#6995ff]" />
-                        {job.experience}
-                      </span>
-                      <span className="inline-flex items-center gap-2">
-                        <IndianRupee className="h-4 w-4 text-[#6995ff]" />
-                        {job.salary}
-                      </span>
-                    </div>
-
-                    {active && job.qualificationAndExperience?.trim() ? (
-                      <div className="mt-5 border-t border-white/10 pt-5">
-                        <p className="text-[13px] font-semibold text-white">Qualification & Experience</p>
-                        <p className="mt-2 whitespace-pre-line text-[14px] leading-7 text-white/58">
-                          {job.qualificationAndExperience}
-                        </p>
-                      </div>
-                    ) : null}
-
-                    {active && (
-                      <div className="mt-5 border-t border-white/10 pt-5">
-                        <p className="text-[13px] font-semibold text-white">Role Summary</p>
-                        <p className="mt-2 text-[14px] leading-7 text-white/58">{job.summary}</p>
+                    {selectedJob.skillsGoodToHave.length > 0 && (
+                      <div className="mt-8 border-t border-white/10 pt-7">
+                        <JobBulletList
+                          title="Good to have"
+                          items={selectedJob.skillsGoodToHave}
+                          bulletIconClass={bulletIconClass}
+                          columns
+                        />
                       </div>
                     )}
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="rounded-[6px] border border-white/12 bg-[#101010] p-6 lg:sticky lg:top-28 sm:p-8">
-              {selectedJob ? (
-                <>
-                  <h3 className="text-[30px] font-semibold leading-tight text-white">{selectedJob.title}</h3>
-                  <p className="mt-4 text-[15px] leading-7 text-white/58">{selectedJob.summary}</p>
-
-                  <div className="mt-7 grid gap-4 border-y border-white/10 py-6 text-[13px] text-white/58 sm:grid-cols-2">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-[#6995ff]" />
-                      {selectedJob.location}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-[#6995ff]" />
-                      {selectedJob.type}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Briefcase className="h-4 w-4 text-[#6995ff]" />
-                      {selectedJob.experience}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <IndianRupee className="h-4 w-4 text-[#6995ff]" />
-                      {selectedJob.salary}
-                    </div>
+                  </>
+                ) : (
+                  <div className="py-10 text-center">
+                    <Briefcase className="mx-auto h-7 w-7 text-white/25" />
+                    <p className="mt-4 text-[14px] text-white/45">Select a role to view details.</p>
                   </div>
-
-                  {selectedJob.qualificationAndExperience?.trim() ? (
-                    <div className="mt-7 border-b border-white/10 pb-7">
-                      <p className="flex items-center gap-2 text-[14px] font-semibold text-white">
-                        <GraduationCap className="h-4 w-4 text-[#6995ff]" />
-                        Qualification & Experience
-                      </p>
-                      <p className="mt-3 whitespace-pre-line text-[14px] leading-7 text-white/58">
-                        {selectedJob.qualificationAndExperience}
-                      </p>
-                    </div>
-                  ) : null}
-
-                  <div className="mt-8 grid gap-8 sm:grid-cols-2">
-                    <div>
-                      <h4 className="text-[14px] font-semibold text-white">Responsibilities</h4>
-                      <ul className="mt-4 space-y-3 text-[14px] leading-7 text-white/58">
-                        {selectedJob.responsibilities.map((r, i) => (
-                          <li key={i} className="flex gap-2">
-                            <CheckCircle2 className={bulletIconClass} strokeWidth={2} />
-                            {r}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 className="text-[14px] font-semibold text-white">Requirements</h4>
-                      <ul className="mt-4 space-y-3 text-[14px] leading-7 text-white/58">
-                        {selectedJob.requirements.map((r, i) => (
-                          <li key={i} className="flex gap-2">
-                            <CheckCircle2 className={bulletIconClass} strokeWidth={2} />
-                            {r}
-                          </li>
-                        ))}
-                      </ul>
-
-                      {selectedJob.skillsGoodToHave?.length > 0 && (
-                        <>
-                          <h4 className="mt-7 text-[14px] font-semibold text-white">Preferred Skills</h4>
-                          <ul className="mt-4 space-y-3 text-[14px] leading-7 text-white/58">
-                            {selectedJob.skillsGoodToHave.map((r, i) => (
-                              <li key={i} className="flex gap-2">
-                                <CheckCircle2 className={bulletIconClass} strokeWidth={2} />
-                                {r}
-                              </li>
-                            ))}
-                          </ul>
-                        </>
-                      )}
-                    </div>
-                  </div>
-
-                  <a
-                    href="#apply"
-                    onClick={() => {
-                      setJobAppliedFor(selectedJob.title);
-                      setJobAppliedForId(selectedJob.id);
-                    }}
-                    className="mt-8 inline-flex min-h-13 items-center justify-center rounded-[4px] bg-[#1467f5] px-6 text-[13px] font-semibold text-white transition hover:bg-[#0f56d6]"
-                  >
-                    Apply for this role
-                  </a>
-                </>
-              ) : (
-                <p className="text-white/45">Select a role to view details.</p>
-              )}
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
-      {/* APPLY FORM */}
-      <section id="apply" className="scroll-mt-24 border-t border-white/10 bg-[#080808] py-16 sm:py-20 lg:py-24">
+      {/* APPLY */}
+      <section
+        id="apply"
+        className="scroll-mt-24 border-t border-white/10 bg-[#050505] py-16 sm:py-20 lg:py-24"
+      >
         <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-10">
-          <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:items-start lg:gap-16 xl:gap-24">
+          <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-start lg:gap-16 xl:gap-24">
             <div className="lg:sticky lg:top-28">
-              <div className="text-[13px] font-semibold uppercase text-[#6995ff]">
-                Apply Now
-              </div>
-
-              <h2 className="mt-4 text-[42px] font-medium leading-[1.08] text-white sm:text-[54px]">
-                Start your journey with BrainADZ Marketing
+              <SectionEyebrow>Apply now</SectionEyebrow>
+              <h2 className="mt-5 text-[40px] font-medium leading-[1.02] tracking-[-0.045em] text-white sm:text-[52px] lg:text-[58px]">
+                Your next role could start with one good conversation.
               </h2>
 
-              <p className="mt-6 max-w-[650px] text-[16px] leading-8 text-white/58">
-                Share your details and resume with our team. We review profiles based on role
-                requirement, skill set, experience, and overall fit.
+              <p className="mt-6 max-w-[640px] text-[16px] leading-8 text-white/52">
+                Share your profile with our team. We review applications based on relevant skill,
+                role fit, experience, communication and the quality of work you have done.
               </p>
 
-              <div className="mt-9 border-t border-white/12 pt-6">
-                <h3 className="text-[18px] font-semibold text-white">Application Guidelines</h3>
-                <ul className="mt-5 space-y-3 text-[14px] leading-7 text-white/58">
-                  <li className="flex gap-2">
+              <div className="mt-9 rounded-[8px] border border-white/10 bg-[#0b0b0b] p-5 sm:p-6">
+                <h3 className="text-[15px] font-semibold text-white">Before you submit</h3>
+                <ul className="mt-5 space-y-3 text-[13px] leading-6 text-white/52">
+                  <li className="flex gap-2.5">
                     <CheckCircle2 className={bulletIconClass} strokeWidth={2} />
-                    Upload your resume in PDF, DOC, or DOCX format up to 5 MB.
+                    PDF, DOC or DOCX resume up to 5 MB.
                   </li>
-                  <li className="flex gap-2">
+                  <li className="flex gap-2.5">
                     <CheckCircle2 className={bulletIconClass} strokeWidth={2} />
-                    Mention your current location, total experience, and notice period clearly.
+                    Mention current location, experience and notice period.
                   </li>
-                  <li className="flex gap-2">
+                  <li className="flex gap-2.5">
                     <CheckCircle2 className={bulletIconClass} strokeWidth={2} />
-                    Add a short note about your role interest and relevant work experience.
+                    Add portfolio or relevant work links inside your message/resume where useful.
                   </li>
                 </ul>
               </div>
 
-              <div className="mt-8 border-t border-white/12 pt-6">
-                <h3 className="text-[18px] font-semibold text-white">HR Contact Details</h3>
-                <div className="mt-5 space-y-4 text-[14px] text-white/58">
+              <div className="mt-6 rounded-[8px] border border-white/10 bg-[#0b0b0b] p-5 sm:p-6">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/34">
+                  HR contact
+                </p>
+                <div className="mt-4 space-y-4 text-[14px] text-white/58">
                   <Link
                     href="https://wa.me/919574511152"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 transition hover:text-white"
                   >
-                    <MessageCircle className="h-4 w-4 text-[#6995ff]" />
-                    WhatsApp: +91 9574511152
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03]">
+                      <MessageCircle className="h-4 w-4 text-[#78a2ff]" />
+                    </span>
+                    +91 95745 11152
                   </Link>
 
                   <Link
                     href="mailto:hr@brainadzmarketing.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="flex items-center gap-3 transition hover:text-white"
                   >
-                    <Mail className="h-4 w-4 text-[#6995ff]" />
-                    Email: hr@brainadzmarketing.com
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03]">
+                      <Mail className="h-4 w-4 text-[#78a2ff]" />
+                    </span>
+                    hr@brainadzmarketing.com
                   </Link>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-[6px] border border-white/12 bg-[#101010] p-5 sm:p-8 lg:p-10">
-              {success ? (
-                <div className="rounded-[4px] border border-emerald-400/25 bg-emerald-400/8 p-6">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="h-6 w-6 text-emerald-400" />
-                    <div>
-                      <p className="text-[16px] font-semibold text-white">Application submitted</p>
-                      <p className="mt-2 text-[14px] leading-7 text-white/58">
-                        Thank you. Our team will review your profile and contact you if a suitable
-                        opening matches your background.
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => setSuccess(false)}
-                        className="mt-5 min-h-11 rounded-[4px] bg-[#1467f5] px-5 text-[13px] font-semibold text-white transition hover:bg-[#0f56d6]"
-                      >
-                        Submit another application
-                      </button>
-                    </div>
+            <div className="overflow-hidden rounded-[10px] border border-white/12 bg-[#0d0d0d] shadow-[0_30px_80px_rgba(0,0,0,0.22)]">
+              <div className="border-b border-white/10 px-5 py-5 sm:px-8 lg:px-10">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-[18px] font-semibold text-white">Application form</p>
+                    <p className="mt-1 text-[12px] text-white/38">Fields marked * are required.</p>
                   </div>
-                </div>
-              ) : (
-                <form onSubmit={onSubmit} className="space-y-4">
-                  {formError && (
-                    <div className="rounded-[4px] border border-red-400/25 bg-red-400/8 px-4 py-3 text-[14px] font-medium text-red-300">
-                      {formError}
-                    </div>
+                  {jobAppliedFor && (
+                    <span className="w-fit rounded-full border border-[#1467f5]/35 bg-[#1467f5]/10 px-3 py-1.5 text-[11px] font-semibold text-[#8db0ff]">
+                      {jobAppliedFor}
+                    </span>
                   )}
+                </div>
+              </div>
 
-                  <div>
-                    <label className="text-[12px] font-semibold uppercase text-white/55">
-                      Applying For
-                    </label>
-                    <select
-                      value={jobAppliedFor}
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        setJobAppliedFor(val);
-
-                        if (val === "General Application") {
-                          setJobAppliedForId(null);
-                          return;
-                        }
-
-                        const found = jobs.find((x) => x.title === val);
-                        setJobAppliedForId(found?.id ?? null);
-                      }}
-                      className="mt-2 h-14 w-full rounded-[4px] border border-white/14 bg-black px-4 text-[14px] text-white outline-none transition focus:border-[#1467f5]"
-                    >
-                      {jobs.map((j) => (
-                        <option key={j.id} value={j.title}>
-                          {j.title}
-                        </option>
-                      ))}
-                      <option value="General Application">
-                        General Application (Any Suitable Role)
-                      </option>
-                    </select>
+              <div className="p-5 sm:p-8 lg:p-10">
+                {success ? (
+                  <div className="rounded-[8px] border border-emerald-400/20 bg-emerald-400/[0.055] p-6 sm:p-8">
+                    <div className="flex items-start gap-4">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-emerald-400/10">
+                        <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+                      </div>
+                      <div>
+                        <p className="text-[19px] font-semibold text-white">Application submitted.</p>
+                        <p className="mt-2 max-w-[560px] text-[14px] leading-7 text-white/52">
+                          Thank you for sharing your profile. Our team will review it and contact you
+                          if your background matches a current or upcoming opportunity.
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => setSuccess(false)}
+                          className="mt-6 min-h-11 rounded-[5px] bg-[#1467f5] px-5 text-[12px] font-semibold text-white transition hover:bg-[#0f56d6]"
+                        >
+                          Submit another application
+                        </button>
+                      </div>
+                    </div>
                   </div>
+                ) : (
+                  <form onSubmit={onSubmit} className="space-y-5" noValidate>
+                    {formError && (
+                      <div
+                        role="alert"
+                        className="rounded-[6px] border border-red-400/20 bg-red-400/[0.06] px-4 py-3 text-[13px] font-medium text-red-300"
+                      >
+                        {formError}
+                      </div>
+                    )}
 
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <FormField
-                      label="Full Name"
-                      icon={<User className="h-4 w-4 text-[#6995ff]" />}
-                      value={fullName}
-                      onChange={setFullName}
-                      type="text"
-                      placeholder="Your full name"
-                      required
-                    />
-                    <FormField
-                      label="Phone"
-                      icon={<Phone className="h-4 w-4 text-[#6995ff]" />}
-                      value={phone}
-                      onChange={setPhone}
-                      type="tel"
-                      placeholder="+91 XXXXX XXXXX"
-                      required
-                    />
-                    <FormField
-                      label="Email"
-                      icon={<Mail className="h-4 w-4 text-[#6995ff]" />}
-                      value={email}
-                      onChange={setEmail}
-                      type="email"
-                      placeholder="you@domain.com"
-                      required
-                    />
-                    <FormField
-                      label="Current Location"
-                      icon={<MapPin className="h-4 w-4 text-[#6995ff]" />}
-                      value={location}
-                      onChange={setLocation}
-                      type="text"
-                      placeholder="e.g. Delhi NCR"
-                    />
-                    <FormField
-                      label="Total Experience"
-                      icon={<Briefcase className="h-4 w-4 text-[#6995ff]" />}
-                      value={experience}
-                      onChange={setExperience}
-                      type="text"
-                      placeholder="e.g. 2 years"
-                    />
-                    <FormField
-                      label="Notice Period"
-                      icon={<Clock className="h-4 w-4 text-[#6995ff]" />}
-                      value={noticePeriod}
-                      onChange={setNoticePeriod}
-                      type="text"
-                      placeholder="e.g. Immediate or 15 days"
-                    />
-                  </div>
+                    <div>
+                      <FormLabel htmlFor="jobAppliedFor">Applying for *</FormLabel>
+                      <select
+                        id="jobAppliedFor"
+                        value={jobAppliedFor}
+                        onChange={(event) => {
+                          const value = event.target.value;
+                          setJobAppliedFor(value);
 
-                  <div>
-                    <label className="text-[12px] font-semibold uppercase text-white/55">
-                      Resume
-                    </label>
-                    <div className="mt-2 flex min-h-14 items-center gap-3 rounded-[4px] border border-white/14 bg-black px-4 py-3 transition focus-within:border-[#1467f5]">
-                      <Upload className="h-4 w-4 shrink-0 text-[#6995ff]" />
-                      <input
-                        required
-                        ref={resumeInputRef}
-                        type="file"
-                        accept=".pdf,.doc,.docx"
-                        className="w-full text-[13px] text-white/65 outline-none file:mr-3 file:rounded-[3px] file:border-0 file:bg-[#1467f5] file:px-3 file:py-2 file:text-[12px] file:font-semibold file:text-white hover:file:bg-[#0f56d6]"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0] || null;
-                          if (file && file.size > 5 * 1024 * 1024) {
-                            setFormError("Resume must be under 5MB.");
-                            e.currentTarget.value = "";
-                            setResume(null);
+                          if (value === "General Application") {
+                            setJobAppliedForId(null);
                             return;
                           }
-                          setResume(file);
+
+                          const found = jobs.find((job) => job.title === value);
+                          setJobAppliedForId(found?.id ?? null);
+                          if (found) setActiveJobId(found.id);
                         }}
+                        required
+                        className="mt-2 h-14 w-full rounded-[6px] border border-white/12 bg-[#070707] px-4 text-[14px] text-white outline-none transition focus:border-[#1467f5]"
+                      >
+                        {jobs.map((job) => (
+                          <option key={job.id} value={job.title}>
+                            {job.title}
+                          </option>
+                        ))}
+                        <option value="General Application">General Application (Any Suitable Role)</option>
+                      </select>
+                    </div>
+
+                    <div className="grid gap-5 sm:grid-cols-2">
+                      <FormField
+                        id="fullName"
+                        label="Full name *"
+                        icon={<User />}
+                        value={fullName}
+                        onChange={setFullName}
+                        type="text"
+                        placeholder="Your full name"
+                        autoComplete="name"
+                        required
+                      />
+                      <FormField
+                        id="phone"
+                        label="Phone *"
+                        icon={<Phone />}
+                        value={phone}
+                        onChange={setPhone}
+                        type="tel"
+                        placeholder="+91 XXXXX XXXXX"
+                        autoComplete="tel"
+                        required
+                      />
+                      <FormField
+                        id="email"
+                        label="Email *"
+                        icon={<Mail />}
+                        value={email}
+                        onChange={setEmail}
+                        type="email"
+                        placeholder="you@domain.com"
+                        autoComplete="email"
+                        required
+                      />
+                      <FormField
+                        id="location"
+                        label="Current location"
+                        icon={<MapPin />}
+                        value={location}
+                        onChange={setLocation}
+                        type="text"
+                        placeholder="e.g. Delhi NCR"
+                        autoComplete="address-level2"
+                      />
+                      <FormField
+                        id="experience"
+                        label="Total experience"
+                        icon={<Briefcase />}
+                        value={experience}
+                        onChange={setExperience}
+                        type="text"
+                        placeholder="e.g. 2 years"
+                      />
+                      <FormField
+                        id="noticePeriod"
+                        label="Notice period"
+                        icon={<Clock />}
+                        value={noticePeriod}
+                        onChange={setNoticePeriod}
+                        type="text"
+                        placeholder="e.g. Immediate / 15 days"
                       />
                     </div>
 
-                    {resume && (
-                      <p className="mt-2 text-[12px] text-white/45">
-                        Selected: <span className="font-semibold text-white">{resume.name}</span>
-                      </p>
-                    )}
-                  </div>
+                    <div>
+                      <FormLabel htmlFor="resume">Resume *</FormLabel>
+                      <div className="mt-2 rounded-[6px] border border-dashed border-white/16 bg-[#070707] p-4 transition focus-within:border-[#1467f5]">
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[6px] border border-white/10 bg-white/[0.03]">
+                            <Upload className="h-4 w-4 text-[#78a2ff]" />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <input
+                              id="resume"
+                              required
+                              ref={resumeInputRef}
+                              type="file"
+                              accept=".pdf,.doc,.docx"
+                              className="w-full text-[12px] text-white/58 outline-none file:mr-3 file:rounded-[4px] file:border-0 file:bg-[#1467f5] file:px-3 file:py-2 file:text-[11px] file:font-semibold file:text-white hover:file:bg-[#0f56d6]"
+                              onChange={(event) => {
+                                const file = event.target.files?.[0] || null;
+                                setFormError(null);
 
-                  <div>
-                    <label className="text-[12px] font-semibold uppercase text-white/55">
-                      Message
-                    </label>
-                    <div className="mt-2 flex items-start gap-3 rounded-[4px] border border-white/14 bg-black px-4 py-3 transition focus-within:border-[#1467f5]">
-                      <FileText className="mt-1 h-4 w-4 shrink-0 text-[#6995ff]" />
-                      <textarea
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        rows={5}
-                        placeholder="Write a short note about your experience and role interest."
-                        className="w-full resize-none bg-transparent text-[14px] text-white outline-none placeholder:text-white/28"
-                      />
+                                if (file && file.size > 5 * 1024 * 1024) {
+                                  setFormError("Resume must be under 5 MB.");
+                                  event.currentTarget.value = "";
+                                  setResume(null);
+                                  return;
+                                }
+
+                                setResume(file);
+                              }}
+                            />
+                            <p className="mt-1.5 text-[11px] text-white/30">PDF, DOC or DOCX · Max 5 MB</p>
+                          </div>
+                        </div>
+
+                        {resume && (
+                          <p className="mt-3 truncate border-t border-white/10 pt-3 text-[12px] text-white/48">
+                            Selected: <span className="font-semibold text-white/80">{resume.name}</span>
+                          </p>
+                        )}
+                      </div>
                     </div>
-                  </div>
 
-                  <button
-                    disabled={submitting}
-                    type="submit"
-                    className="h-14 w-full rounded-[4px] bg-[#1467f5] text-[14px] font-semibold text-white transition hover:bg-[#0f56d6] disabled:cursor-not-allowed disabled:opacity-70"
-                  >
-                    {submitting ? "Submitting..." : "Submit Application"}
-                  </button>
-                </form>
-              )}
+                    <div>
+                      <FormLabel htmlFor="message">Message</FormLabel>
+                      <div className="mt-2 flex items-start gap-3 rounded-[6px] border border-white/12 bg-[#070707] px-4 py-3 transition focus-within:border-[#1467f5]">
+                        <FileText className="mt-1 h-4 w-4 shrink-0 text-[#78a2ff]" />
+                        <textarea
+                          id="message"
+                          value={message}
+                          onChange={(event) => setMessage(event.target.value)}
+                          rows={5}
+                          placeholder="Tell us briefly about your experience, strongest skills, portfolio link or why this role interests you."
+                          className="w-full resize-none bg-transparent text-[14px] leading-7 text-white outline-none placeholder:text-white/24"
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      disabled={submitting}
+                      type="submit"
+                      className="group flex h-14 w-full items-center justify-center gap-4 rounded-[5px] bg-[#1467f5] px-6 text-[14px] font-semibold text-white transition hover:bg-[#0f56d6] disabled:cursor-not-allowed disabled:opacity-65"
+                    >
+                      {submitting ? "Submitting application..." : "Submit application"}
+                      {!submitting && (
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      )}
+                    </button>
+
+                    <p className="text-center text-[11px] leading-5 text-white/28">
+                      By submitting this form, you agree that BrainADZ may use the information you
+                      provide for recruitment-related communication.
+                    </p>
+                  </form>
+                )}
+              </div>
             </div>
           </div>
         </div>
       </section>
+    </main>
+  );
+}
+
+function SectionEyebrow({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.17em] text-[#78a2ff]">
+      <span className="h-px w-7 bg-[#1467f5]" />
+      {children}
     </div>
   );
 }
 
+function JobMeta({
+  icon,
+  label,
+  value,
+}: {
+  icon: ReactNode;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="rounded-[6px] border border-white/10 bg-[#080808] p-4">
+      <div className="flex items-center gap-2 text-[#78a2ff] [&>svg]:h-4 [&>svg]:w-4">{icon}</div>
+      <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.13em] text-white/28">
+        {label}
+      </p>
+      <p className="mt-1.5 text-[13px] font-medium text-white/72">{value}</p>
+    </div>
+  );
+}
+
+function JobBulletList({
+  title,
+  items,
+  bulletIconClass,
+  columns = false,
+}: {
+  title: string;
+  items: string[];
+  bulletIconClass: string;
+  columns?: boolean;
+}) {
+  if (!items.length) return null;
+
+  return (
+    <div>
+      <h4 className="text-[14px] font-semibold text-white">{title}</h4>
+      <ul
+        className={`mt-4 gap-x-6 space-y-3 text-[14px] leading-7 text-white/52 ${
+          columns ? "sm:columns-2" : ""
+        }`}
+      >
+        {items.map((item, index) => (
+          <li key={`${item}-${index}`} className="flex break-inside-avoid gap-2.5">
+            <CheckCircle2 className={bulletIconClass} strokeWidth={2} />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function FormLabel({ htmlFor, children }: { htmlFor: string; children: ReactNode }) {
+  return (
+    <label
+      htmlFor={htmlFor}
+      className="text-[11px] font-semibold uppercase tracking-[0.08em] text-white/48"
+    >
+      {children}
+    </label>
+  );
+}
+
 function FormField({
+  id,
   label,
   icon,
   value,
@@ -855,29 +1180,32 @@ function FormField({
   type,
   placeholder,
   required = false,
+  autoComplete,
 }: {
+  id: string;
   label: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   value: string;
   onChange: (value: string) => void;
   type: string;
   placeholder: string;
   required?: boolean;
+  autoComplete?: string;
 }) {
   return (
     <div>
-      <label className="text-[12px] font-semibold uppercase text-white/55">
-        {label}
-      </label>
-      <div className="mt-2 flex min-h-14 items-center gap-3 rounded-[4px] border border-white/14 bg-black px-4 py-3 transition focus-within:border-[#1467f5]">
-        {icon}
+      <FormLabel htmlFor={id}>{label}</FormLabel>
+      <div className="mt-2 flex min-h-14 items-center gap-3 rounded-[6px] border border-white/12 bg-[#070707] px-4 py-3 transition focus-within:border-[#1467f5]">
+        <span className="shrink-0 text-[#78a2ff] [&>svg]:h-4 [&>svg]:w-4">{icon}</span>
         <input
+          id={id}
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(event) => onChange(event.target.value)}
           required={required}
           type={type}
           placeholder={placeholder}
-          className="w-full bg-transparent text-[14px] text-white outline-none placeholder:text-white/28"
+          autoComplete={autoComplete}
+          className="w-full bg-transparent text-[14px] text-white outline-none placeholder:text-white/24"
         />
       </div>
     </div>

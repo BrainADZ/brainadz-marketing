@@ -651,7 +651,7 @@ export default function GoogleAdsServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/google-ads-overview.jpg"
+                  src="/poster/GoogleAds-Overview.webp"
                   alt="Google Ads search campaign dashboard and keyword performance"
                   className="h-full w-full object-cover object-center"
                 />
@@ -886,7 +886,7 @@ export default function GoogleAdsServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/performance-marketing/google-ads-conversion-tracking.jpg"
+                src="/poster/GoogleAds-CM.webp"
                 alt="Google Ads conversion tracking, lead quality and revenue feedback"
                 className="h-full w-full object-cover object-center"
               />
@@ -1132,7 +1132,7 @@ export default function GoogleAdsServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/google-ads-reporting-dashboard.jpg"
+                  src="/poster/GoogleAds-Reporting.webp"
                   alt="Google Ads reporting dashboard for search terms, conversions and budget"
                   className="h-full w-full object-cover object-center"
                 />

@@ -652,7 +652,7 @@ export default function MetaAdsServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/meta-ads-overview.jpg"
+                  src="/poster/Meta-Overview.webp"
                   alt="Meta Ads Manager dashboard for Facebook and Instagram campaigns"
                   className="h-full w-full object-cover object-center"
                 />
@@ -870,7 +870,7 @@ export default function MetaAdsServicesPage() {
             <div className="grid lg:grid-cols-[0.95fr_1.05fr]">
               <figure className="relative min-h-[320px] lg:min-h-[500px]">
                 <img
-                  src="/performance-marketing/meta-ads-creative-testing.jpg"
+                  src="/poster/Meta-Framework.webp"
                   alt="Meta Ads creative testing across image, video, Stories and Reels"
                   className="absolute inset-0 h-full w-full object-cover object-center"
                 />
@@ -1162,7 +1162,7 @@ export default function MetaAdsServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/meta-ads-reporting-dashboard.jpg"
+                  src="/poster/Meta-Reporting.webp"
                   alt="Meta Ads reporting dashboard for campaigns, creative, leads and sales"
                   className="h-full w-full object-cover object-center"
                 />

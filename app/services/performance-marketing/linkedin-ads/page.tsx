@@ -760,7 +760,7 @@ export default function LinkedInAdsServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/linkedin-ads-overview.jpg"
+                  src="/poster/LinkedIn-Overview.webp"
                   alt="LinkedIn Ads dashboard for professional audiences, leads and pipeline"
                   className="h-full w-full object-cover object-center"
                 />
@@ -989,7 +989,7 @@ export default function LinkedInAdsServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/performance-marketing/linkedin-ads-audience-strategy.jpg"
+                src="/poster/LinkedIn-AS.webp"
                 alt="LinkedIn professional audience and Matched Audience strategy"
                 className="h-full w-full object-cover object-center"
               />
@@ -1352,7 +1352,7 @@ export default function LinkedInAdsServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/linkedin-ads-reporting-dashboard.jpg"
+                  src="/poster/LinkedIn-Report.webp"
                   alt="LinkedIn Ads reporting dashboard for professional audiences, leads and pipeline"
                   className="h-full w-full object-cover object-center"
                 />

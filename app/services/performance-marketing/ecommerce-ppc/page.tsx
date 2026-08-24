@@ -684,7 +684,7 @@ export default function EcommercePpcServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/ecommerce-ppc-overview.jpg"
+                  src="/poster/Ecom-Overview.webp"
                   alt="Ecommerce PPC dashboard showing products, orders, revenue and profitability"
                   className="h-full w-full object-cover object-center"
                 />
@@ -920,7 +920,7 @@ export default function EcommercePpcServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/performance-marketing/ecommerce-ppc-merchandising.jpg"
+                src="/poster/Ecom-Product.webp"
                 alt="Ecommerce merchandising, product feed and landing-page readiness"
                 className="h-full w-full object-cover object-center"
               />
@@ -1214,7 +1214,7 @@ export default function EcommercePpcServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/ecommerce-ppc-reporting-dashboard.jpg"
+                  src="/poster/Ecom-Report.webp"
                   alt="Ecommerce PPC reporting dashboard for products, revenue, customers and budget"
                   className="h-full w-full object-cover object-center"
                 />

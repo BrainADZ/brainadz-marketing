@@ -552,7 +552,7 @@ export default function EmailMarketingPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/email-marketing/dashboard.jpg"
+                  src="/poster/Email-Overview.webp"
                   alt="Email marketing campaign dashboard and performance reporting"
                   className="h-full w-full object-cover object-top"
                 />
@@ -654,7 +654,7 @@ export default function EmailMarketingPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/email-marketing/campaign.jpg"
+                  src="/poster/Email-Features.webp"
                   alt="Responsive email marketing campaign designed by BrainADZ"
                   className="h-full w-full object-cover object-top"
                 />

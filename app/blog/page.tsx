@@ -48,7 +48,7 @@ export default function BlogPage() {
     <main className="dm-sans bg-white text-[#111111]">
       <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <Image
-          src="/about/about.avif"
+          src="/banner/blog-banner.webp"
           alt="BrainADZ team workspace"
           fill
           priority

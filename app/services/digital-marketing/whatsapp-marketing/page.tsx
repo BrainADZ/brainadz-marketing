@@ -627,7 +627,7 @@ export default function WhatsAppMarketingPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/whatsapp-marketing/dashboard.jpg"
+                  src="/poster/Whatsapp-Overview.webp"
                   alt="WhatsApp marketing campaign and conversation dashboard"
                   className="h-full w-full object-cover object-top"
                 />
@@ -730,7 +730,7 @@ export default function WhatsAppMarketingPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/whatsapp-marketing/automation.jpg"
+                  src="/poster/Whatsapp-Capabilities.webp"
                   alt="WhatsApp marketing automation and chatbot workflow"
                   className="h-full w-full object-cover object-top"
                 />

@@ -690,7 +690,7 @@ export default function YouTubeAdsServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/youtube-ads-overview.jpg"
+                  src="/poster/Youtube-Overview.webp"
                   alt="YouTube Ads campaign dashboard showing views, audiences and conversions"
                   className="h-full w-full object-cover object-center"
                 />
@@ -865,7 +865,7 @@ export default function YouTubeAdsServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/performance-marketing/youtube-ads-creative-strategy.jpg"
+                src="/poster/Youtube-VCR.webp"
                 alt="YouTube Ads creative strategy across horizontal and vertical video"
                 className="h-full w-full object-cover object-center"
               />
@@ -1017,7 +1017,7 @@ export default function YouTubeAdsServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/performance-marketing/youtube-ads-conversion-tracking.jpg"
+                src="/poster/Youtube-Tracking.webp"
                 alt="YouTube Ads view, watch-time and conversion tracking"
                 className="h-full w-full object-cover object-center"
               />
@@ -1258,7 +1258,7 @@ export default function YouTubeAdsServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/performance-marketing/youtube-ads-reporting-dashboard.jpg"
+                  src="/poster/Youtube-Report.webp"
                   alt="YouTube Ads reporting dashboard for views, watch time and conversions"
                   className="h-full w-full object-cover object-center"
                 />

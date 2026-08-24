@@ -48,6 +48,7 @@ const FOOTER_LINKS = [
   {
     title: "Our Company",
     links: [
+      { label: "Home", href: "/" },
       { label: "Company Overview", href: "/company-overview" },
       { label: "Core Team", href: "/teams" },
       { label: "Careers", href: "/career" },
@@ -65,19 +66,20 @@ const FOOTER_LINKS = [
     ],
   },
   {
-    title: "Portfolio",
-    links: [
-      { label: "Website Projects", href: "/#casestudies" },
-      { label: "Social Media", href: "/#portfolio" },
-      { label: "Graphic Design", href: "/#portfolio" },
-      { label: "Videos & Exhibits", href: "/#casestudies" },
-    ],
-  },
+  title: "Portfolio",
+  links: [
+    { label: "Digital Marketing", href: "/case-studies?category=digital-marketing#portfolio" },
+    { label: "Performance Marketing", href: "/case-studies?category=performance-marketing#portfolio" },
+    { label: "Web Design", href: "/case-studies?category=web-design#portfolio" },
+    { label: "SEO", href: "/case-studies?category=seo#portfolio" },
+    { label: "Creative Media", href: "/case-studies?category=creative-media#portfolio" },
+  ],
+},
   {
     title: "Resources",
     links: [
       { label: "Case Studies", href: "/case-studies" },
-      { label: "Client Testimonials", href: "/#testimonials" },
+      { label: "Client Testimonials", href: "/testimonial" },
       { label: "FAQs", href: "/faqs" },
       { label: "Growth Insights", href: "/#insights" },
     ],
