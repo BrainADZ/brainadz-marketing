@@ -144,7 +144,7 @@ const TEAMS_PAGE_CORE_TEAM: TeamMember[] = [
   },
   {
     name: "Loveneet Pawar",
-    designation: "SEO Executive",
+    designation: "Social Media Executive",
     image: "/teams/Loveneet.webp",
     linkedin: "https://www.linkedin.com/in/loveneet-pawar-9a9aaa301/",
     email: "dm@brainadz.com",

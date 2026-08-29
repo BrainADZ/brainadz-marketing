@@ -378,13 +378,13 @@ const WORK_ITEMS = [
   {
     title: "Social-first visual system",
     category: "Social Content",
-    image: "/portfolio/instagram/3.png",
+    image: "/portfolio/instagram/facebook.jpg",
     imageAlt: "Social-first creative system developed by BrainADZ",
   },
   {
     title: "Brand communication series",
     category: "Brand and Marketing",
-    image: "/portfolio/instagram/4.png",
+    image: "/portfolio/instagram/youtube.jpg",
     imageAlt: "Brand communication design series created by BrainADZ",
   },
 ];

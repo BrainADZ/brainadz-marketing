@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+ 
 
 import Link from "next/link";
 import {
@@ -805,10 +805,9 @@ function PrivacyPolicyContent() {
                 </a>
 
                 <Link
-                  href="/contact" data-enquiry-trigger data-enquiry-source="Page CTA"
+                  href="/contact"
                   className="group rounded-[12px] border border-black/10 bg-[#fbfbfb] p-5 transition hover:border-[#E1122B]/40 hover:bg-[#fff8f8]"
                 >
-                  Enquire Now
                   <ArrowRight className="h-6 w-6 text-[#E1122B]" />
 
                   <p className="mt-5 text-[12px] font-semibold uppercase tracking-[0.15em] text-black/38">
@@ -878,10 +877,10 @@ function PrivacyPolicyNavigation() {
         </p>
 
         <Link
-          href="/contact" data-enquiry-trigger data-enquiry-source="Page CTA"
+          href="/contact"
           className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-4 rounded-full bg-[#E1122B] px-5 text-[13px] font-semibold text-white transition hover:bg-white hover:text-black"
         >
-          Enquire Now
+          Contact BrainADZ
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
@@ -913,10 +912,10 @@ function PrivacyPolicyCTA() {
             </div>
 
             <Link
-              href="/contact" data-enquiry-trigger data-enquiry-source="Page CTA"
+              href="/contact"
               className="inline-flex min-h-14 shrink-0 items-center justify-center gap-5 rounded-full bg-[#E1122B] px-7 text-[13px] font-semibold text-white transition hover:bg-white hover:text-black"
             >
-              Enquire Now
+              Contact our team
               <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
             </Link>
           </div>
