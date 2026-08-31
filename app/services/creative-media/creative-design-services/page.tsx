@@ -372,19 +372,19 @@ const WORK_ITEMS = [
   {
     title: "Integrated campaign creative",
     category: "Campaign and Digital",
-    image: "/portfolio/instagram/2.png",
+    image: "/poster/Creative-Design-Services-Campaign-And-Digital.webp",
     imageAlt: "Integrated campaign creative designed by BrainADZ",
   },
   {
     title: "Social-first visual system",
     category: "Social Content",
-    image: "/portfolio/instagram/facebook.jpg",
+    image: "/poster/Creative-Design-Services-Social-Content.webp",
     imageAlt: "Social-first creative system developed by BrainADZ",
   },
   {
     title: "Brand communication series",
     category: "Brand and Marketing",
-    image: "/portfolio/instagram/youtube.jpg",
+    image: "/poster/Creative-Design-Services-Brand-And-Marketing.webp",
     imageAlt: "Brand communication design series created by BrainADZ",
   },
 ];
@@ -558,7 +558,7 @@ export default function CreativeDesignServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/portfolio/instagram/2.png"
+                  src="/poster/Creative-Design-Services-Overview.webp"
                   alt="Creative campaign design work by BrainADZ"
                   className="h-full w-full object-cover object-top"
                 />

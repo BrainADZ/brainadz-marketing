@@ -401,19 +401,19 @@ const WORK_ITEMS = [
   {
     title: "Product acquisition creative system",
     category: "Performance Advertising",
-    image: "/portfolio/instagram/2.png",
+    image: "/poster/Ad-Creative-Design-Performance-Advertising.webp",
     imageAlt: "Product advertising creative designed by BrainADZ",
   },
   {
     title: "Lead-generation campaign creatives",
     category: "Service Campaign",
-    image: "/portfolio/instagram/3.png",
+    image: "/poster/Ad-Creative-Design-Service-Campaign.webp",
     imageAlt: "Lead generation advertising creatives designed by BrainADZ",
   },
   {
     title: "Multi-format promotional ad family",
     category: "Campaign Adaptation",
-    image: "/portfolio/instagram/4.png",
+    image: "/poster/Ad-Creative-Design-Campaign-Adaptation.webp",
     imageAlt: "Multi-format campaign ad creatives designed by BrainADZ",
   },
 ];
@@ -577,7 +577,7 @@ export default function AdCreativeDesignPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/portfolio/instagram/2.png"
+                  src="/poster/Ad-Creative-Design-Overview.webp"
                   alt="Performance advertising creative designed by BrainADZ"
                   className="h-full w-full object-cover object-top"
                 />

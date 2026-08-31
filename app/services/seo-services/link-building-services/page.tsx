@@ -82,7 +82,7 @@ const ACQUISITION_PATHS = [
       "Resource-page and contextual-link opportunities",
     ],
     icon: Mail,
-    image: "/seo/editorial-link-outreach.jpg",
+    image: "/poster/Editorial-Outreach.jpg",
     imageAlt:
       "Editorial link outreach campaign with publisher research and personalised communication",
   },
@@ -99,7 +99,7 @@ const ACQUISITION_PATHS = [
       "Expert quote and reactive PR opportunities",
     ],
     icon: Newspaper,
-    image: "/seo/digital-pr-link-building.jpg",
+    image: "/poster/Digital-PR.jpg",
     imageAlt:
       "Digital PR campaign earning authoritative media coverage and backlinks",
   },
@@ -116,7 +116,7 @@ const ACQUISITION_PATHS = [
       "Outreach positioning for each asset",
     ],
     icon: Sparkles,
-    image: "/seo/linkable-assets-strategy.jpg",
+    image: "/poster/Linkable-Assets.jpg",
     imageAlt:
       "Linkable asset strategy featuring research guides data and useful resources",
   },
@@ -523,7 +523,7 @@ export default function LinkBuildingSeoServicesPage() {
             <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
               <figure className="relative min-h-[320px] lg:min-h-[520px]">
                 <img
-                  src="/seo/link-authority-gap-analysis.jpg"
+                  src="/poster/Campaign-Intelligence.jpg"
                   alt="Backlink authority gap analysis comparing referring domains and target pages"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
@@ -968,7 +968,7 @@ export default function LinkBuildingSeoServicesPage() {
             <figure>
               <div className="relative aspect-[4/3] overflow-hidden rounded-[18px] border border-white/10 bg-[#171717] shadow-[0_22px_70px_rgba(0,0,0,0.28)]">
                 <img
-                  src="/seo/link-building-reporting-dashboard.jpg"
+                  src="/poster/Link-Reporting.jpg"
                   alt="Link building reporting dashboard showing earned links outreach and authority growth"
                   className="h-full w-full object-cover object-top"
                 />

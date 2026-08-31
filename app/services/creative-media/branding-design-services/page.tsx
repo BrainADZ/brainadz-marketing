@@ -385,19 +385,19 @@ const WORK_ITEMS = [
   {
     title: "Brand identity and launch system",
     category: "Identity Design",
-    image: "/portfolio/instagram/2.png",
+    image: "/poster/Branding-Design-Services-Identity-Design.webp",
     imageAlt: "Brand identity and launch communication designed by BrainADZ",
   },
   {
     title: "Corporate visual identity rollout",
     category: "Corporate Branding",
-    image: "/portfolio/instagram/3.png",
+    image: "/poster/Branding-Design-Services-Corporate-Branding.webp",
     imageAlt: "Corporate visual identity system created by BrainADZ",
   },
   {
     title: "Multi-format brand communication",
     category: "Brand Applications",
-    image: "/portfolio/instagram/4.png",
+    image: "/poster/Branding-Design-Services-Brand-Applications.webp",
     imageAlt: "Multi-format branded communication designed by BrainADZ",
   },
 ];
@@ -564,7 +564,7 @@ export default function BrandingDesignServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/portfolio/instagram/2.png"
+                  src="/poster/Branding-Design-Services-Overview.webp"
                   alt="Brand identity and visual communication work by BrainADZ"
                   className="h-full w-full object-cover object-top"
                 />

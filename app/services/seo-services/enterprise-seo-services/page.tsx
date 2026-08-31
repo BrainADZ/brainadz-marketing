@@ -658,7 +658,7 @@ export default function EnterpriseSeoServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/enterprise-seo-overview.jpg"
+                  src="/poster/Enterprise-SEO-Overview.jpg"
                   alt="Enterprise SEO overview showing large website portfolios, teams and performance"
                   className="h-full w-full object-cover object-center"
                 />
@@ -895,7 +895,7 @@ export default function EnterpriseSeoServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/seo/enterprise-seo-governance.jpg"
+                src="/poster/SEO-Governance.jpg"
                 alt="Enterprise SEO governance across product, engineering, content and analytics teams"
                 className="h-full w-full object-cover object-center"
               />
@@ -1112,7 +1112,7 @@ export default function EnterpriseSeoServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/enterprise-seo-reporting-dashboard.jpg"
+                  src="/poster/Enterprise-SEO-Reporting.jpg"
                   alt="Enterprise SEO reporting dashboard for portfolio visibility and implementation"
                   className="h-full w-full object-cover object-center"
                 />

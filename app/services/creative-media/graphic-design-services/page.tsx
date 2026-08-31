@@ -274,19 +274,19 @@ const WORK_ITEMS = [
   {
     title: "Social campaign design",
     category: "Digital and Social",
-    image: "/portfolio/instagram/2.png",
+    image: "/poster/Graphic-Design-Services-Digital-And-Social.webp",
     imageAlt: "Social media campaign design created by BrainADZ",
   },
   {
     title: "Brand-led visual communication",
     category: "Brand and Marketing",
-    image: "/portfolio/instagram/3.png",
+    image: "/poster/Graphic-Design-Services-Brand-And-Marketing.webp",
     imageAlt: "Brand-led graphic design work created by BrainADZ",
   },
   {
     title: "Promotional creative system",
     category: "Campaign Design",
-    image: "/portfolio/instagram/4.png",
+    image: "/poster/Graphic-Design-Services-Campaign-Design.webp",
     imageAlt: "Promotional campaign creative designed by BrainADZ",
   },
 ];
@@ -459,7 +459,7 @@ export default function GraphicDesignServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/portfolio/instagram/2.png"
+                  src="/poster/Graphic-Design-Services-Overview.webp"
                   alt="Graphic design and campaign creative work by BrainADZ"
                   className="h-full w-full object-cover object-top"
                 />

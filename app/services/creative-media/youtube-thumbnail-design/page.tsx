@@ -389,19 +389,19 @@ const WORK_ITEMS = [
   {
     title: "Educational Video Thumbnail Series",
     category: "YouTube Education",
-    image: "/portfolio/instagram/2.png",
+    image: "/poster/YouTube-Thumbnail-Design-YouTube-Education.webp",
     imageAlt: "Temporary portfolio image for educational YouTube thumbnail design",
   },
   {
     title: "Product Review Thumbnail System",
     category: "Product Content",
-    image: "/portfolio/instagram/3.png",
+    image: "/poster/YouTube-Thumbnail-Design-Product-Content.webp",
     imageAlt: "Temporary portfolio image for product review thumbnail design",
   },
   {
     title: "Podcast Episode Cover Direction",
     category: "Podcast Content",
-    image: "/portfolio/instagram/4.png",
+    image: "/poster/YouTube-Thumbnail-Desig-Podcast-Content.webp",
     imageAlt: "Temporary portfolio image for podcast YouTube thumbnail design",
   },
 ];

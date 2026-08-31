@@ -575,7 +575,7 @@ export default function OnPageSeoServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/on-page-seo-overview.jpg"
+                  src="/poster/On-Page-SEO-Overview.jpg"
                   alt="On Page SEO overview showing content structure, metadata and keyword mapping"
                   className="h-full w-full object-cover object-center"
                 />
@@ -751,7 +751,7 @@ export default function OnPageSeoServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/seo/on-page-content-quality.jpg"
+                src="/poster/Content-Quality.jpg"
                 alt="On Page SEO content quality review and topic coverage"
                 className="h-full w-full object-cover object-center"
               />
@@ -953,7 +953,7 @@ export default function OnPageSeoServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/on-page-seo-reporting-dashboard.jpg"
+                  src="/poster/On-Page-SEO-Reporting.jpg"
                   alt="On Page SEO reporting dashboard showing rankings, clicks and conversions"
                   className="h-full w-full object-cover object-center"
                 />

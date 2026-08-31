@@ -580,7 +580,7 @@ export default function TechnicalSeoPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/technical-seo-overview.jpg"
+                  src="/poster/Technical-SEO-Overview.jpg"
                   alt="Technical SEO overview dashboard with crawl indexing and performance data"
                   className="h-full w-full object-cover object-center"
                 />
@@ -754,7 +754,7 @@ export default function TechnicalSeoPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/seo/technical-seo-crawl-indexing.jpg"
+                src="/poster/Crawl-And-Index-Control.jpg"
                 alt="Technical SEO crawl and indexation analysis across website URLs"
                 className="h-full w-full object-cover object-center"
               />
@@ -849,7 +849,7 @@ export default function TechnicalSeoPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/core-web-vitals-javascript-seo.jpg"
+                  src="/poster/Performance-And-JavaScript-SEO.jpg"
                   alt="Core Web Vitals and JavaScript SEO performance analysis"
                   className="h-full w-full object-cover object-center"
                 />
@@ -975,7 +975,7 @@ export default function TechnicalSeoPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/technical-seo-reporting-dashboard.jpg"
+                  src="/poster/Technical-SEO-Reporting.jpg"
                   alt="Technical SEO reporting dashboard with crawl index and performance metrics"
                   className="h-full w-full object-cover object-center"
                 />

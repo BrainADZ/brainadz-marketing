@@ -390,19 +390,19 @@ const WORK_ITEMS = [
   {
     title: "Product and Demonstration Reels",
     category: "Product reel editing",
-    image: "/portfolio/instagram/2.png",
+    image: "/poster/Reel-Editing-Services-Product-Reel-Editing.webp",
     imageAlt: "Product Reel editing and demonstration content by BrainADZ",
   },
   {
     title: "Founder and Expert Reels",
     category: "Talking-head reel editing",
-    image: "/portfolio/instagram/3.png",
+    image: "/poster/Reel-Editing-Services-Talking-Head-Reel-Editing.webp",
     imageAlt: "Founder and expert Reel editing by BrainADZ",
   },
   {
     title: "Campaign and Lifestyle Reels",
     category: "Branded campaign reels",
-    image: "/portfolio/instagram/4.png",
+    image: "/poster/Reel-Editing-Services-Branded-Campaign-Reels.webp",
     imageAlt: "Campaign and lifestyle Reel editing by BrainADZ",
   },
 ];
@@ -577,7 +577,7 @@ export default function ReelEditingServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/smm/panel.jpg"
+                  src="/poster/Reel-Editing-Services-Overview.webp"
                   alt="Reel editing timeline and vertical content work by BrainADZ"
                   className="h-full w-full object-cover object-top"
                 />

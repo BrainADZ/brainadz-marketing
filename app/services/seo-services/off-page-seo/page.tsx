@@ -599,7 +599,7 @@ export default function OffPageSeoServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/off-page-seo-overview.jpg"
+                  src="/poster/Off-Page-SEO-Overview.jpg"
                   alt="Off Page SEO overview with links, mentions, citations and reputation signals"
                   className="h-full w-full object-cover object-center"
                 />
@@ -776,7 +776,7 @@ export default function OffPageSeoServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/seo/off-page-brand-reputation.jpg"
+                src="/poster/Brand-Mentions-And-Reputation.jpg"
                 alt="Brand mentions, reviews and reputation monitoring for Off Page SEO"
                 className="h-full w-full object-cover object-center"
               />
@@ -1030,7 +1030,7 @@ export default function OffPageSeoServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/off-page-seo-reporting-dashboard.jpg"
+                  src="/poster/Off-Page-SEO-Reporting.jpg"
                   alt="Off Page SEO reporting dashboard for links, mentions, citations and reputation"
                   className="h-full w-full object-cover object-center"
                 />

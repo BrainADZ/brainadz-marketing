@@ -567,7 +567,7 @@ export default function CorporateVideoEditingPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/smm/panel.jpg"
+                  src="/poster/Corporate-Video-Editing-Overview.webp"
                   alt="Corporate video editing timeline with interview, brand and approval workflow"
                   className="h-full w-full object-cover object-top"
                 />

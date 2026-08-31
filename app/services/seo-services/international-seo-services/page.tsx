@@ -662,7 +662,7 @@ export default function InternationalSeoServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/international-seo-overview.jpg"
+                  src="/poster/International-SEO-Overview.jpg"
                   alt="International SEO overview showing countries, languages and market performance"
                   className="h-full w-full object-cover object-center"
                 />
@@ -835,7 +835,7 @@ export default function InternationalSeoServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/seo/international-seo-localisation.jpg"
+                src="/poster/Search-Led-Localisation.jpg"
                 alt="International SEO localisation across language, currency and market experience"
                 className="h-full w-full object-cover object-center"
               />
@@ -1011,7 +1011,7 @@ export default function InternationalSeoServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/seo/international-seo-governance.jpg"
+                src="/poster/Global-And-Local-Governance.jpg"
                 alt="International SEO governance across global and regional teams"
                 className="h-full w-full object-cover object-center"
               />
@@ -1170,7 +1170,7 @@ export default function InternationalSeoServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/international-seo-reporting-dashboard.jpg"
+                  src="/poster/International-SEO-Reporting.jpg"
                   alt="International SEO reporting dashboard by country and language"
                   className="h-full w-full object-cover object-center"
                 />

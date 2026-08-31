@@ -562,7 +562,7 @@ export default function MotionGraphicsServicesPage() {
             <figure>
               <div className="group relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/portfolio/instagram/5.png"
+                  src="/poster/Motion-Graphics-Services-Overview.webp"
                   alt="Motion graphics and animated campaign work by BrainADZ"
                   className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.02]"
                 />

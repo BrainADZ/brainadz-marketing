@@ -390,19 +390,19 @@ const WORK_ITEMS = [
   {
     title: "Branded social content system",
     category: "Monthly Content Design",
-    image: "/portfolio/instagram/2.png",
+    image: "/poster/Social-Media-Creative-Design-Monthly-Content-Design.webp",
     imageAlt: "Branded social media content system designed by BrainADZ",
   },
   {
     title: "Campaign carousel and post series",
     category: "Campaign Creatives",
-    image: "/portfolio/instagram/3.png",
+    image: "/poster/Social-Media-Creative-Design-Campaign-Creatives.webp",
     imageAlt: "Social campaign carousel and post designs created by BrainADZ",
   },
   {
     title: "Multi-format platform adaptations",
     category: "Social Creative Adaptation",
-    image: "/portfolio/instagram/4.png",
+    image: "/poster/Social-Media-Creative-Design-Social-Creative-Adaptation.webp",
     imageAlt: "Multi-format social media creatives designed by BrainADZ",
   },
 ];
@@ -575,7 +575,7 @@ export default function SocialMediaCreativeDesignPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/smm/panel.jpg"
+                  src="/poster/Social-Media-Creative-Overview.webp"
                   alt="Social media creative design and content system by BrainADZ"
                   className="h-full w-full object-cover object-top"
                 />

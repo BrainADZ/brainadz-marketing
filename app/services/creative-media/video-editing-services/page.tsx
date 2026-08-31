@@ -397,7 +397,7 @@ const WORK_ITEMS = [
     title: "Structured videos that hold the complete story",
     description:
       "Educational, interview, product and thought-leadership edits organized for clarity, credibility and sustained viewing.",
-    image: "/portfolio/instagram/2.png",
+    image: "/poster/Video-Editing-Services-Long-Form-Content.webp",
     imageAlt: "Long-form video editing work by BrainADZ",
   },
   {
@@ -405,7 +405,7 @@ const WORK_ITEMS = [
     title: "Focused edits built around one communication goal",
     description:
       "Promotional and campaign videos combining footage, graphics, sound and brand direction into a polished final asset.",
-    image: "/portfolio/instagram/3.png",
+    image: "/poster/Video-Editing-Services-Brand-And-Campaign-Films.webp",
     imageAlt: "Promotional video editing and campaign work by BrainADZ",
   },
   {
@@ -413,7 +413,7 @@ const WORK_ITEMS = [
     title: "Master videos adapted for practical distribution",
     description:
       "Approved edits extended into shorter durations and alternate ratios while retaining the core message and visual system.",
-    image: "/portfolio/instagram/4.png",
+    image: "/poster/Video-Editing-Service-Multi-Format-Delivery.webp",
     imageAlt: "Multi-platform video editing work by BrainADZ",
   },
 ];
@@ -578,7 +578,7 @@ export default function VideoEditingServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/smm/panel.jpg"
+                  src="/poster/Video-Editing-Services-Overview.webp"
                   alt="Video editing timeline and post-production workflow"
                   className="h-full w-full object-cover object-top"
                 />

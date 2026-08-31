@@ -554,7 +554,7 @@ export default function InfographicDesignServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/portfolio/instagram/2.png"
+                  src="/poster/Infographic-Design-Services-Overview.webp"
                   alt="Infographic and data visualisation design by BrainADZ"
                   className="h-full w-full object-cover object-top"
                 />

@@ -389,19 +389,19 @@ const WORK_ITEMS = [
   {
     title: "Product and Campaign Reels",
     category: "Short-form product editing",
-    image: "/portfolio/instagram/2.png",
+    image: "/poster/Short-Video-Editing-Short-form-product-editing.webp",
     imageAlt: "Short-form product and campaign video editing by BrainADZ",
   },
   {
     title: "Founder and Expert Clips",
     category: "Talking-head editing",
-    image: "/portfolio/instagram/3.png",
+    image: "/poster/Short-Video-Editing-Talking-Head-Editing.webp",
     imageAlt: "Founder and expert short video editing by BrainADZ",
   },
   {
     title: "Educational Content Series",
     category: "Reels and Shorts system",
-    image: "/portfolio/instagram/4.png",
+    image: "/poster/Short-Video-Editing-Reels-and-Shorts-System.webp",
     imageAlt: "Educational Reels and YouTube Shorts editing by BrainADZ",
   },
 ];
@@ -570,9 +570,9 @@ export default function ShortVideoEditingPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/smm/panel.jpg"
+                  src="/smm/video.png"
                   alt="Short-form video editing timeline and content work by BrainADZ"
-                  className="h-full w-full object-cover object-top"
+                  className="h-120 w-900 object-cover object-top"
                 />
               </div>
               <figcaption className="mt-2 text-[13px] leading-5 text-black/48">

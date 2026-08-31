@@ -583,7 +583,7 @@ export default function LocalSeoServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/local-seo-overview.jpg"
+                  src="/poster/Local-SEO-Overview.jpg"
                   alt="Local SEO overview showing map rankings and business visibility"
                   className="h-full w-full object-cover object-center"
                 />
@@ -699,7 +699,7 @@ export default function LocalSeoServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/seo/google-business-profile-optimization.jpg"
+                src="/poster/Profile-to-Page-Alignment.jpg"
                 alt="Google Business Profile optimization for local search visibility"
                 className="h-full w-full object-cover object-center"
               />
@@ -934,7 +934,7 @@ export default function LocalSeoServicesPage() {
           <figure>
             <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/seo/local-keyword-location-pages.jpg"
+                src="/poster/Local-Intent-And-Location-Pages.jpg"
                 alt="Local keyword mapping and location landing-page strategy"
                 className="h-full w-full object-cover object-center"
               />
@@ -1059,7 +1059,7 @@ export default function LocalSeoServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/local-seo-reporting-dashboard.jpg"
+                  src="/poster/Local-SEO-Reporting.jpg"
                   alt="Local SEO reporting dashboard with map rankings and lead tracking"
                   className="h-full w-full object-cover object-center"
                 />

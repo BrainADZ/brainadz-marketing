@@ -622,7 +622,7 @@ export default function EcommerceSeoServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/ecommerce-seo-overview.jpg"
+                  src="/poster/Ecommerce-SEO-Overview.jpg"
                   alt="Ecommerce SEO overview showing category, product and revenue performance"
                   className="h-full w-full object-cover object-center"
                 />
@@ -796,7 +796,7 @@ export default function EcommerceSeoServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/seo/ecommerce-category-product-optimization.jpg"
+                src="/poster/Category-To-Product-Alignment.jpg"
                 alt="Ecommerce category-page and product-page SEO optimisation"
                 className="h-full w-full object-cover object-center"
               />
@@ -920,7 +920,7 @@ export default function EcommerceSeoServicesPage() {
           <figure>
             <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/seo/ecommerce-faceted-navigation.jpg"
+                src="/poster/Faceted-Navigation-And-Crawl-Control.jpg"
                 alt="Faceted navigation and ecommerce crawl-management strategy"
                 className="h-full w-full object-cover object-center"
               />
@@ -1152,7 +1152,7 @@ export default function EcommerceSeoServicesPage() {
             <figure className="lg:sticky lg:top-[188px]">
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/ecommerce-seo-reporting-dashboard.jpg"
+                  src="/poster/Ecommerce-SEO-Reporting.jpg"
                   alt="Ecommerce SEO reporting dashboard with revenue and catalogue visibility"
                   className="h-full w-full object-cover object-center"
                 />

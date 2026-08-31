@@ -589,7 +589,7 @@ export default function SeoAuditServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/seo/seo-audit-overview.jpg"
+                  src="/poster/SEO-Audit-Overview.jpg"
                   alt="SEO audit dashboard with technical, content and performance findings"
                   className="h-full w-full object-cover object-center"
                 />
@@ -809,7 +809,7 @@ export default function SeoAuditServicesPage() {
           <figure>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
               <img
-                src="/seo/seo-audit-finding-validation.jpg"
+                src="/poster/Finding-Validation.jpg"
                 alt="SEO audit finding validation and implementation requirements"
                 className="h-full w-full object-cover object-center"
               />

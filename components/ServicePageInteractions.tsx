@@ -104,7 +104,14 @@ export default function ServicePageInteractions() {
         return;
 
       const section = openedDetails.closest("section");
-      if (!section || !["features", "faqs"].includes(section.id)) return;
+      if (!section || !["features", "faqs", "capabilities"].includes(section.id))
+        return;
+
+      if (
+        section.id === "capabilities" &&
+        !pathname.startsWith("/services/digital-marketing/")
+      )
+        return;
 
       section
         .querySelectorAll<HTMLDetailsElement>("details[open]")
