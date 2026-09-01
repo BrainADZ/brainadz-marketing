@@ -580,7 +580,7 @@ export default function PresentationDesignServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/portfolio/instagram/2.png"
+                  src="/poster/Presentation-Design-Services-Overview.webp"
                   alt="Professional business presentation designed by BrainADZ"
                   className="h-full w-full object-cover object-top"
                 />

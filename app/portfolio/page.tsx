@@ -1,0 +1,739 @@
+/* eslint-disable react-hooks/set-state-in-effect */
+"use client";
+
+/* eslint-disable @next/next/no-img-element */
+
+import Image from "next/image";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { FiArrowRight, FiExternalLink } from "react-icons/fi";
+
+const ACCENT = "#E1122B";
+
+/* ========================= TABS ========================= */
+
+type TabKey =
+  | "Web Design"
+  | "SEO"
+  | "Digital Marketing"
+  | "Performance Marketing"
+  | "Creative Media";
+
+const TABS: TabKey[] = [
+  "Web Design",
+  "SEO",
+  "Digital Marketing",
+  "Performance Marketing",
+  "Creative Media",
+];
+
+const CATEGORY_TO_TAB: Record<string, TabKey> = {
+  "web-design": "Web Design",
+  seo: "SEO",
+  "digital-marketing": "Digital Marketing",
+  "performance-marketing": "Performance Marketing",
+  "creative-media": "Creative Media",
+};
+
+const TAB_TO_CATEGORY: Record<TabKey, string> = {
+  "Web Design": "web-design",
+  SEO: "seo",
+  "Digital Marketing": "digital-marketing",
+  "Performance Marketing": "performance-marketing",
+  "Creative Media": "creative-media",
+};
+
+/* ========================= DATA ========================= */
+
+type PortfolioItem = {
+  title: string;
+  image?: string;
+  video?: string;
+  href?: string;
+};
+
+
+const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
+  "Web Design": [
+    {
+      title: "Khadi Organique",
+      image: "/portfolio/khadi-organique.webp",
+      href: "http://khadiorganique.com/",
+    },
+    {
+      title: "Mewa Hub",
+      image: "/portfolio/web-insight1.webp",
+      href: "https://mewahub.com/",
+    },
+    {
+      title: "Comac India",
+      image: "/portfolio/insights2.webp",
+      href: "https://comacindia.com/",
+    },
+    {
+      title: "National Engineers & Steel Fabricators",
+      image: "/portfolio/national-engineers.webp",
+      href: "https://nationalengrs.com/",
+    },
+    {
+      title: "Okay Trip",
+      image: "/portfolio/okay-trip.webp",
+      href: "https://okaytrip.in/",
+    },
+    {
+      title: "Rubber Hose India",
+      image: "/portfolio/rubber-hose-india.webp",
+      href: "https://rubberhoseindia.com/",
+    },
+    {
+      title: "Synergy Infra",
+      image: "/portfolio/synergy-infra.webp",
+      href: "https://synergyinfra.ltd/",
+    },
+    {
+      title: "Country Home",
+      image: "/portfolio/country-home.webp",
+      href: "https://atlasmachinery.co.in/",
+    },
+    {
+      title: "Silent Meadows",
+      image: "/portfolio/silent-meadows.webp",
+      href: "https://silentmeadows.in/silentmeadows/",
+    },
+  ],
+  SEO: [
+    {
+      title: "National Engineers SEO",
+      image: "/portfolio/seo/",
+      href: "https://nationalengrs.com",
+    },
+    {
+      title: "Dairy Best Organic Reach",
+      image: "/portfolio/seo/",
+      href: "https://livlite.co.in",
+    },
+    {
+      title: "Lords Xtra Search Performance",
+      image: "/portfolio/seo/",
+      href: "https://lordsxtra.in",
+    },
+  ],
+
+  "Digital Marketing": [
+    {
+      title: "Cremica",
+      image: "/portfolio/instagram/",
+      href: "https://www.instagram.com/cremicafoods/",
+    },
+    {
+      title: "Eclectic Bay India",
+      image: "/portfolio/instagram/",
+      href: "https://www.instagram.com/eclecticbayindia/",
+    },
+    {
+      title: "Comac India",
+      image: "/portfolio/instagram/",
+      href: "https://www.instagram.com/comacindia/",
+    },
+    {
+      title: "Navin Polycon",
+      image: "/portfolio/instagram/",
+      href: "https://www.instagram.com/navin.polycon/",
+    },
+    {
+      title: "Stas Chem Group",
+      image: "/portfolio/instagram/",
+      href: "https://www.instagram.com/staschemgroup/",
+    },
+    {
+      title: "Ok Cookware",
+      image: "/portfolio/instagram/",
+      href: "https://www.instagram.com/okcookware/",
+    },
+  ],
+
+  "Performance Marketing": [
+    {
+      title: "Water Expo Campaigns",
+      image: "/portfolio/facebook/",
+      href: "https://facebook.com/",
+    },
+    {
+      title: "Dhariwala Foods Page",
+      image: "/portfolio/facebook/",
+      href: "https://facebook.com/",
+    },
+    {
+      title: "BrainADZ Live",
+      image: "/portfolio/facebook/",
+      href: "https://facebook.com/",
+    },
+  ],
+
+  "Creative Media": [
+    {
+      title: "In-House Studio Setup",
+      image: "/portfolio/inhouse-studio.webp",
+    },
+    {
+      title: "Classic Hotel",
+      video: "/portfolio/classic-video.mp4",
+    },
+    {
+      title: "Social Media Design",
+      image: "/portfolio/social-media-design.webp",
+    },
+    {
+      title: "Video Editing",
+      video: "/portfolio/video1.mp4",
+    },
+    {
+      title: "Stall Design",
+      image: "/portfolio/stall-insight.webp",
+    },
+    {
+      title: "Logo Design",
+      image: "/portfolio/logo-insight.webp",
+    },
+  ],
+};
+
+export default function Page() {
+  return (
+    <main className="dm-sans w-full overflow-x-hidden bg-white text-[#111111]">
+      <CaseStudiesHero />
+      <Suspense fallback={<PortfolioTabsFallback />}>
+        <PortfolioTabsSection />
+      </Suspense>
+    </main>
+  );
+}
+
+/* ========================= HERO ========================= */
+
+function CaseStudiesHero() {
+  return (
+    <section className="relative min-h-[460px] overflow-hidden bg-black sm:min-h-[520px] lg:min-h-[580px]">
+      <Image
+        src="/banner/case-study.webp"
+        alt="Selected website project delivered by BrainADZ"
+        fill
+        priority
+        className="object-cover object-top"
+        sizes="100vw"
+      />
+
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.96)_0%,rgba(0,0,0,0.84)_34%,rgba(0,0,0,0.42)_68%,rgba(0,0,0,0.16)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.2)_0%,rgba(0,0,0,0.06)_48%,rgba(0,0,0,0.46)_100%)]" />
+
+      <div className="relative z-10 mx-auto flex min-h-[460px] max-w-[1800px] flex-col px-5 py-8 sm:min-h-[520px] sm:px-8 lg:min-h-[580px] lg:px-10">
+        <nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-2 text-[14px] font-medium leading-none"
+        >
+          <Link href="/" className="text-[#E1122B] transition hover:text-white">
+            Home
+          </Link>
+          <span className="text-white/60">/</span>
+          <span className="text-white">Portfolio</span>
+        </nav>
+
+        <h1 className="mt-7 max-w-[800px] text-[36px] font-semibold leading-[1.04] tracking-[-0.04em] text-white sm:text-[48px] lg:text-[62px]">
+          Portfolio
+        </h1>
+
+        <div className="mt-auto max-w-[760px] pb-6 sm:pb-10 lg:pb-12">
+          <p className="text-[18px] leading-[1.5] text-white/84 sm:text-[21px] lg:text-[24px]">
+            Explore real work across websites, search, social media and creative
+            systems, built to move brands from challenge to measurable progress.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="#portfolio"
+              className="inline-flex min-h-14 items-center justify-center gap-7 rounded-full bg-[#E1122B] px-6 text-[15px] font-semibold text-white transition hover:bg-black"
+            >
+              Explore our work
+              <FiArrowRight />
+            </Link>
+            <Link
+              href="/contact" data-enquiry-trigger data-enquiry-source="Page CTA"
+              className="inline-flex min-h-14 items-center justify-center gap-7 rounded-full border border-white/45 bg-black/25 px-6 text-[15px] font-semibold text-white transition hover:border-[#E1122B] hover:bg-[#E1122B]"
+            >
+              Enquire Now
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function LegacyHeroSection() {
+  return (
+    <section className="relative w-full overflow-hidden pt-10">
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(90deg, #003F42 0%, #005E63 35%, #00AAB7 120%)",
+        }}
+      />
+
+      <div className="absolute inset-0 opacity-40">
+        <svg
+          className="absolute inset-0 h-full w-full"
+          viewBox="0 0 1600 520"
+          preserveAspectRatio="none"
+        >
+          <polygon
+            points="0,520 0,250 220,160 420,240 520,190 720,300 920,220 1100,320 1300,200 1600,320 1600,520"
+            fill="#007E85"
+          />
+          <polygon
+            points="0,520 0,320 260,240 420,320 560,260 760,360 980,280 1180,380 1400,300 1600,380 1600,520"
+            fill="#005E63"
+          />
+          <polygon
+            points="0,520 0,380 240,330 430,380 600,330 820,420 1040,350 1240,430 1460,370 1600,420 1600,520"
+            fill="#003F42"
+          />
+        </svg>
+      </div>
+
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.12]"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px)",
+          backgroundSize: "18px 18px",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-[1500px] px-4 sm:px-6 pt-20 pb-14 md:pt-28 md:pb-20">
+        <div className="grid items-center gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/90">
+              Portfolio
+              <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
+              Work • Results • Execution
+            </p>
+
+            <h1 className="mt-6 text-4xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-white">
+              Explore our{" "}
+              <span style={{ color: "#E9FFFE" }}>selected work</span> across
+              brands & industries.
+            </h1>
+
+            <p className="mt-6 max-w-2xl text-sm md:text-base leading-relaxed text-white/85">
+              Websites, growth campaigns, creatives, on-ground activations, and
+              exhibition execution — built with consistency, speed, and strong
+              systems.
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <Link
+                href="#portfolio"
+                className="inline-flex h-[46px] items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-black bg-white transition-all duration-200 hover:opacity-95"
+              >
+                View Portfolio <FiArrowRight />
+              </Link>
+
+              <Link
+                href="/contact" data-enquiry-trigger data-enquiry-source="Page CTA"
+                className="inline-flex h-[46px] items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-white border border-white/25 bg-white/10 transition-all duration-200 hover:bg-white/15"
+              >
+                Enquire Now
+              </Link>
+            </div>
+
+            <div className="mt-10 grid gap-3 sm:grid-cols-3 max-w-3xl">
+              <MiniStat label="Web + UI/UX" value="High-converting" />
+              <MiniStat label="Marketing" value="Performance-led" />
+              <MiniStat label="Exhibits + Live" value="Turnkey execution" />
+            </div>
+          </div>
+
+          <div className="lg:col-span-5">
+            <div className="relative max-w-[520px] ml-auto">
+              <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 md:p-7 shadow-[0_18px_50px_rgba(0,0,0,0.35)]">
+                <h2 className="text-white/90 text-lg font-semibold uppercase tracking-[0.16em]">
+                  Connect with our Experts
+                </h2>
+
+                <p className="mt-2 text-sm text-white/75 leading-relaxed">
+                  Share your requirement — we’ll get back with the best
+                  approach.
+                </p>
+
+                <div className="mt-6 h-px w-full bg-white/15" />
+
+                <form className="mt-6 space-y-3">
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      className="h-11 w-full rounded-xl border border-white/20 bg-white/10 px-4 text-sm text-white placeholder:text-white/60 outline-none focus:border-white/40 focus:bg-white/15"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Email address"
+                      className="h-11 w-full rounded-xl border border-white/20 bg-white/10 px-4 text-sm text-white placeholder:text-white/60 outline-none focus:border-white/40 focus:bg-white/15"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <input
+                      type="tel"
+                      placeholder="Phone"
+                      className="h-11 w-full rounded-xl border border-white/20 bg-white/10 px-4 text-sm text-white placeholder:text-white/60 outline-none focus:border-white/40 focus:bg-white/15"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Company"
+                      className="h-11 w-full rounded-xl border border-white/20 bg-white/10 px-4 text-sm text-white placeholder:text-white/60 outline-none focus:border-white/40 focus:bg-white/15"
+                    />
+                  </div>
+
+                  <select
+                    defaultValue=""
+                    className="h-11 w-full rounded-xl border border-white/20 bg-white/10 px-4 text-sm text-white outline-none focus:border-white/40 focus:bg-white/15"
+                  >
+                    <option value="" disabled className="text-black">
+                      Choose services
+                    </option>
+                    <option value="seo-performance" className="text-black">
+                      SEO + Performance
+                    </option>
+                    <option value="social-creatives" className="text-black">
+                      Social + Creatives
+                    </option>
+                    <option value="web-uiux" className="text-black">
+                      Web + UI/UX
+                    </option>
+                    <option value="exhibits-live" className="text-black">
+                      Exhibits + Live
+                    </option>
+                  </select>
+
+                  <button
+                    type="submit"
+                    className="mt-2 inline-flex h-[46px] w-full items-center justify-center rounded-xl bg-white text-sm font-semibold text-black hover:opacity-95"
+                  >
+                    Request a Callback
+                  </button>
+                </form>
+              </div>
+
+              <div
+                className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-25 blur-3xl"
+                style={{ background: "white" }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MiniStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur">
+      <p className="text-xs text-white/75">{label}</p>
+      <p className="mt-1 text-sm font-semibold text-white">{value}</p>
+    </div>
+  );
+}
+
+/* ========================= TABS SECTION ========================= */
+
+function PortfolioTabsFallback() {
+  return (
+    <section
+      id="portfolio"
+      className="w-full scroll-mt-24 bg-[#fbfbfb] text-black"
+    >
+      <div className="mx-auto max-w-[1800px] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          {TABS.map((tab, index) => (
+            <div
+              key={tab}
+              className={[
+                "min-h-12 rounded-full border px-5 py-3 text-sm font-semibold",
+                index === 0
+                  ? "border-[#E1122B] bg-[#E1122B] text-white"
+                  : "border-black/10 bg-white text-black/70",
+              ].join(" ")}
+            >
+              {tab}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PortfolioTabsSection() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const categoryFromUrl = useMemo<TabKey>(() => {
+    const category = searchParams.get("category")?.toLowerCase().trim();
+
+    if (!category) return "Web Design";
+
+    return CATEGORY_TO_TAB[category] ?? "Web Design";
+  }, [searchParams]);
+
+  const [active, setActive] = useState<TabKey>(categoryFromUrl);
+
+  useEffect(() => {
+    const category = searchParams.get("category")?.toLowerCase().trim();
+
+    if (!category) return;
+
+    const selectedCategory = CATEGORY_TO_TAB[category];
+
+    if (!selectedCategory) return;
+
+    setActive(selectedCategory);
+
+    const frame = requestAnimationFrame(() => {
+      document.getElementById("portfolio")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [searchParams]);
+
+  const handleTabChange = (tab: TabKey) => {
+    setActive(tab);
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("category", TAB_TO_CATEGORY[tab]);
+
+    router.replace(`${pathname}?${params.toString()}#portfolio`, {
+      scroll: false,
+    });
+  };
+
+  const activeMeta = useMemo(() => {
+    const map: Record<TabKey, { title: string; desc: string }> = {
+      "Web Design": {
+        title: "Web Design",
+        desc: "UI/UX, landing pages, and conversion-ready websites.",
+      },
+      SEO: {
+        title: "SEO",
+        desc: "Audits, growth systems, content ops, and performance improvements.",
+      },
+      "Digital Marketing": {
+        title: "Digital Marketing",
+        desc: "Content systems, profile growth, and creative consistency.",
+      },
+      "Performance Marketing": {
+        title: "Performance Marketing",
+        desc: "Page management, campaigns support, and content publishing.",
+      },
+      "Creative Media": {
+        title: "Creative Media",
+        desc: "Branding, ad creatives, and visual-first design output.",
+      },
+    };
+    return map[active];
+  }, [active]);
+
+  const items = PORTFOLIO_DATA[active];
+
+  return (
+    <section
+      id="portfolio"
+      className="w-full scroll-mt-24 bg-[#fbfbfb] text-black"
+    >
+      <div className="mx-auto max-w-[1800px] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          {TABS.map((t) => {
+            const isActive = t === active;
+            return (
+              <button
+                key={t}
+                type="button"
+                onClick={() => handleTabChange(t)}
+                className={[
+                  "min-h-12 rounded-full border px-5 text-sm font-semibold transition-all duration-200",
+                  isActive
+                    ? "border-[#E1122B] text-white"
+                    : "border-black/10 bg-white text-black/70 hover:border-[#E1122B] hover:text-[#E1122B]",
+                ].join(" ")}
+                style={
+                  isActive
+                    ? {
+                        background: ACCENT,
+                      }
+                    : undefined
+                }
+                aria-pressed={isActive}
+              >
+                {t}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="mt-12 border-t border-black/10 pt-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#E1122B]">
+            Selected Category
+          </p>
+
+          <h3 className="mt-3 text-2xl font-semibold tracking-[-0.035em] text-black md:text-3xl">
+            {activeMeta.title}
+          </h3>
+
+          <div className="mt-3 h-0.5 w-24" style={{ background: ACCENT }} />
+
+          <p className="mt-4 max-w-3xl text-sm text-black/60 md:text-base">
+            {activeMeta.desc}
+          </p>
+
+          {active === "Creative Media" ? (
+            <GraphicGrid items={items} category={active} />
+          ) : (
+            <BrowserGrid items={items} category={active} />
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ========================= BROWSER STYLE GRID ========================= */
+
+function BrowserGrid({
+  items,
+  category,
+}: {
+  items: PortfolioItem[];
+  category: TabKey;
+}) {
+  return (
+    <div className="mt-10 columns-1 gap-5 sm:columns-2 lg:columns-3">
+      {items.map((item, index) => (
+        <PortfolioCard
+          key={`${item.title}-${index}`}
+          item={item}
+          category={category}
+          index={index}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* ========================= GRAPHIC ONLY GRID ========================= */
+
+function GraphicGrid({
+  items,
+  category,
+}: {
+  items: PortfolioItem[];
+  category: TabKey;
+}) {
+  return (
+    <div className="mt-10 columns-1 gap-5 sm:columns-2 lg:columns-3">
+      {items.map((item, index) => (
+        <PortfolioCard
+          key={`${item.title}-${index}`}
+          item={item}
+          category={category}
+          index={index}
+        />
+      ))}
+    </div>
+  );
+}
+
+function PortfolioCard({
+  item,
+  category,
+  index,
+}: {
+  item: PortfolioItem;
+  category: TabKey;
+  index: number;
+}) {
+  const content = (
+    <>
+      <div className="overflow-hidden bg-white shadow-[0_12px_36px_rgba(0,0,0,0.08)] transition-[border-radius] duration-500 ease-out group-hover:rounded-lg">
+        {item.video ? (
+          <video
+            aria-label={`${item.title} project video`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="block h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:rotate-1"
+          >
+            <source src={item.video} type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src={item.image}
+            alt={item.title}
+            loading="lazy"
+            decoding="async"
+            className="block h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:rotate-1"
+          />
+        )}
+      </div>
+
+      <div className="pt-4">
+        <h4 className="text-[18px] font-semibold leading-tight text-black">
+          {item.title}
+        </h4>
+
+        <div className="relative mt-1 h-5 overflow-hidden text-[12px] font-medium">
+          <span className="absolute left-0 top-0 text-black/50 transition-all duration-300 group-hover:-translate-y-4 group-hover:opacity-0">
+            {category}
+          </span>
+
+          {item.href ? (
+            <span className="absolute left-0 top-0 inline-flex translate-y-4 items-center gap-1 text-[#E1122B] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+              Visit Project
+              <FiExternalLink className="h-3.5 w-3.5" />
+            </span>
+          ) : null}
+        </div>
+      </div>
+    </>
+  );
+
+  return (
+    <article
+      data-aos="fade-up"
+      data-aos-delay={(index % 3) * 80}
+      className="group mb-8 inline-block w-full break-inside-avoid"
+    >
+      {item.href ? (
+        <a
+          href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Visit ${item.title} project`}
+          className="block"
+        >
+          {content}
+        </a>
+      ) : (
+        <div>{content}</div>
+      )}
+    </article>
+  );
+}

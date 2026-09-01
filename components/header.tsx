@@ -382,11 +382,11 @@ export default function Navbar() {
                   </Link>
 
                   <Link
-                    href="/case-studies"
+                    href="/portfolio"
                     onClick={closeDesktopMenus}
                     className="group flex items-center justify-between px-4 py-3 text-[15px] font-semibold text-[#050505] transition hover:bg-[#fff1f2] hover:text-[#e50914]"
                   >
-                    <span>Case Studies</span>
+                    <span>Portfolio</span>
                     <span className="text-[12px] font-bold text-[#e50914] transition group-hover:translate-x-0.5">
                       <ArrowRight className="h-3 w-3" strokeWidth={1.8} />
                     </span>
@@ -394,6 +394,13 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
+
+            <Link
+              href="/case-studies"
+              className="text-[15px] font-medium text-[#111111] transition hover:text-[#e50914]"
+            >
+              Case Studies
+            </Link>
 
             {normalLinks.slice(3).map((link) => (
               <Link
@@ -588,17 +595,25 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="/case-studies"
+                href="/portfolio"
                 onClick={closeMobileMenu}
                 className="flex items-center justify-between px-8 py-4 text-[16px] font-semibold text-[#050505] transition hover:bg-[#fff1f2] hover:text-[#e50914]"
               >
-                <span>Case Studies</span>
+                <span>Portfolio</span>
                 <span className="text-[12px] font-bold text-[#e50914]">
                   -&gt;
                 </span>
               </Link>
             </div>
           )}
+
+          <Link
+            href="/case-studies"
+            onClick={closeMobileMenu}
+            className="border-b border-black/10 px-5 py-5 text-[18px] font-normal text-[#111111]"
+          >
+            Case Studies
+          </Link>
 
           <a
             href="tel:+919540468023"

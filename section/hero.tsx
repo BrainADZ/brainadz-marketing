@@ -32,10 +32,10 @@ export default function Hero() {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         poster="/hero/hero-poster.jpg"
       >
-        <source src="/hero/hero-video.webm" type="video/mp4" />
+        <source src="/hero/hero-video.webm" type="video/webm" />
       </video>
 
 

@@ -403,7 +403,7 @@ export default function LinkBuildingSeoServicesPage() {
       />
 
       {/* Hero */}
-      <section className="relative min-h-[440px] overflow-hidden bg-black sm:min-h-[520px] lg:min-h-[580px]">
+      <section className="relative min-h-[420px] overflow-hidden bg-black sm:min-h-[500px] lg:min-h-[540px]">
         <img
           src="/banner/linkbuilding-services.webp"
           alt="Link building strategy with editorial outreach and authority growth"
@@ -412,7 +412,7 @@ export default function LinkBuildingSeoServicesPage() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.94)_0%,rgba(0,0,0,0.84)_34%,rgba(0,0,0,0.48)_62%,rgba(0,0,0,0.12)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.18)_0%,rgba(0,0,0,0.04)_48%,rgba(0,0,0,0.34)_100%)]" />
 
-        <div className="relative z-10 mx-auto flex min-h-[440px] max-w-[1800px] flex-col px-5 py-8 sm:min-h-[520px] sm:px-8 lg:min-h-[580px] lg:px-10">
+        <div className="relative z-10 mx-auto flex min-h-[420px] max-w-[1800px] flex-col px-5 py-8 sm:min-h-[500px] sm:px-8 lg:min-h-[540px] lg:px-10">
           <nav
             aria-label="Breadcrumb"
             className="flex items-center gap-2 text-[14px] font-medium leading-none"
@@ -423,18 +423,16 @@ export default function LinkBuildingSeoServicesPage() {
             >
               Home
             </Link>
-            <span className="text-white/60">/</span>
+            <span className="text-white/70">/</span>
             <span className="text-white">Link Building SEO Services</span>
           </nav>
 
-          <div className="mt-auto max-w-[940px] pb-6 sm:pb-10 lg:pb-12">
-            <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#E1122B] sm:text-[13px]">
-              Earned authority, not manufactured links
-            </p>
-            <h1 className="mt-5 text-[40px] font-semibold leading-[1.04] tracking-[-0.045em] text-white sm:text-[52px] lg:text-[66px]">
-              Link Building SEO Services
-            </h1>
-            <p className="mt-6 max-w-[760px] text-[15px] leading-7 text-white/78 sm:text-[17px] sm:leading-8 lg:text-[20px]">
+          <h1 className="mt-7 max-w-[950px] text-[38px] font-semibold leading-[1.06] tracking-[-0.04em] text-white sm:text-[48px] lg:text-[58px]">
+            Link Building SEO Services
+          </h1>
+
+          <div className="mt-auto max-w-[780px] pb-6 sm:pb-10 lg:pb-12">
+            <p className="text-[14px] font-normal leading-[1.48] tracking-[-0.02em] text-white sm:text-[16px] lg:text-[20px]">
               Build search authority through relevant editorial placements,
               digital PR, useful assets and outreach grounded in quality,
               transparency and commercial priorities.
@@ -442,7 +440,7 @@ export default function LinkBuildingSeoServicesPage() {
 
             <Link
               href="/contact" data-enquiry-trigger data-enquiry-source="Page CTA"
-              className="mt-8 inline-flex min-h-14 items-center justify-center gap-5 rounded-full bg-[#E1122B] px-7 text-[13px] font-semibold text-white transition-colors hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              className="mt-8 inline-flex min-h-14 items-center justify-center gap-5 rounded-full bg-[#E1122B] px-7 text-[13px] font-semibold text-white transition-colors hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               Enquire Now
               <ArrowRight className="h-5 w-5" strokeWidth={1.8} />

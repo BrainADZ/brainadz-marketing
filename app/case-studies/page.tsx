@@ -1,739 +1,718 @@
-/* eslint-disable react-hooks/set-state-in-effect */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
-import Image from "next/image";
-import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { FiArrowRight, FiExternalLink } from "react-icons/fi";
+import { useState } from "react";
+import {
+  ArrowRight,
+  Palette,
+  Search,
+  SearchCheck,
+  Target,
+  Workflow,
+} from "lucide-react";
 
-const ACCENT = "#E1122B";
 
-/* ========================= TABS ========================= */
-
-type TabKey =
-  | "Web Design"
-  | "SEO"
+type CaseStudyCategory =
+  | "All Case Studies"
   | "Digital Marketing"
   | "Performance Marketing"
-  | "Creative Media";
+  | "SEO"
+  | "Web Design & Development"
+  | "Creative & Media";
 
-const TABS: TabKey[] = [
-  "Web Design",
-  "SEO",
+type CaseStudy = {
+  title: string;
+  summary: string;
+  category: Exclude<CaseStudyCategory, "All Case Studies">;
+  industry: string;
+  image: string;
+  href: string;
+  services: string[];
+};
+
+const categories: CaseStudyCategory[] = [
+  "All Case Studies",
   "Digital Marketing",
   "Performance Marketing",
-  "Creative Media",
+  "SEO",
+  "Web Design & Development",
+  "Creative & Media",
 ];
 
-const CATEGORY_TO_TAB: Record<string, TabKey> = {
-  "web-design": "Web Design",
-  seo: "SEO",
-  "digital-marketing": "Digital Marketing",
-  "performance-marketing": "Performance Marketing",
-  "creative-media": "Creative Media",
-};
-
-const TAB_TO_CATEGORY: Record<TabKey, string> = {
-  "Web Design": "web-design",
-  SEO: "seo",
-  "Digital Marketing": "digital-marketing",
-  "Performance Marketing": "performance-marketing",
-  "Creative Media": "creative-media",
-};
-
-/* ========================= DATA ========================= */
-
-type PortfolioItem = {
-  title: string;
-  image?: string;
-  video?: string;
-  href?: string;
-};
-
-
-const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
-  "Web Design": [
-    {
-      title: "Khadi Organique",
-      image: "/portfolio/khadi-organique.webp",
-      href: "http://khadiorganique.com/",
-    },
-    {
-      title: "Mewa Hub",
-      image: "/portfolio/web-insight1.webp",
-      href: "https://mewahub.com/",
-    },
-    {
-      title: "Comac India",
-      image: "/portfolio/insights2.webp",
-      href: "https://comacindia.com/",
-    },
-    {
-      title: "National Engineers & Steel Fabricators",
-      image: "/portfolio/national-engineers.webp",
-      href: "https://nationalengrs.com/",
-    },
-    {
-      title: "Okay Trip",
-      image: "/portfolio/okay-trip.webp",
-      href: "https://okaytrip.in/",
-    },
-    {
-      title: "Rubber Hose India",
-      image: "/portfolio/rubber-hose-india.webp",
-      href: "https://rubberhoseindia.com/",
-    },
-    {
-      title: "Synergy Infra",
-      image: "/portfolio/synergy-infra.webp",
-      href: "https://synergyinfra.ltd/",
-    },
-    {
-      title: "Country Home",
-      image: "/portfolio/country-home.webp",
-      href: "https://atlasmachinery.co.in/",
-    },
-    {
-      title: "Silent Meadows",
-      image: "/portfolio/silent-meadows.webp",
-      href: "https://silentmeadows.in/silentmeadows/",
-    },
-  ],
-  SEO: [
-    {
-      title: "National Engineers SEO",
-      image: "/portfolio/seo/",
-      href: "https://nationalengrs.com",
-    },
-    {
-      title: "Dairy Best Organic Reach",
-      image: "/portfolio/seo/",
-      href: "https://livlite.co.in",
-    },
-    {
-      title: "Lords Xtra Search Performance",
-      image: "/portfolio/seo/",
-      href: "https://lordsxtra.in",
-    },
-  ],
-
-  "Digital Marketing": [
-    {
-      title: "Cremica",
-      image: "/portfolio/instagram/",
-      href: "https://www.instagram.com/cremicafoods/",
-    },
-    {
-      title: "Eclectic Bay India",
-      image: "/portfolio/instagram/",
-      href: "https://www.instagram.com/eclecticbayindia/",
-    },
-    {
-      title: "Comac India",
-      image: "/portfolio/instagram/",
-      href: "https://www.instagram.com/comacindia/",
-    },
-    {
-      title: "Navin Polycon",
-      image: "/portfolio/instagram/",
-      href: "https://www.instagram.com/navin.polycon/",
-    },
-    {
-      title: "Stas Chem Group",
-      image: "/portfolio/instagram/",
-      href: "https://www.instagram.com/staschemgroup/",
-    },
-    {
-      title: "Ok Cookware",
-      image: "/portfolio/instagram/",
-      href: "https://www.instagram.com/okcookware/",
-    },
-  ],
-
-  "Performance Marketing": [
-    {
-      title: "Water Expo Campaigns",
-      image: "/portfolio/facebook/",
-      href: "https://facebook.com/",
-    },
-    {
-      title: "Dhariwala Foods Page",
-      image: "/portfolio/facebook/",
-      href: "https://facebook.com/",
-    },
-    {
-      title: "BrainADZ Live",
-      image: "/portfolio/facebook/",
-      href: "https://facebook.com/",
-    },
-  ],
-
-  "Creative Media": [
-    {
-      title: "In-House Studio Setup",
-      image: "/portfolio/inhouse-studio.webp",
-    },
-    {
-      title: "Classic Hotel",
-      video: "/portfolio/classic-video.mp4",
-    },
-    {
-      title: "Social Media Design",
-      image: "/portfolio/social-media-design.webp",
-    },
-    {
-      title: "Video Editing",
-      video: "/portfolio/video1.mp4",
-    },
-    {
-      title: "Stall Design",
-      image: "/portfolio/stall-insight.webp",
-    },
-    {
-      title: "Logo Design",
-      image: "/portfolio/logo-insight.webp",
-    },
+const featuredCaseStudy: CaseStudy = {
+  title: "Building a Search-Led Growth Foundation for a B2B Business",
+  summary:
+    "A connected marketing approach bringing technical SEO, search-focused content, landing page improvements and conversion thinking into one structured growth system.",
+  category: "SEO",
+  industry: "B2B",
+  image: "/portfolio/web-insight1.webp",
+  href: "/contact",
+  services: [
+    "SEO Audit",
+    "Technical SEO",
+    "On-Page SEO",
+    "Content Strategy",
   ],
 };
 
-export default function Page() {
+const caseStudies: CaseStudy[] = [
+  {
+    title: "Organic Search Growth Framework for a B2B Manufacturing Brand",
+    summary:
+      "A search strategy shaped around technical cleanup, keyword-to-page mapping, content structure and stronger organic discovery across priority service areas.",
+    category: "SEO",
+    industry: "Manufacturing",
+    image: "/portfolio/national-engineers.webp",
+    href: "/contact",
+    services: ["Technical SEO", "On-Page SEO", "Content Marketing"],
+  },
+  {
+    title: "Local Search Visibility System for a Multi-Service Business",
+    summary:
+      "A local SEO framework connecting location intent, service pages, business profile optimization and local relevance signals into one discoverability strategy.",
+    category: "SEO",
+    industry: "Local Services",
+    image: "/portfolio/rubber-hose-india.webp",
+    href: "/contact",
+    services: ["Local SEO", "On-Page SEO", "SEO Audit"],
+  },
+  {
+    title: "Ecommerce Search Architecture for Better Product Discovery",
+    summary:
+      "An ecommerce SEO approach focused on category structure, product discoverability, faceted navigation, technical crawl control and commercial search intent.",
+    category: "SEO",
+    industry: "Ecommerce",
+    image: "/portfolio/khadi-organique.webp",
+    href: "/contact",
+    services: ["Ecommerce SEO", "Technical SEO", "Content Strategy"],
+  },
+  {
+    title: "Lead Generation Funnel Built Around Google Search Ads",
+    summary:
+      "A performance marketing structure connecting keyword intent, campaign segmentation, landing pages, conversion tracking and ongoing paid search optimization.",
+    category: "Performance Marketing",
+    industry: "Business Services",
+    image: "/portfolio/okay-trip.webp",
+    href: "/contact",
+    services: ["Google Ads", "Lead Generation", "Landing Page Optimization"],
+  },
+  {
+    title: "Meta Campaign System for Multi-Creative Customer Acquisition",
+    summary:
+      "A structured Meta Ads approach built around audience testing, campaign creative variations, funnel stages, remarketing and measurable acquisition workflows.",
+    category: "Performance Marketing",
+    industry: "Consumer Brand",
+    image: "/portfolio/instagram/1.png",
+    href: "/contact",
+    services: ["Meta Ads", "Remarketing Ads", "Ad Creative Design"],
+  },
+  {
+    title: "LinkedIn Demand Generation for a B2B Service Offering",
+    summary:
+      "A B2B acquisition framework combining audience definition, message positioning, LinkedIn campaigns, lead capture and conversion-focused landing experiences.",
+    category: "Performance Marketing",
+    industry: "B2B Services",
+    image: "/portfolio/instagram/2.png",
+    href: "/contact",
+    services: ["LinkedIn Ads", "Lead Generation", "Landing Page Optimization"],
+  },
+  {
+    title: "Social Content System for a Consistent Consumer Brand Presence",
+    summary:
+      "A social media workflow covering content pillars, campaign planning, visual consistency, publishing structure and ongoing audience-facing communication.",
+    category: "Digital Marketing",
+    industry: "Consumer Brand",
+    image: "/portfolio/social-media-design.webp",
+    href: "/contact",
+    services: ["Social Media Marketing", "SMO", "Content Marketing"],
+  },
+  {
+    title: "Reputation and Brand Communication Framework",
+    summary:
+      "A digital reputation workflow designed around brand monitoring, response planning, content support and consistent public-facing communication across channels.",
+    category: "Digital Marketing",
+    industry: "Professional Services",
+    image: "/portfolio/instagram/3.png",
+    href: "/contact",
+    services: ["ORM", "Content Marketing", "Social Media Optimization"],
+  },
+  {
+    title: "Retention Communication Through Email and WhatsApp Journeys",
+    summary:
+      "A customer communication setup connecting campaign planning, audience segments, messaging journeys and follow-up touchpoints across email and WhatsApp.",
+    category: "Digital Marketing",
+    industry: "Ecommerce",
+    image: "/portfolio/instagram/4.png",
+    href: "/contact",
+    services: ["Email Marketing", "WhatsApp Marketing", "Content Marketing"],
+  },
+  {
+    title: "Conversion-Focused Website Redesign for a Service Business",
+    summary:
+      "A website redesign shaped around clearer information architecture, stronger service journeys, responsive UI and a more practical path from visit to enquiry.",
+    category: "Web Design & Development",
+    industry: "Business Services",
+    image: "/portfolio/web-insight2.webp",
+    href: "/contact",
+    services: ["UI/UX Design", "Web Development", "Landing Page Optimization"],
+  },
+  {
+    title: "Shopify Store Experience Built Around Product Discovery",
+    summary:
+      "A Shopify experience structured around navigation, collection organization, product presentation, responsive behaviour and a smoother ecommerce purchase journey.",
+    category: "Web Design & Development",
+    industry: "Retail & Ecommerce",
+    image: "/portfolio/country-home.webp",
+    href: "/contact",
+    services: ["Shopify Development", "UI/UX Design", "E-Commerce Development"],
+  },
+  {
+    title: "Custom Web Application for a Connected Business Workflow",
+    summary:
+      "A custom web experience translating business requirements into clear interfaces, structured workflows, responsive behaviour and scalable application architecture.",
+    category: "Web Design & Development",
+    industry: "Business Operations",
+    image: "/portfolio/synergy-infra.webp",
+    href: "/contact",
+    services: ["Custom Web Application", "UI/UX Design", "Web Development"],
+  },
+  {
+    title: "Campaign Creative System for Multi-Channel Advertising",
+    summary:
+      "A flexible creative system designed to adapt campaign messages across paid social, display formats, landing experiences and multiple content dimensions.",
+    category: "Creative & Media",
+    industry: "Consumer Campaign",
+    image: "/portfolio/design-insight.webp",
+    href: "/contact",
+    services: ["Ad Creative Design", "Graphic Design", "Visual Content Creation"],
+  },
+  {
+    title: "Social Video Editing System for Short-Form Content",
+    summary:
+      "A repeatable short-form editing workflow combining pacing, visual hierarchy, branded treatments and practical delivery across Reels, Shorts and campaign formats.",
+    category: "Creative & Media",
+    industry: "Digital Content",
+    image: "/portfolio/inhouse-studio.webp",
+    href: "/contact",
+    services: ["Reel Editing", "Short Video Editing", "Motion Graphics"],
+  },
+  {
+    title: "Brand Identity and Visual Communication Toolkit",
+    summary:
+      "A visual identity system bringing brand direction, graphic language, campaign assets and reusable communication formats into one consistent creative framework.",
+    category: "Creative & Media",
+    industry: "Brand & Corporate",
+    image: "/portfolio/logo-insight.webp",
+    href: "/contact",
+    services: ["Branding Design", "Graphic Design", "Presentation Design"],
+  },
+];
+
+const capabilityCards = [
+  {
+    title: "Search & Organic Growth",
+    description:
+      "SEO audits, technical SEO, on-page strategy, content, local search, ecommerce SEO and link-building work connected to measurable search visibility.",
+    icon: SearchCheck,
+  },
+  {
+    title: "Paid Acquisition & Lead Generation",
+    description:
+      "Google, Meta, LinkedIn, YouTube, shopping and remarketing campaigns planned around intent, conversion paths and accountable media performance.",
+    icon: Target,
+  },
+  {
+    title: "Digital Experience & Creative",
+    description:
+      "Web design, development, ecommerce, branding, campaign creatives, motion and video work shaped around practical customer journeys.",
+    icon: Palette,
+  },
+];
+
+const engagementSteps = [
+  {
+    number: "01",
+    title: "Understand the business objective",
+    description:
+      "We begin with the offer, customer, market, current marketing activity and the commercial outcome the engagement needs to support.",
+  },
+  {
+    number: "02",
+    title: "Find the growth constraint",
+    description:
+      "We identify the biggest gaps across search, paid media, content, website experience, tracking, creative or conversion flow.",
+  },
+  {
+    number: "03",
+    title: "Build the right marketing system",
+    description:
+      "Strategy, campaigns, content, design and development are connected around one practical execution plan instead of isolated activities.",
+  },
+  {
+    number: "04",
+    title: "Measure, learn and improve",
+    description:
+      "Performance is reviewed against meaningful business signals so the work can be refined, expanded and prioritized over time.",
+  },
+];
+
+export default function CaseStudiesPage() {
+  const [activeCategory, setActiveCategory] =
+    useState<CaseStudyCategory>("All Case Studies");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [visibleCount, setVisibleCount] = useState(6);
+
+  const filteredCaseStudies = caseStudies.filter((caseStudy) => {
+    const matchesCategory =
+      activeCategory === "All Case Studies" ||
+      caseStudy.category === activeCategory;
+
+    const query = searchQuery.trim().toLowerCase();
+
+    const matchesSearch =
+      !query ||
+      caseStudy.title.toLowerCase().includes(query) ||
+      caseStudy.summary.toLowerCase().includes(query) ||
+      caseStudy.category.toLowerCase().includes(query) ||
+      caseStudy.industry.toLowerCase().includes(query) ||
+      caseStudy.services.some((service) =>
+        service.toLowerCase().includes(query),
+      );
+
+    return matchesCategory && matchesSearch;
+  });
+
+  const visibleCaseStudies = filteredCaseStudies.slice(0, visibleCount);
+  const hasMoreCaseStudies = visibleCount < filteredCaseStudies.length;
+
   return (
-    <main className="dm-sans w-full overflow-x-hidden bg-white text-[#111111]">
-      <CaseStudiesHero />
-      <Suspense fallback={<PortfolioTabsFallback />}>
-        <PortfolioTabsSection />
-      </Suspense>
-    </main>
-  );
-}
+    <main className="dm-sans bg-white text-[#161616]">
+      {/* HERO */}
+      <section className="relative min-h-[420px] overflow-hidden bg-black text-white sm:min-h-[500px] lg:min-h-[540px]">
+        <img
+          src="/banner/case-study.webp"
+          alt="BrainADZ Marketing Case Studies"
+          className="absolute inset-0 h-full w-full object-cover"
+          onError={(event) => {
+            event.currentTarget.style.display = "none";
+          }}
+        />
 
-/* ========================= HERO ========================= */
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.82)_32%,rgba(0,0,0,0.48)_60%,rgba(0,0,0,0.12)_100%)]" />
 
-function CaseStudiesHero() {
-  return (
-    <section className="relative min-h-[460px] overflow-hidden bg-black sm:min-h-[520px] lg:min-h-[580px]">
-      <Image
-        src="/banner/case-study.webp"
-        alt="Selected website project delivered by BrainADZ"
-        fill
-        priority
-        className="object-cover object-top"
-        sizes="100vw"
-      />
-
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.96)_0%,rgba(0,0,0,0.84)_34%,rgba(0,0,0,0.42)_68%,rgba(0,0,0,0.16)_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.2)_0%,rgba(0,0,0,0.06)_48%,rgba(0,0,0,0.46)_100%)]" />
-
-      <div className="relative z-10 mx-auto flex min-h-[460px] max-w-[1800px] flex-col px-5 py-8 sm:min-h-[520px] sm:px-8 lg:min-h-[580px] lg:px-10">
-        <nav
-          aria-label="Breadcrumb"
-          className="flex items-center gap-2 text-[14px] font-medium leading-none"
-        >
-          <Link href="/" className="text-[#E1122B] transition hover:text-white">
-            Home
-          </Link>
-          <span className="text-white/60">/</span>
-          <span className="text-white">Case Studies</span>
-        </nav>
-
-        <h1 className="mt-7 max-w-[800px] text-[36px] font-semibold leading-[1.04] tracking-[-0.04em] text-white sm:text-[48px] lg:text-[62px]">
-          Case Studies
-        </h1>
-
-        <div className="mt-auto max-w-[760px] pb-6 sm:pb-10 lg:pb-12">
-          <p className="text-[18px] leading-[1.5] text-white/84 sm:text-[21px] lg:text-[24px]">
-            Explore real work across websites, search, social media and creative
-            systems, built to move brands from challenge to measurable progress.
-          </p>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <div className="relative z-10 mx-auto flex min-h-[420px] max-w-[1800px] flex-col px-5 py-8 sm:min-h-[500px] sm:px-8 lg:min-h-[540px] lg:px-10">
+          <nav
+            aria-label="Breadcrumb"
+            className="flex items-center gap-2 text-[14px] font-medium leading-none"
+          >
             <Link
-              href="#portfolio"
-              className="inline-flex min-h-14 items-center justify-center gap-7 rounded-full bg-[#E1122B] px-6 text-[15px] font-semibold text-white transition hover:bg-black"
+              href="/"
+              className="text-[#E1122B] transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
-              Explore our work
-              <FiArrowRight />
+              Home
             </Link>
-            <Link
-              href="/contact" data-enquiry-trigger data-enquiry-source="Page CTA"
-              className="inline-flex min-h-14 items-center justify-center gap-7 rounded-full border border-white/45 bg-black/25 px-6 text-[15px] font-semibold text-white transition hover:border-[#E1122B] hover:bg-[#E1122B]"
+            <span className="text-white/70">/</span>
+            <span className="text-white">Case Studies</span>
+          </nav>
+
+          <h1 className="mt-7 max-w-[950px] text-[38px] font-semibold leading-[1.06] tracking-[-0.04em] text-white sm:text-[48px] lg:text-[58px]">
+            See how marketing strategy turns into practical growth systems
+          </h1>
+
+          <div className="mt-auto max-w-[900px] pb-6 sm:pb-10 lg:pb-12">
+            <p className="text-[14px] font-normal leading-[1.48] tracking-[-0.02em] text-white sm:text-[16px] lg:text-[20px]">
+              Explore marketing work across SEO, paid media, social, web
+              experiences and creative delivery. Each case study is structured
+              around the business challenge, the strategy, the execution and the
+              system built to support better marketing outcomes.
+            </p>
+
+            <a
+              href="#case-studies"
+              className="mt-8 inline-flex min-h-14 items-center justify-center gap-5 rounded-full bg-[#E1122B] px-7 text-[13px] font-semibold text-white transition-colors hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
-              Enquire Now
-            </Link>
+              Explore Case Studies
+              <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
+            </a>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function LegacyHeroSection() {
-  return (
-    <section className="relative w-full overflow-hidden pt-10">
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(90deg, #003F42 0%, #005E63 35%, #00AAB7 120%)",
-        }}
-      />
-
-      <div className="absolute inset-0 opacity-40">
-        <svg
-          className="absolute inset-0 h-full w-full"
-          viewBox="0 0 1600 520"
-          preserveAspectRatio="none"
-        >
-          <polygon
-            points="0,520 0,250 220,160 420,240 520,190 720,300 920,220 1100,320 1300,200 1600,320 1600,520"
-            fill="#007E85"
-          />
-          <polygon
-            points="0,520 0,320 260,240 420,320 560,260 760,360 980,280 1180,380 1400,300 1600,380 1600,520"
-            fill="#005E63"
-          />
-          <polygon
-            points="0,520 0,380 240,330 430,380 600,330 820,420 1040,350 1240,430 1460,370 1600,420 1600,520"
-            fill="#003F42"
-          />
-        </svg>
-      </div>
-
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.12]"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px)",
-          backgroundSize: "18px 18px",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-[1500px] px-4 sm:px-6 pt-20 pb-14 md:pt-28 md:pb-20">
-        <div className="grid items-center gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/90">
-              Portfolio
-              <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
-              Work • Results • Execution
-            </p>
-
-            <h1 className="mt-6 text-4xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-white">
-              Explore our{" "}
-              <span style={{ color: "#E9FFFE" }}>selected work</span> across
-              brands & industries.
-            </h1>
-
-            <p className="mt-6 max-w-2xl text-sm md:text-base leading-relaxed text-white/85">
-              Websites, growth campaigns, creatives, on-ground activations, and
-              exhibition execution — built with consistency, speed, and strong
-              systems.
-            </p>
-
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Link
-                href="#portfolio"
-                className="inline-flex h-[46px] items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-black bg-white transition-all duration-200 hover:opacity-95"
-              >
-                View Portfolio <FiArrowRight />
-              </Link>
-
-              <Link
-                href="/contact" data-enquiry-trigger data-enquiry-source="Page CTA"
-                className="inline-flex h-[46px] items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-white border border-white/25 bg-white/10 transition-all duration-200 hover:bg-white/15"
-              >
-                Enquire Now
-              </Link>
-            </div>
-
-            <div className="mt-10 grid gap-3 sm:grid-cols-3 max-w-3xl">
-              <MiniStat label="Web + UI/UX" value="High-converting" />
-              <MiniStat label="Marketing" value="Performance-led" />
-              <MiniStat label="Exhibits + Live" value="Turnkey execution" />
-            </div>
-          </div>
-
-          <div className="lg:col-span-5">
-            <div className="relative max-w-[520px] ml-auto">
-              <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 md:p-7 shadow-[0_18px_50px_rgba(0,0,0,0.35)]">
-                <h2 className="text-white/90 text-lg font-semibold uppercase tracking-[0.16em]">
-                  Connect with our Experts
-                </h2>
-
-                <p className="mt-2 text-sm text-white/75 leading-relaxed">
-                  Share your requirement — we’ll get back with the best
-                  approach.
-                </p>
-
-                <div className="mt-6 h-px w-full bg-white/15" />
-
-                <form className="mt-6 space-y-3">
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <input
-                      type="text"
-                      placeholder="Your name"
-                      className="h-11 w-full rounded-xl border border-white/20 bg-white/10 px-4 text-sm text-white placeholder:text-white/60 outline-none focus:border-white/40 focus:bg-white/15"
-                    />
-                    <input
-                      type="email"
-                      placeholder="Email address"
-                      className="h-11 w-full rounded-xl border border-white/20 bg-white/10 px-4 text-sm text-white placeholder:text-white/60 outline-none focus:border-white/40 focus:bg-white/15"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <input
-                      type="tel"
-                      placeholder="Phone"
-                      className="h-11 w-full rounded-xl border border-white/20 bg-white/10 px-4 text-sm text-white placeholder:text-white/60 outline-none focus:border-white/40 focus:bg-white/15"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Company"
-                      className="h-11 w-full rounded-xl border border-white/20 bg-white/10 px-4 text-sm text-white placeholder:text-white/60 outline-none focus:border-white/40 focus:bg-white/15"
-                    />
-                  </div>
-
-                  <select
-                    defaultValue=""
-                    className="h-11 w-full rounded-xl border border-white/20 bg-white/10 px-4 text-sm text-white outline-none focus:border-white/40 focus:bg-white/15"
-                  >
-                    <option value="" disabled className="text-black">
-                      Choose services
-                    </option>
-                    <option value="seo-performance" className="text-black">
-                      SEO + Performance
-                    </option>
-                    <option value="social-creatives" className="text-black">
-                      Social + Creatives
-                    </option>
-                    <option value="web-uiux" className="text-black">
-                      Web + UI/UX
-                    </option>
-                    <option value="exhibits-live" className="text-black">
-                      Exhibits + Live
-                    </option>
-                  </select>
-
-                  <button
-                    type="submit"
-                    className="mt-2 inline-flex h-[46px] w-full items-center justify-center rounded-xl bg-white text-sm font-semibold text-black hover:opacity-95"
-                  >
-                    Request a Callback
-                  </button>
-                </form>
+      {/* FEATURED CASE STUDY */}
+      <section className="border-b border-black/10 bg-white py-16 text-black sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-10">
+          <div className="mb-12 grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end lg:gap-16">
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="h-0.5 w-8 bg-[#E1122B]" />
+              <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#E1122B]">
+                Featured Case Study
+              </p>
               </div>
 
-              <div
-                className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-25 blur-3xl"
-                style={{ background: "white" }}
+              <h2 className="mt-5 max-w-[900px] text-[38px] font-semibold leading-[1.08] tracking-[-0.04em] text-black sm:text-[48px] lg:text-[58px]">
+                From business challenge to connected digital growth
+              </h2>
+            </div>
+
+            <p className="max-w-[720px] text-[15px] leading-7 text-black/60 sm:text-[16px] sm:leading-8">
+              See how research, channel strategy, content, design and measurement
+              come together to solve a defined marketing problem—not as isolated
+              deliverables, but as one practical growth system.
+            </p>
+          </div>
+
+          <Link
+            href={featuredCaseStudy.href}
+            className="group grid overflow-hidden rounded-[14px] border border-black/10 bg-[#fbfbfb] shadow-[0_18px_55px_rgba(0,0,0,0.06)] lg:grid-cols-[1.05fr_0.95fr]"
+            data-aos="fade-up"
+          >
+            <div className="relative min-h-80 overflow-hidden bg-[#f3f3f3] sm:min-h-100 lg:min-h-145">
+              <img
+                src={featuredCaseStudy.image}
+                alt={featuredCaseStudy.title}
+                className="relative z-10 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                onError={(event) => {
+                  event.currentTarget.style.display = "none";
+                }}
               />
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
-function MiniStat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur">
-      <p className="text-xs text-white/75">{label}</p>
-      <p className="mt-1 text-sm font-semibold text-white">{value}</p>
-    </div>
-  );
-}
+            <div className="flex flex-col justify-center p-8 md:p-10 lg:p-14">
+              <div className="flex flex-wrap items-center gap-3 text-[13px] font-light">
+                <span className="rounded-full bg-[#E1122B] px-4 py-2 font-semibold text-white">
+                  {featuredCaseStudy.category}
+                </span>
 
-/* ========================= TABS SECTION ========================= */
+                <span className="rounded-full border border-black/10 bg-white px-4 py-2 text-black/60">
+                  {featuredCaseStudy.industry}
+                </span>
+              </div>
 
-function PortfolioTabsFallback() {
-  return (
-    <section
-      id="portfolio"
-      className="w-full scroll-mt-24 bg-[#fbfbfb] text-black"
-    >
-      <div className="mx-auto max-w-[1800px] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          {TABS.map((tab, index) => (
-            <div
-              key={tab}
-              className={[
-                "min-h-12 rounded-full border px-5 py-3 text-sm font-semibold",
-                index === 0
-                  ? "border-[#E1122B] bg-[#E1122B] text-white"
-                  : "border-black/10 bg-white text-black/70",
-              ].join(" ")}
-            >
-              {tab}
+              <h3 className="mt-8 max-w-[760px] text-[30px] font-semibold leading-[1.12] tracking-[-0.03em] text-black transition group-hover:text-[#E1122B] sm:text-[38px]">
+                {featuredCaseStudy.title}
+              </h3>
+
+              <p className="mt-5 max-w-[720px] text-[15px] leading-7 text-black/60 sm:text-[16px] sm:leading-8">
+                {featuredCaseStudy.summary}
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-2.5">
+                {featuredCaseStudy.services.map((service) => (
+                  <span
+                    key={service}
+                    className="rounded-[6px] border border-black/10 bg-white px-3.5 py-2 text-[13px] text-black/60"
+                  >
+                    {service}
+                  </span>
+                ))}
+              </div>
+
+              <span className="mt-10 inline-flex items-center gap-3 text-[14px] font-semibold text-[#E1122B]">
+                Discuss a Similar Project
+                <ArrowRight
+                  size={19}
+                  className="transition group-hover:translate-x-1"
+                />
+              </span>
             </div>
-          ))}
+          </Link>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function PortfolioTabsSection() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
+      {/* CASE STUDIES GRID */}
+      <section
+        id="case-studies"
+        className="scroll-mt-24 border-b border-black/10 bg-[#fbfbfb] py-16 text-black sm:py-20 lg:py-24"
+      >
+        <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-10">
+          <div className="mb-12 grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="h-0.5 w-8 bg-[#E1122B]" />
+              <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#E1122B]">
+                Case Study Library
+              </p>
+              </div>
 
-  const categoryFromUrl = useMemo<TabKey>(() => {
-    const category = searchParams.get("category")?.toLowerCase().trim();
+              <h2 className="mt-5 text-[38px] font-semibold leading-[1.08] tracking-[-0.04em] text-black sm:text-[48px] lg:text-[58px]">
+                Explore work by marketing discipline
+              </h2>
+            </div>
 
-    if (!category) return "Web Design";
+            <div className="flex flex-col gap-5 lg:items-end">
+              <div className="relative w-full max-w-145">
+                <Search
+                  size={19}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6b7280]"
+                />
 
-    return CATEGORY_TO_TAB[category] ?? "Web Design";
-  }, [searchParams]);
+                <input
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) => {
+                    setSearchQuery(event.target.value);
+                    setVisibleCount(6);
+                  }}
+                  placeholder="Search case studies"
+                  className="h-14 w-full rounded-full border border-black/10 bg-white pl-12 pr-5 text-[15px] text-black outline-none transition placeholder:text-black/40 focus:border-[#E1122B] focus:ring-2 focus:ring-[#E1122B]/10"
+                />
+              </div>
+            </div>
+          </div>
 
-  const [active, setActive] = useState<TabKey>(categoryFromUrl);
+          <div className="mb-10 flex flex-wrap gap-3">
+            {categories.map((category) => {
+              const isActive = activeCategory === category;
 
-  useEffect(() => {
-    const category = searchParams.get("category")?.toLowerCase().trim();
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => {
+                    setActiveCategory(category);
+                    setVisibleCount(6);
+                  }}
+                  className={`rounded-full border px-5 py-2.5 text-[14px] font-medium transition ${
+                    isActive
+                      ? "border-[#E1122B] bg-[#E1122B] text-white"
+                      : "border-black/10 bg-white text-black/65 hover:border-[#E1122B] hover:text-[#E1122B]"
+                  }`}
+                >
+                  {category}
+                </button>
+              );
+            })}
+          </div>
 
-    if (!category) return;
+          {filteredCaseStudies.length > 0 ? (
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {visibleCaseStudies.map((caseStudy) => (
+                <Link
+                  key={caseStudy.title}
+                  href={caseStudy.href}
+                  className="group flex h-full flex-col overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_12px_36px_rgba(0,0,0,0.04)] transition duration-300 hover:-translate-y-1 hover:border-[#E1122B]/40 hover:shadow-[0_20px_55px_rgba(0,0,0,0.08)]"
+                >
+                  <div className="relative h-64 overflow-hidden bg-[#f1ecea]">
+                    <img
+                      src={caseStudy.image}
+                      alt={caseStudy.title}
+                      className="relative z-10 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                      onError={(event) => {
+                        event.currentTarget.style.display = "none";
+                      }}
+                    />
+                  </div>
 
-    const selectedCategory = CATEGORY_TO_TAB[category];
+                  <div className="flex flex-1 flex-col p-7">
+                    <div className="flex flex-wrap items-center justify-between gap-3 text-[13px]">
+                      <span className="font-semibold text-[#E1122B]">
+                        {caseStudy.category}
+                      </span>
 
-    if (!selectedCategory) return;
+                      <span className="text-black/50">
+                        {caseStudy.industry}
+                      </span>
+                    </div>
 
-    setActive(selectedCategory);
+                    <h3 className="mt-5 text-[24px] font-semibold leading-[1.25] tracking-[-0.02em] text-black transition group-hover:text-[#E1122B]">
+                      {caseStudy.title}
+                    </h3>
 
-    const frame = requestAnimationFrame(() => {
-      document.getElementById("portfolio")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    });
+                    <p className="mt-4 text-[14px] leading-7 text-black/58 sm:text-[15px]">
+                      {caseStudy.summary}
+                    </p>
 
-    return () => cancelAnimationFrame(frame);
-  }, [searchParams]);
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {caseStudy.services.slice(0, 3).map((service) => (
+                        <span
+                          key={service}
+                          className="rounded-[6px] bg-[#fff1f1] px-3 py-1.5 text-[12px] text-black/60"
+                        >
+                          {service}
+                        </span>
+                      ))}
+                    </div>
 
-  const handleTabChange = (tab: TabKey) => {
-    setActive(tab);
-
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("category", TAB_TO_CATEGORY[tab]);
-
-    router.replace(`${pathname}?${params.toString()}#portfolio`, {
-      scroll: false,
-    });
-  };
-
-  const activeMeta = useMemo(() => {
-    const map: Record<TabKey, { title: string; desc: string }> = {
-      "Web Design": {
-        title: "Web Design",
-        desc: "UI/UX, landing pages, and conversion-ready websites.",
-      },
-      SEO: {
-        title: "SEO",
-        desc: "Audits, growth systems, content ops, and performance improvements.",
-      },
-      "Digital Marketing": {
-        title: "Digital Marketing",
-        desc: "Content systems, profile growth, and creative consistency.",
-      },
-      "Performance Marketing": {
-        title: "Performance Marketing",
-        desc: "Page management, campaigns support, and content publishing.",
-      },
-      "Creative Media": {
-        title: "Creative Media",
-        desc: "Branding, ad creatives, and visual-first design output.",
-      },
-    };
-    return map[active];
-  }, [active]);
-
-  const items = PORTFOLIO_DATA[active];
-
-  return (
-    <section
-      id="portfolio"
-      className="w-full scroll-mt-24 bg-[#fbfbfb] text-black"
-    >
-      <div className="mx-auto max-w-[1800px] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          {TABS.map((t) => {
-            const isActive = t === active;
-            return (
-              <button
-                key={t}
-                type="button"
-                onClick={() => handleTabChange(t)}
-                className={[
-                  "min-h-12 rounded-full border px-5 text-sm font-semibold transition-all duration-200",
-                  isActive
-                    ? "border-[#E1122B] text-white"
-                    : "border-black/10 bg-white text-black/70 hover:border-[#E1122B] hover:text-[#E1122B]",
-                ].join(" ")}
-                style={
-                  isActive
-                    ? {
-                        background: ACCENT,
-                      }
-                    : undefined
-                }
-                aria-pressed={isActive}
-              >
-                {t}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="mt-12 border-t border-black/10 pt-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#E1122B]">
-            Selected Category
-          </p>
-
-          <h3 className="mt-3 text-2xl font-semibold tracking-[-0.035em] text-black md:text-3xl">
-            {activeMeta.title}
-          </h3>
-
-          <div className="mt-3 h-0.5 w-24" style={{ background: ACCENT }} />
-
-          <p className="mt-4 max-w-3xl text-sm text-black/60 md:text-base">
-            {activeMeta.desc}
-          </p>
-
-          {active === "Creative Media" ? (
-            <GraphicGrid items={items} category={active} />
+                    <span className="mt-auto inline-flex items-center gap-3 pt-7 text-[14px] font-semibold text-[#E1122B]">
+                      Discuss This Project
+                      <ArrowRight
+                        size={17}
+                        className="transition group-hover:translate-x-1"
+                      />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           ) : (
-            <BrowserGrid items={items} category={active} />
+            <div className="rounded-[18px] border border-[#e7ddda] bg-white px-6 py-16 text-center">
+              <Workflow
+                size={36}
+                strokeWidth={1.5}
+                className="mx-auto text-[#d9362b]"
+              />
+
+              <h3 className="mt-5 text-[24px] font-normal text-[#262626]">
+                No case studies found
+              </h3>
+
+              <p className="mx-auto mt-3 max-w-130 text-[15px] font-light leading-[1.7] text-[#616161]">
+                Try another search term or switch back to all case studies.
+              </p>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery("");
+                  setActiveCategory("All Case Studies");
+                  setVisibleCount(6);
+                }}
+                className="mt-6 inline-flex items-center gap-2 text-[14px] font-medium text-[#d9362b]"
+              >
+                Clear Filters
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          )}
+
+          {filteredCaseStudies.length > 0 && hasMoreCaseStudies && (
+            <div className="mt-12 flex justify-center">
+              <button
+                type="button"
+                onClick={() =>
+                  setVisibleCount((currentCount) =>
+                    Math.min(currentCount + 6, filteredCaseStudies.length),
+                  )
+                }
+                className="group inline-flex h-13.5 min-w-52 items-center justify-between rounded-sm border border-[#d9362b] px-6 text-[15px] font-medium text-[#d9362b] transition-all duration-300 hover:bg-[#d9362b] hover:text-white"
+              >
+                <span>Load More Case Studies</span>
+
+                <ArrowRight
+                  size={18}
+                  className="transition group-hover:translate-x-1"
+                />
+              </button>
+            </div>
           )}
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-/* ========================= BROWSER STYLE GRID ========================= */
+      {/* WHAT THE CASE STUDIES COVER */}
+      <section className="border-b border-black/10 bg-white py-16 text-black sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-10">
+          <div className="mb-14 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="h-0.5 w-8 bg-[#E1122B]" />
+                <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#E1122B]">
+                  Capabilities in Practice
+                </p>
+              </div>
 
-function BrowserGrid({
-  items,
-  category,
-}: {
-  items: PortfolioItem[];
-  category: TabKey;
-}) {
-  return (
-    <div className="mt-10 columns-1 gap-5 sm:columns-2 lg:columns-3">
-      {items.map((item, index) => (
-        <PortfolioCard
-          key={`${item.title}-${index}`}
-          item={item}
-          category={category}
-          index={index}
-        />
-      ))}
-    </div>
-  );
-}
+              <h2 className="mt-5 text-[38px] font-semibold leading-[1.08] tracking-[-0.04em] text-black sm:text-[48px] lg:text-[58px]">
+                Specialist execution connected to one business objective
+              </h2>
+            </div>
 
-/* ========================= GRAPHIC ONLY GRID ========================= */
+            <p className="max-w-[720px] text-[15px] leading-7 text-black/60 sm:text-[16px] sm:leading-8">
+              Every engagement starts with the commercial goal. We then combine
+              the channels and capabilities needed to improve visibility,
+              acquisition, customer experience and measurable performance.
+            </p>
+          </div>
 
-function GraphicGrid({
-  items,
-  category,
-}: {
-  items: PortfolioItem[];
-  category: TabKey;
-}) {
-  return (
-    <div className="mt-10 columns-1 gap-5 sm:columns-2 lg:columns-3">
-      {items.map((item, index) => (
-        <PortfolioCard
-          key={`${item.title}-${index}`}
-          item={item}
-          category={category}
-          index={index}
-        />
-      ))}
-    </div>
-  );
-}
+          <div className="grid gap-5 md:grid-cols-3">
+            {capabilityCards.map((item) => {
+              const Icon = item.icon;
 
-function PortfolioCard({
-  item,
-  category,
-  index,
-}: {
-  item: PortfolioItem;
-  category: TabKey;
-  index: number;
-}) {
-  const content = (
-    <>
-      <div className="overflow-hidden bg-white shadow-[0_12px_36px_rgba(0,0,0,0.08)] transition-[border-radius] duration-500 ease-out group-hover:rounded-lg">
-        {item.video ? (
-          <video
-            aria-label={`${item.title} project video`}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            className="block h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:rotate-1"
-          >
-            <source src={item.video} type="video/mp4" />
-          </video>
-        ) : (
-          <img
-            src={item.image}
-            alt={item.title}
-            loading="lazy"
-            decoding="async"
-            className="block h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:rotate-1"
-          />
-        )}
-      </div>
+              return (
+                <div
+                  key={item.title}
+                  className="rounded-[14px] border border-black/10 bg-[#fbfbfb] p-8 shadow-[0_12px_36px_rgba(0,0,0,0.04)] transition duration-300 hover:-translate-y-1 hover:border-[#E1122B]/40"
+                  data-aos="fade-up"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-[10px] border border-[#E1122B]/20 bg-[#fff1f1] text-[#E1122B]">
+                    <Icon size={27} strokeWidth={1.5} />
+                  </div>
 
-      <div className="pt-4">
-        <h4 className="text-[18px] font-semibold leading-tight text-black">
-          {item.title}
-        </h4>
+                  <h3 className="mt-8 text-[24px] font-semibold leading-tight tracking-[-0.02em] text-black">
+                    {item.title}
+                  </h3>
 
-        <div className="relative mt-1 h-5 overflow-hidden text-[12px] font-medium">
-          <span className="absolute left-0 top-0 text-black/50 transition-all duration-300 group-hover:-translate-y-4 group-hover:opacity-0">
-            {category}
-          </span>
-
-          {item.href ? (
-            <span className="absolute left-0 top-0 inline-flex translate-y-4 items-center gap-1 text-[#E1122B] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-              Visit Project
-              <FiExternalLink className="h-3.5 w-3.5" />
-            </span>
-          ) : null}
+                  <p className="mt-4 text-[14px] leading-7 text-black/58 sm:text-[15px]">
+                    {item.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </section>
 
-  return (
-    <article
-      data-aos="fade-up"
-      data-aos-delay={(index % 3) * 80}
-      className="group mb-8 inline-block w-full break-inside-avoid"
-    >
-      {item.href ? (
-        <a
-          href={item.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Visit ${item.title} project`}
-          className="block"
-        >
-          {content}
-        </a>
-      ) : (
-        <div>{content}</div>
-      )}
-    </article>
+      {/* HOW WE APPROACH MARKETING */}
+      <section className="bg-[#111111] py-16 text-white sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-10">
+          <div className="mb-14 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="h-0.5 w-8 bg-[#E1122B]" />
+                <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#ff8178]">
+                  How We Work
+                </p>
+              </div>
+
+              <h2 className="mt-5 text-[38px] font-semibold leading-[1.08] tracking-[-0.04em] text-white sm:text-[48px] lg:text-[58px]">
+                A clear process from diagnosis to continuous improvement
+              </h2>
+            </div>
+
+            <p className="max-w-[720px] text-[15px] leading-7 text-white/65 sm:text-[16px] sm:leading-8">
+              Strategy is translated into priorities, accountable execution and
+              useful reporting. Each stage is designed to keep the work focused
+              on the problem that matters most to the business.
+            </p>
+          </div>
+
+          <div className="grid border-l border-t border-white/15 md:grid-cols-2 lg:grid-cols-4">
+            {engagementSteps.map((step) => (
+              <div
+                key={step.number}
+                className="min-h-72 border-b border-r border-white/15 p-7 md:p-8"
+              >
+                <span className="text-[13px] font-semibold tracking-[2px] text-[#ff8178]">
+                  {step.number}
+                </span>
+
+                <h3 className="mt-10 text-[22px] font-semibold leading-[1.25] tracking-[-0.02em] text-white">
+                  {step.title}
+                </h3>
+
+                <p className="mt-5 text-[14px] leading-7 text-white/60 sm:text-[15px]">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 flex flex-col gap-6 border-t border-white/15 pt-10 sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-[760px] text-[20px] font-semibold leading-8 text-white sm:text-[24px]">
+              Have a similar growth challenge? Let&apos;s map the right next step.
+            </p>
+            <Link
+              href="/contact"
+              data-enquiry-trigger
+              data-enquiry-source="Case Studies CTA"
+              className="inline-flex min-h-14 shrink-0 items-center justify-center gap-5 rounded-full bg-[#E1122B] px-7 text-[13px] font-semibold text-white transition-colors hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              Start a Conversation
+              <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
