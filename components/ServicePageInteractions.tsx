@@ -5,6 +5,13 @@ import { useEffect } from "react";
 
 const ACTIVE_ATTRIBUTE = "data-active-service-nav";
 const SERVICE_IMAGE_FALLBACK = "/poster/poster-img.jpeg";
+const SINGLE_OPEN_SECTION_IDS = new Set([
+  "capabilities",
+  "features",
+  "wordpress-features",
+  "core-features",
+  "commerce-features",
+]);
 
 export default function ServicePageInteractions() {
   const pathname = usePathname();
@@ -104,12 +111,9 @@ export default function ServicePageInteractions() {
         return;
 
       const section = openedDetails.closest("section");
-      if (!section || !["features", "faqs", "capabilities"].includes(section.id))
-        return;
-
       if (
-        section.id === "capabilities" &&
-        !pathname.startsWith("/services/digital-marketing/")
+        !section ||
+        (section.id !== "faqs" && !SINGLE_OPEN_SECTION_IDS.has(section.id))
       )
         return;
 
