@@ -43,9 +43,6 @@ export default function Hero() {
       <div className="relative z-10 mx-auto flex min-h-[calc(100vh-58px)] max-w-450 items-start md:items-end justify-between gap-10 px-6 pt-27 md:pt-0 pb-4 md:pb-27 md:px-10">
         {/* LEFT CONTAINER */}
         <div className="w-full max-w-132.5">
-          <h1 className="text-[38px] font-semibold leading-[1.16] tracking-[-1.2px] text-white sm:text-[40px] md:text-[48px] lg:text-[58px]">
-            {/* 360° Marketing Solutions That Turn Brands Into Growth Engines */}
-          </h1>
 
           <p className="mt-7 max-w-190 text-[14px] font-normal leading-[1.65] tracking-[-0.1px] text-white/90 md:text-[16px]">
            {/* BrainADZ Marketing helps businesses grow with strategy, creativity, performance marketing, SEO, social media, paid ads, website development, branding, and custom digital solutions — all built to generate leads, improve visibility, and scale revenue. */}
