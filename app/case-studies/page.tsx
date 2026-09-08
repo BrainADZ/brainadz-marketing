@@ -11,6 +11,7 @@ import {
   Target,
   Workflow,
 } from "lucide-react";
+import { getCaseStudyHref } from "./data";
 
 
 type CaseStudyCategory =
@@ -364,7 +365,7 @@ export default function CaseStudiesPage() {
           </div>
 
           <Link
-            href={featuredCaseStudy.href}
+            href={getCaseStudyHref(featuredCaseStudy)}
             className="group grid overflow-hidden rounded-[14px] border border-black/10 bg-[#fbfbfb] shadow-[0_18px_55px_rgba(0,0,0,0.06)] lg:grid-cols-[1.05fr_0.95fr]"
             data-aos="fade-up"
           >
@@ -491,7 +492,7 @@ export default function CaseStudiesPage() {
               {visibleCaseStudies.map((caseStudy) => (
                 <Link
                   key={caseStudy.title}
-                  href={caseStudy.href}
+                  href={getCaseStudyHref(caseStudy)}
                   className="group flex h-full flex-col overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_12px_36px_rgba(0,0,0,0.04)] transition duration-300 hover:-translate-y-1 hover:border-[#E1122B]/40 hover:shadow-[0_20px_55px_rgba(0,0,0,0.08)]"
                 >
                   <div className="relative h-64 overflow-hidden bg-[#f1ecea]">
@@ -536,7 +537,7 @@ export default function CaseStudiesPage() {
                     </div>
 
                     <span className="mt-auto inline-flex items-center gap-3 pt-7 text-[14px] font-semibold text-[#E1122B]">
-                      Discuss This Project
+                      Read More
                       <ArrowRight
                         size={17}
                         className="transition group-hover:translate-x-1"

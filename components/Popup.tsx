@@ -237,21 +237,18 @@ export default function EnquiryPopup() {
     setErrorMessage("");
 
     try {
-      const { serviceCategory, ...payload } = form;
-
       const response = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...payload,
-          service: `${serviceCategory} - ${form.service}`,
+          ...form,
           pageUrl: form.pageUrl || window.location.href,
         }),
       });
 
-      const result = (await response.json().catch(() => null)) as
-        | { message?: string }
-        | null;
+      const result = (await response.json().catch(() => null)) as {
+        message?: string;
+      } | null;
 
       if (!response.ok) {
         throw new Error(
@@ -553,13 +550,7 @@ export default function EnquiryPopup() {
 const inputClassName =
   "min-h-12 w-full rounded-[10px] border border-black/15 bg-white px-4 text-[14px] text-black outline-none transition placeholder:text-black/35 focus:border-[#E1122B] focus:ring-2 focus:ring-[#E1122B]/10";
 
-function Field({
-  label,
-  children,
-}: {
-  label: string;
-  children: ReactNode;
-}) {
+function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <label className="block">
       <span className="mb-2 block text-[11px] font-bold uppercase tracking-[0.08em] text-black/55">

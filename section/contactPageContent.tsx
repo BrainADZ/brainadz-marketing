@@ -12,6 +12,7 @@ import {
   Mail,
   MapPin,
   MessageCircle,
+  Loader2,
   Phone,
 } from "lucide-react";
 
@@ -79,6 +80,7 @@ const SERVICE_OPTIONS = {
 } as const;
 
 type MainService = keyof typeof SERVICE_OPTIONS;
+type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
 const CONTACT_FAQS = [
   {
@@ -109,38 +111,61 @@ const CONTACT_FAQS = [
 ];
 
 export default function ContactPageContent() {
-  const [submitted, setSubmitted] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [selectedMainService, setSelectedMainService] = useState<
     MainService | ""
   >("");
   const [selectedService, setSelectedService] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const getValue = (name: string) => String(formData.get(name) ?? "").trim();
-    const name = getValue("name");
-    const mainService = getValue("mainService");
-    const service = getValue("service");
-    const subject = `New ${mainService} - ${service} enquiry from ${name}`;
-    const body = [
-      `Name: ${name}`,
-      `Work email: ${getValue("email")}`,
-      `Phone: ${getValue("phone")}`,
-      `Company: ${getValue("company") || "Not provided"}`,
-      `Main service: ${mainService}`,
-      `Specific service: ${service}`,
-      "",
-      "Project details:",
-      getValue("message"),
-    ].join("\n");
+    setSubmitStatus("submitting");
+    setErrorMessage("");
 
-    setSubmitted(true);
-    window.location.href = `mailto:enquiry@brainadz.com?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: getValue("name"),
+          email: getValue("email"),
+          phone: getValue("phone"),
+          company: getValue("company"),
+          serviceCategory: selectedMainService,
+          service: selectedService,
+          message: getValue("message"),
+          source: "Contact Page Form",
+          pageUrl: window.location.href,
+        }),
+      });
+      const result = (await response.json().catch(() => null)) as {
+        message?: string;
+      } | null;
+
+      if (!response.ok) {
+        throw new Error(
+          result?.message || "Unable to submit your enquiry right now.",
+        );
+      }
+
+      form.reset();
+      setSelectedMainService("");
+      setSelectedService("");
+      setSubmitStatus("success");
+    } catch (error) {
+      setSubmitStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.",
+      );
+    }
   };
 
   return (
@@ -164,7 +189,10 @@ export default function ContactPageContent() {
             aria-label="Breadcrumb"
             className="flex items-center gap-2 text-[14px] font-medium leading-none"
           >
-            <Link href="/" className="text-[#E1122B] transition hover:text-white">
+            <Link
+              href="/"
+              className="text-[#E1122B] transition hover:text-white"
+            >
               Home
             </Link>
             <span className="text-white/45">/</span>
@@ -248,178 +276,199 @@ export default function ContactPageContent() {
           </div>
 
           <div className="border-t border-black/10 py-14 sm:py-16 lg:border-l lg:border-t-0 lg:py-20 lg:pl-14 xl:pl-20">
-              <div className="rounded-[14px] border border-black/10 bg-[#fbfbfb] p-5 shadow-[0_16px_45px_rgba(0,0,0,0.06)] sm:p-8 lg:p-10">
-                <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#E1122B]">
-                  Start a project
-                </p>
-                <h2 className="mt-4 text-[32px] font-semibold leading-tight tracking-[-0.03em] text-black sm:text-[40px]">
-                  Tell us what you are building
-                </h2>
-                <p className="mt-4 max-w-[650px] text-[15px] leading-7 text-black/58">
-                  Share a few details and we will connect you with the right
-                  BrainADZ team.
-                </p>
+            <div className="rounded-[14px] border border-black/10 bg-[#fbfbfb] p-5 shadow-[0_16px_45px_rgba(0,0,0,0.06)] sm:p-8 lg:p-10">
+              <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#E1122B]">
+                Start a project
+              </p>
+              <h2 className="mt-4 text-[32px] font-semibold leading-tight tracking-[-0.03em] text-black sm:text-[40px]">
+                Tell us what you are building
+              </h2>
+              <p className="mt-4 max-w-[650px] text-[15px] leading-7 text-black/58">
+                Share a few details and we will connect you with the right
+                BrainADZ team.
+              </p>
 
-                <form onSubmit={handleSubmit} className="mt-9 space-y-6">
-                  <div className="grid gap-6 sm:grid-cols-2">
-                    <FormField
-                      label="Name"
-                      name="name"
-                      placeholder="Your full name"
-                      autoComplete="name"
-                      required
-                    />
-                    <FormField
-                      label="Work email"
-                      name="email"
-                      type="email"
-                      placeholder="name@company.com"
-                      autoComplete="email"
-                      required
-                    />
-                    <FormField
-                      label="Phone"
-                      name="phone"
-                      type="tel"
-                      placeholder="+91 00000 00000"
-                      autoComplete="tel"
-                      required
-                    />
-                    <FormField
-                      label="Company"
-                      name="company"
-                      placeholder="Company name"
-                      autoComplete="organization"
-                    />
-                  </div>
+              <form onSubmit={handleSubmit} className="mt-9 space-y-6">
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <FormField
+                    label="Name"
+                    name="name"
+                    placeholder="Your full name"
+                    autoComplete="name"
+                    required
+                  />
+                  <FormField
+                    label="Work email"
+                    name="email"
+                    type="email"
+                    placeholder="name@company.com"
+                    autoComplete="email"
+                    required
+                  />
+                  <FormField
+                    label="Phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="+91 00000 00000"
+                    autoComplete="tel"
+                    required
+                  />
+                  <FormField
+                    label="Company"
+                    name="company"
+                    placeholder="Company name"
+                    autoComplete="organization"
+                  />
+                </div>
 
-                  <div className="grid gap-6 sm:grid-cols-2">
-                    <div>
-                      <label
-                        htmlFor="mainService"
-                        className="mb-2 block text-[13px] font-medium text-black/65"
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="mainService"
+                      className="mb-2 block text-[13px] font-medium text-black/65"
+                    >
+                      Main service
+                    </label>
+                    <div className="relative">
+                      <select
+                        id="mainService"
+                        name="mainService"
+                        required
+                        value={selectedMainService}
+                        onChange={(event) => {
+                          setSelectedMainService(
+                            event.target.value as MainService | "",
+                          );
+                          setSelectedService("");
+                          setSubmitStatus("idle");
+                        }}
+                        className="h-14 w-full appearance-none rounded-[10px] border border-black/14 bg-white px-4 pr-12 text-[15px] text-black outline-none transition focus:border-[#E1122B]"
                       >
-                        Main service
-                      </label>
-                      <div className="relative">
-                        <select
-                          id="mainService"
-                          name="mainService"
-                          required
-                          value={selectedMainService}
-                          onChange={(event) => {
-                            setSelectedMainService(
-                              event.target.value as MainService | "",
-                            );
-                            setSelectedService("");
-                            setSubmitted(false);
-                          }}
-                          className="h-14 w-full appearance-none rounded-[10px] border border-black/14 bg-white px-4 pr-12 text-[15px] text-black outline-none transition focus:border-[#E1122B]"
-                        >
-                          <option value="" disabled>
-                            Select main service
+                        <option value="" disabled>
+                          Select main service
+                        </option>
+                        {Object.keys(SERVICE_OPTIONS).map((service) => (
+                          <option key={service} value={service}>
+                            {service}
                           </option>
-                          {Object.keys(SERVICE_OPTIONS).map((service) => (
-                            <option key={service} value={service}>
-                              {service}
-                            </option>
-                          ))}
-                        </select>
-                        <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-black/45" />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="service"
-                        className="mb-2 block text-[13px] font-medium text-black/65"
-                      >
-                        Service you need
-                      </label>
-                      <div className="relative">
-                        <select
-                          id="service"
-                          name="service"
-                          required
-                          disabled={!selectedMainService}
-                          value={selectedService}
-                          onChange={(event) => {
-                            setSelectedService(event.target.value);
-                            setSubmitted(false);
-                          }}
-                          className="h-14 w-full appearance-none rounded-[10px] border border-black/14 bg-white px-4 pr-12 text-[15px] text-black outline-none transition focus:border-[#E1122B] disabled:cursor-not-allowed disabled:bg-black/[0.03] disabled:text-black/40"
-                        >
-                          <option value="" disabled>
-                            {selectedMainService
-                              ? "Select specific service"
-                              : "Select main service first"}
-                          </option>
-                          {selectedMainService &&
-                            SERVICE_OPTIONS[selectedMainService].map((service) => (
-                              <option key={service} value={service}>
-                                {service}
-                              </option>
-                            ))}
-                        </select>
-                        <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-black/45" />
-                      </div>
+                        ))}
+                      </select>
+                      <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-black/45" />
                     </div>
                   </div>
 
                   <div>
                     <label
-                      htmlFor="message"
+                      htmlFor="service"
                       className="mb-2 block text-[13px] font-medium text-black/65"
                     >
-                      Project details
+                      Service you need
                     </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={6}
-                      placeholder="Tell us about your goals, challenges, and timeline"
-                      className="w-full resize-none rounded-[10px] border border-black/14 bg-white px-4 py-4 text-[15px] leading-6 text-black outline-none transition placeholder:text-black/35 focus:border-[#E1122B]"
-                    />
-                  </div>
-
-                  <label className="flex items-start gap-3 text-[13px] leading-6 text-black/52">
-                    <input
-                      type="checkbox"
-                      required
-                      className="mt-1 h-4 w-4 shrink-0 accent-[#E1122B]"
-                    />
-                    <span>
-                      I agree to be contacted about this enquiry and accept the{" "}
-                      <Link
-                        href="/privacy-policy"
-                        className="text-black underline decoration-black/35 underline-offset-4"
+                    <div className="relative">
+                      <select
+                        id="service"
+                        name="service"
+                        required
+                        disabled={!selectedMainService}
+                        value={selectedService}
+                        onChange={(event) => {
+                          setSelectedService(event.target.value);
+                          setSubmitStatus("idle");
+                        }}
+                        className="h-14 w-full appearance-none rounded-[10px] border border-black/14 bg-white px-4 pr-12 text-[15px] text-black outline-none transition focus:border-[#E1122B] disabled:cursor-not-allowed disabled:bg-black/3 disabled:text-black/40"
                       >
-                        privacy policy
-                      </Link>
-                      .
-                    </span>
-                  </label>
+                        <option value="" disabled>
+                          {selectedMainService
+                            ? "Select specific service"
+                            : "Select main service first"}
+                        </option>
+                        {selectedMainService &&
+                          SERVICE_OPTIONS[selectedMainService].map(
+                            (service) => (
+                              <option key={service} value={service}>
+                                {service}
+                              </option>
+                            ),
+                          )}
+                      </select>
+                      <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-black/45" />
+                    </div>
+                  </div>
+                </div>
 
-                  <button
-                    type="submit"
-                    className="inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-[#E1122B] px-7 text-[14px] font-semibold text-white transition hover:bg-black sm:w-auto"
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="mb-2 block text-[13px] font-medium text-black/65"
                   >
-                    Send enquiry
-                    <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
-                  </button>
+                    Project details
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={6}
+                    placeholder="Tell us about your goals, challenges, and timeline"
+                    className="w-full resize-none rounded-[10px] border border-black/14 bg-white px-4 py-4 text-[15px] leading-6 text-black outline-none transition placeholder:text-black/35 focus:border-[#E1122B]"
+                  />
+                </div>
 
-                  {submitted && (
-                    <p
-                      role="status"
-                      className="flex items-center gap-2 text-[14px] text-[#E1122B]"
+                <label className="flex items-start gap-3 text-[13px] leading-6 text-black/52">
+                  <input
+                    type="checkbox"
+                    required
+                    className="mt-1 h-4 w-4 shrink-0 accent-[#E1122B]"
+                  />
+                  <span>
+                    I agree to be contacted about this enquiry and accept the{" "}
+                    <Link
+                      href="/privacy-policy"
+                      className="text-black underline decoration-black/35 underline-offset-4"
                     >
-                      <CheckCircle2 className="h-5 w-5" />
-                      Your email app is ready with the enquiry details.
-                    </p>
+                      privacy policy
+                    </Link>
+                    .
+                  </span>
+                </label>
+
+                <button
+                  type="submit"
+                  disabled={submitStatus === "submitting"}
+                  className="inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-[#E1122B] px-7 text-[14px] font-semibold text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-65 sm:w-auto"
+                >
+                  {submitStatus === "submitting" ? (
+                    <>
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      Sending enquiry
+                    </>
+                  ) : (
+                    <>
+                      Send enquiry
+                      <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
+                    </>
                   )}
-                </form>
-              </div>
+                </button>
+
+                {submitStatus === "success" && (
+                  <p
+                    role="status"
+                    className="flex items-center gap-2 text-[14px] text-[#E1122B]"
+                  >
+                    <CheckCircle2 className="h-5 w-5" />
+                    Thank you. Your enquiry has been submitted successfully.
+                  </p>
+                )}
+
+                {submitStatus === "error" && (
+                  <p
+                    role="alert"
+                    className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-[13px] text-red-700"
+                  >
+                    {errorMessage}
+                  </p>
+                )}
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -429,7 +478,12 @@ export default function ContactPageContent() {
         <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-10">
           <div className="grid gap-7 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
             <div>
-              <div className="flex items-center gap-3"><span className="h-0.5 w-8 bg-[#E1122B]" /><p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#E1122B]">Our offices</p></div>
+              <div className="flex items-center gap-3">
+                <span className="h-0.5 w-8 bg-[#E1122B]" />
+                <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#E1122B]">
+                  Our offices
+                </p>
+              </div>
               <h2 className="mt-4 text-[38px] font-semibold leading-none tracking-[-0.04em] sm:text-[48px] lg:text-[58px]">
                 Visit our Delhi office
               </h2>
@@ -484,7 +538,12 @@ export default function ContactPageContent() {
         <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
             <div className="lg:sticky lg:top-32 lg:self-start">
-              <div className="flex items-center gap-3"><span className="h-0.5 w-8 bg-[#E1122B]" /><p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#E1122B]">Common questions</p></div>
+              <div className="flex items-center gap-3">
+                <span className="h-0.5 w-8 bg-[#E1122B]" />
+                <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#E1122B]">
+                  Common questions
+                </p>
+              </div>
               <h2 className="mt-4 max-w-[520px] text-[38px] font-semibold leading-[1.08] tracking-[-0.04em] sm:text-[48px] lg:text-[58px]">
                 Before we start a conversation
               </h2>
@@ -500,7 +559,9 @@ export default function ContactPageContent() {
                   <button
                     type="button"
                     onClick={() =>
-                      setOpenFaq((current) => (current === index ? null : index))
+                      setOpenFaq((current) =>
+                        current === index ? null : index,
+                      )
                     }
                     aria-expanded={openFaq === index}
                     aria-controls={`contact-faq-${index}`}
@@ -566,7 +627,9 @@ function ContactLink({
         <Icon className="h-5 w-5" strokeWidth={1.7} />
       </span>
       <span className="min-w-0">
-        <span className="block text-[12px] font-medium text-black/42">{label}</span>
+        <span className="block text-[12px] font-medium text-black/42">
+          {label}
+        </span>
         <span className="mt-1 block wrap-break-word text-[15px] font-medium text-black">
           {value}
         </span>

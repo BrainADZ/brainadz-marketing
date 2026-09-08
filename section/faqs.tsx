@@ -1,8 +1,9 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { type ChangeEvent, type FormEvent, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
+import { CheckCircle2, Loader2 } from "lucide-react";
 
 type Faq = {
   question: string;
@@ -62,14 +63,71 @@ const FAQS: Faq[] = [
   },
 ];
 
-const MARKETING_SERVICES = [
-  "SEO and organic growth",
-  "Performance ads",
-  "Social media marketing",
-  "Website and landing pages",
-  "Branding and creative design",
-  "Complete digital marketing",
-];
+const SERVICE_OPTIONS = {
+  "Digital Marketing": [
+    "Social Media Marketing Services (SMM)",
+    "Social Media Optimization Services (SMO)",
+    "Content Marketing Services",
+    "Online Reputation Management (ORM)",
+    "Influencer Marketing",
+    "WhatsApp Marketing",
+    "Email Marketing",
+  ],
+  "Performance Marketing": [
+    "Google Ads",
+    "Meta Ads",
+    "LinkedIn Ads",
+    "Search Engine Marketing (SEM)",
+    "YouTube Ads",
+    "Google Shopping Ads",
+    "Ecommerce PPC",
+    "Lead Generation Services",
+    "Remarketing Ads",
+    "Display Advertising",
+    "Landing Page Optimization",
+    "PPC Audit Services",
+  ],
+  "SEO Services": [
+    "SEO Audit Services",
+    "On-Page SEO",
+    "Technical SEO",
+    "Off-Page SEO",
+    "Link-Building Services",
+    "Local SEO Services",
+    "Ecommerce SEO Services",
+    "Enterprise SEO Services",
+    "International SEO Services",
+  ],
+  "Web Design & Development": [
+    "UI/UX Design",
+    "Web Development Services",
+    "WordPress Development",
+    "Shopify Development",
+    "E-Commerce Development",
+    "Custom Web Application Development",
+    "Mobile App Development",
+    "Website Maintenance Services",
+  ],
+  "Creative & Media Services": [
+    "Creative Design Services",
+    "Graphic Design Services",
+    "Branding Design Services",
+    "Social Media Creative Design",
+    "Ad Creative Design",
+    "Visual Content Creation",
+    "Motion Graphics Services",
+    "Short Video Editing",
+    "Reel Editing Services",
+    "Video Editing Services",
+    "Corporate Video Editing",
+    "YouTube Thumbnail Design",
+    "Presentation Design Services",
+    "Infographic Design Services",
+  ],
+} as const;
+
+type MainService = keyof typeof SERVICE_OPTIONS;
+type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState(0);
@@ -98,7 +156,7 @@ export default function FaqSection() {
               alt="Marketing questions illustration"
               loading="lazy"
               decoding="async"
-              className="absolute inset-0 h-full w-full object-contain object-right-bottom"
+              className="absolute inset-0 h-full w-full object-contain object-bottom-right"
             />
           </div>
         </div>
@@ -193,6 +251,64 @@ export default function FaqSection() {
 }
 
 function ContactMiniForm() {
+  const [mainService, setMainService] = useState<MainService | "">("");
+  const [service, setService] = useState("");
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleMainServiceChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setMainService(event.target.value as MainService);
+    setService("");
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setStatus("submitting");
+    setErrorMessage("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: String(formData.get("name") ?? "").trim(),
+          email: String(formData.get("email") ?? "").trim(),
+          phone: String(formData.get("phone") ?? "").trim(),
+          company: String(formData.get("company") ?? "").trim(),
+          serviceCategory: mainService,
+          service,
+          message: String(formData.get("message") ?? "").trim(),
+          source: "Home Page FAQ Form",
+          pageUrl: window.location.href,
+        }),
+      });
+      const result = (await response.json().catch(() => null)) as {
+        message?: string;
+      } | null;
+
+      if (!response.ok) {
+        throw new Error(
+          result?.message || "Unable to submit your enquiry right now.",
+        );
+      }
+
+      form.reset();
+      setMainService("");
+      setService("");
+      setStatus("success");
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.",
+      );
+    }
+  };
+
   return (
     <div className="relative overflow-hidden rounded-[14px] border border-black/10 bg-[#fbfbfb] p-6 text-black shadow-[0_16px_45px_rgba(0,0,0,0.06)] sm:p-7 lg:flex lg:h-full lg:flex-col">
       <span className="absolute inset-x-0 top-0 h-[3px] bg-[#E1122B]" />
@@ -206,28 +322,90 @@ function ContactMiniForm() {
         team will reach out with the right next step.
       </p>
 
-      <form className="mt-7 flex flex-col gap-6 lg:flex-1 lg:gap-5">
+      <form
+        onSubmit={handleSubmit}
+        className="mt-7 flex flex-col gap-6 lg:flex-1 lg:gap-5"
+      >
         <div className="grid gap-6 sm:grid-cols-2 lg:gap-x-6 lg:gap-y-5">
-          <MinimalField label="Name" placeholder="Full Name" />
-          <MinimalField label="Company / Brand" placeholder="Brand Name" />
-          <MinimalField label="Contact Number" placeholder="Enter Your Number*" />
-          <MinimalField label="Work Email" placeholder="Enter Email Address*" />
+          <MinimalField
+            label="Full Name *"
+            name="name"
+            placeholder="Enter your name"
+            required
+          />
+          <MinimalField
+            label="Work Email *"
+            name="email"
+            type="email"
+            placeholder="name@company.com"
+            required
+          />
+          <MinimalField
+            label="Phone Number *"
+            name="phone"
+            type="tel"
+            placeholder="10-digit number"
+            required
+            pattern="[0-9]{10}"
+            maxLength={10}
+          />
+          <MinimalField
+            label="Company / Brand"
+            name="company"
+            placeholder="Your company name"
+          />
         </div>
 
         <MinimalSelect
-          label="Marketing Need"
-          placeholder="Select Marketing Service"
-          options={MARKETING_SERVICES}
+          label="Main Service *"
+          name="serviceCategory"
+          placeholder="Select main service"
+          value={mainService}
+          onChange={handleMainServiceChange}
+          options={Object.keys(SERVICE_OPTIONS)}
+          required
         />
-        <MinimalTextarea placeholder="Tell us your marketing goal" />
+        <MinimalSelect
+          label="Service Required *"
+          name="service"
+          placeholder={
+            mainService ? "Select a service" : "Select main service first"
+          }
+          value={service}
+          onChange={(event) => setService(event.target.value)}
+          options={mainService ? [...SERVICE_OPTIONS[mainService]] : []}
+          disabled={!mainService}
+          required
+        />
+        <MinimalTextarea
+          name="message"
+          placeholder="Briefly tell us your goal, challenge or project requirement"
+        />
 
-      
+        {status === "error" && (
+          <p role="alert" className="text-[13px] text-red-700">
+            {errorMessage}
+          </p>
+        )}
+        {status === "success" && (
+          <p
+            role="status"
+            className="flex items-center gap-2 text-[13px] text-[#E1122B]"
+          >
+            <CheckCircle2 className="h-4 w-4" /> Enquiry submitted successfully.
+            We&apos;ll contact you shortly.
+          </p>
+        )}
         <div className="flex justify-end">
           <button
-            type="button"
-            className="min-h-12 rounded-full bg-[#193175] px-12 text-[14px] font-semibold text-white transition hover:bg-[#E1122B]"
+            type="submit"
+            disabled={status === "submitting"}
+            className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[#193175] px-12 text-[14px] font-semibold text-white transition hover:bg-[#E1122B] disabled:cursor-not-allowed disabled:opacity-65"
           >
-            Submit
+            {status === "submitting" && (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            )}
+            {status === "submitting" ? "Submitting" : "Submit Enquiry"}
           </button>
         </div>
       </form>
@@ -237,19 +415,26 @@ function ContactMiniForm() {
 
 function MinimalField({
   label,
+  name,
   placeholder,
+  type = "text",
+  ...props
 }: {
   label: string;
+  name: string;
   placeholder: string;
-}) {
+  type?: string;
+} & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <label className="block">
       <span className="text-[11px] font-bold uppercase tracking-[0.08em] text-black/55">
         {label}
       </span>
       <input
-        type="text"
+        type={type}
+        name={name}
         placeholder={placeholder}
+        {...props}
         className="mt-2 h-8 w-full border-b border-black/20 bg-transparent text-[15px] text-black outline-none placeholder:text-black/35 focus:border-[#E1122B]"
       />
     </label>
@@ -258,12 +443,22 @@ function MinimalField({
 
 function MinimalSelect({
   label,
+  name,
   placeholder,
   options,
+  value,
+  onChange,
+  disabled = false,
+  required = false,
 }: {
   label: string;
+  name: string;
   placeholder: string;
   options: string[];
+  value: string;
+  onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  disabled?: boolean;
+  required?: boolean;
 }) {
   return (
     <label className="block">
@@ -271,8 +466,12 @@ function MinimalSelect({
         {label}
       </span>
       <select
-        defaultValue=""
-        className="mt-2 h-9 w-full border-b border-black/20 bg-transparent text-[15px] text-black outline-none focus:border-[#E1122B]"
+        name={name}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        required={required}
+        className="mt-2 h-9 w-full border-b border-black/20 bg-transparent text-[15px] text-black outline-none focus:border-[#E1122B] disabled:cursor-not-allowed disabled:text-black/40"
       >
         <option value="" disabled className="text-black/45">
           {placeholder}
@@ -287,9 +486,16 @@ function MinimalSelect({
   );
 }
 
-function MinimalTextarea({ placeholder }: { placeholder: string }) {
+function MinimalTextarea({
+  name,
+  placeholder,
+}: {
+  name: string;
+  placeholder: string;
+}) {
   return (
     <textarea
+      name={name}
       placeholder={placeholder}
       rows={3}
       className="min-h-[68px] w-full resize-none border-b border-black/20 bg-transparent text-[15px] text-black outline-none placeholder:text-black/35 focus:border-[#E1122B]"
