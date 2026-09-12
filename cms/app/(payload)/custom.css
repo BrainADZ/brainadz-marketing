@@ -106,7 +106,13 @@ input:focus, textarea:focus, select:focus, .react-select__control--is-focused { 
 .rich-text-lexical__wrap { border: 1px solid var(--theme-elevation-250); border-radius: 12px; background: var(--theme-elevation-0); overflow: hidden; transition: border-color .15s ease, box-shadow .15s ease; }
 .rich-text-lexical__wrap:focus-within { border-color: var(--brainadz-blue); box-shadow: 0 0 0 3px color-mix(in srgb,var(--brainadz-blue) 16%,transparent); }
 .rich-text-lexical__wrap .editor-container { border: 0; border-radius: 0; }
-.rich-text-lexical .ContentEditable__root { min-height: 280px; padding: 18px 20px; font-size: 16px; line-height: 1.75; }
+.rich-text-lexical__wrap > .fixed-toolbar { position: relative; top: auto; transform: none; border-width: 0 0 1px; background: var(--theme-elevation-0); }
+.rich-text-lexical__wrap > .fixed-toolbar::before,
+.rich-text-lexical__wrap > .fixed-toolbar::after { border-radius: 11px 11px 0 0; }
+.rich-text-lexical .editor-scroller,
+.rich-text-lexical .editor { background: var(--theme-elevation-0); }
+.rich-text-lexical .ContentEditable__root { min-height: 280px; padding: 18px 20px !important; color: var(--theme-elevation-900); caret-color: var(--brainadz-blue); font-size: 16px; line-height: 1.75; }
+.rich-text-lexical .LexicalEditorTheme__placeholder { top: 18px !important; left: 20px !important; color: var(--theme-elevation-500); opacity: 1; }
 
 /* Data tables and utility UI */
 .collection-list .table { border: 1px solid var(--brainadz-border); border-radius: 15px; background: var(--theme-elevation-0); box-shadow: var(--brainadz-shadow-sm); overflow: hidden; }
