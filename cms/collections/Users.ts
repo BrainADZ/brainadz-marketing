@@ -11,6 +11,7 @@ const isAdmin = (user: unknown): boolean => {
 };
 
 const adminOnly: Access = ({ req }) => isAdmin(req.user);
+const authenticated: Access = ({ req }) => Boolean(req.user);
 
 const authenticatedOrFirstUser: Access = async ({ req }) => {
   if (req.user) {
@@ -34,7 +35,7 @@ export const Users: CollectionConfig = {
   access: {
     create: authenticatedOrFirstUser,
     delete: adminOnly,
-    read: adminOnly,
+    read: authenticated,
     update: adminOnly,
   },
   auth: true,

@@ -30,16 +30,20 @@ export const BlogPosts: CollectionConfig = {
       // Expose only the byline; user accounts remain private.
       const authorID = typeof doc.author === "object" ? doc.author?.id : doc.author;
       if (authorID) {
-        const authors = await req.payload.find({
-          collection: "users",
-          where: { id: { equals: authorID } },
-          select: { name: true },
-          limit: 1,
-          depth: 0,
-          overrideAccess: true,
-          req,
-        });
-        doc.authorName = authors.docs[0]?.name || null;
+        try {
+          const author = await req.payload.findByID({
+            collection: "users",
+            id: authorID,
+            select: { name: true },
+            depth: 0,
+            overrideAccess: true,
+            req,
+          });
+          doc.authorName = author?.name || null;
+        } catch {
+          // A missing author must not break the public article response.
+          doc.authorName = null;
+        }
       }
       return doc;
     }],
@@ -78,6 +82,7 @@ export const BlogPosts: CollectionConfig = {
       name: "author",
       type: "relationship",
       relationTo: "users",
+      maxDepth: 0,
       required: true,
       admin: { position: "sidebar" },
     },
