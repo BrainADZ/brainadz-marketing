@@ -37,6 +37,9 @@ export const metadata: Metadata = {
   authors: [{ name: "BrainADZ Marketing" }],
   creator: "BrainADZ Marketing",
   publisher: "BrainADZ Marketing",
+  verification: {
+    google: "-86nVY0WGXmDQbYV1EoEag4hzaqSOkg2z-p5mdGMjQ0",
+  },
   icons: {
     icon: [{ url: "/logo/icon.png", type: "image/png" }],
     shortcut: "/logo/icon.png",
