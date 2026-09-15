@@ -25,7 +25,7 @@ const IMPACT_STATS: ImpactStat[] = [
     label: "PROJECTS DELIVERED",
     description:
       "successfully completed across digital campaigns, website development, creative design, paid ads, social media, and brand experiences",
-    image: "/Mask-Group-22.jpg",
+    image: "/projectdevliver.png",
     imageAlt: "BrainADZ Marketing project delivery",
     imageClassName: "object-cover object-center",
   },
@@ -52,9 +52,9 @@ const IMPACT_STATS: ImpactStat[] = [
     label: "FULL-TIME EXPERTS",
     description:
       "working across strategy, SEO, paid ads, social media, design, content, video, development, automation, and client servicing",
-    image: "/full-time-experts.webp",
+    image: "/experts.png",
     imageAlt: "BrainADZ Marketing full-time expert team",
-    imageClassName: "object-contain p-8",
+    imageClassName: "object-cover object-center",
   },
   {
     value: "360°",
