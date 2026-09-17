@@ -7,12 +7,11 @@ import { getCaseStudies, getCaseStudy, getCMSCategoryTitle, getCMSImageURL } fro
 import { getRobotsMetadata } from "@/lib/seo";
 
 
-type PageProps = { params: Promise<{ slug: string }> };
+// CMS content is fetched without caching and can be published after deployment.
+// Keep every slug dynamic, including slugs that did not exist at build time.
+export const dynamic = "force-dynamic";
 
-export async function generateStaticParams() {
-  const cmsStudies = await getCaseStudies();
-  return cmsStudies.map((study) => ({ slug: study.slug }));
-}
+type PageProps = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
@@ -45,7 +44,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
   const study = cmsStudy;
   const category = getCMSCategoryTitle(study.categoryRelation, study.category);
   const nextStudy = (await getCaseStudies()).find((item) => item.slug !== slug);
-  const services = study.services.map((service) => service.name);
+  const services = (study.services ?? []).map((service) => service.name);
   const image = getCMSImageURL(study.heroImage);
   const approach = cmsStudy?.approach?.length
     ? cmsStudy.approach
