@@ -405,6 +405,15 @@ export interface CaseStudy {
   slug: string;
   categoryRelation: string | CaseStudyCategory;
   industry: string;
+  /**
+   * Public author name shown on the case study.
+   */
+  authorName?: string | null;
+  publishedAt?: string | null;
+  /**
+   * Reading time in minutes. Leave blank to estimate from content.
+   */
+  readTime?: number | null;
   featured?: boolean | null;
   sortOrder?: number | null;
   updatedAt: string;
@@ -817,6 +826,9 @@ export interface CaseStudiesSelect<T extends boolean = true> {
   slug?: T;
   categoryRelation?: T;
   industry?: T;
+  authorName?: T;
+  publishedAt?: T;
+  readTime?: T;
   featured?: T;
   sortOrder?: T;
   updatedAt?: T;

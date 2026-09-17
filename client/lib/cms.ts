@@ -42,6 +42,10 @@ export type BlogPost = {
 };
 
 export type CMSCaseStudy = {
+  authorName?: string | null;
+  createdAt?: string;
+  publishedAt?: string | null;
+  readTime?: number | null;
   approach?: Array<{ description: string; id?: string | null; title: string }> | null;
   category?: string | null;
   categoryRelation?: CMSCategory | number | string | null;

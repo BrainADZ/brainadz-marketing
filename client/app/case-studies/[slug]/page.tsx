@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, CalendarDays, Clock3, UserRound } from "lucide-react";
 import { RichText } from "@/components/RichText";
 import { getCaseStudies, getCaseStudy, getCMSCategoryTitle, getCMSImageURL } from "@/lib/cms";
 import { getRobotsMetadata } from "@/lib/seo";
+import { estimateCaseStudyReadingTime } from "@/lib/case-study-reading-time";
 
 
 // CMS content is fetched without caching and can be published after deployment.
@@ -50,6 +51,15 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
     ? cmsStudy.approach
     : [];
   const results = cmsStudy?.results || [];
+  const authorName = study.authorName?.trim() || "BrainADZ Marketing";
+  const readTime = study.readTime || estimateCaseStudyReadingTime(study);
+  const publishedDate = new Date(study.publishedAt || study.createdAt || "");
+  const hasDate = !Number.isNaN(publishedDate.getTime());
+  const dateLabel = hasDate
+    ? new Intl.DateTimeFormat("en-IN", {
+        day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Kolkata",
+      }).format(publishedDate)
+    : null;
 
   return (
     <main className="dm-sans bg-white text-[#161616]">
@@ -67,6 +77,27 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
                 <span>{category}</span><span className="text-white/30">•</span><span>{study.industry}</span>
               </div>
               <h1 className="mt-6 max-w-4xl text-[40px] font-semibold leading-[1.06] tracking-[-.04em] sm:text-[54px] lg:text-[68px]">{study.title}</h1>
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 border-t border-white/15 pt-6 text-sm text-white/80">
+                <span className="inline-flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10">
+                    <UserRound aria-hidden="true" className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-xs text-white/55">Written by</span>
+                    <span className="font-medium text-white">{authorName}</span>
+                  </span>
+                </span>
+                {hasDate ? (
+                  <span className="inline-flex items-center gap-2">
+                    <CalendarDays aria-hidden="true" className="h-4 w-4 text-white/55" />
+                    <time dateTime={publishedDate.toISOString()}>{dateLabel}</time>
+                  </span>
+                ) : null}
+                <span className="inline-flex items-center gap-2">
+                  <Clock3 aria-hidden="true" className="h-4 w-4 text-white/55" />
+                  {readTime} min read
+                </span>
+              </div>
             </div>
             <div className="border-l border-white/20 pl-6 lg:pb-2">
               <p className="text-base leading-8 text-white/75 sm:text-lg">{study.summary}</p>
@@ -76,12 +107,14 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="bg-[#f6f5f3] px-5 py-8 sm:px-8 lg:px-10 lg:py-12">
-        <div className="mx-auto max-w-[1400px] overflow-hidden rounded-2xl border border-black/10 bg-white p-3 sm:p-5">
+      {image ? (
+      <section className="px-5 py-8 sm:px-8 lg:px-10 lg:py-12">
+        <div className="mx-auto max-w-[1400px] overflow-hidden rounded-2xl">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          {image ? <img src={image} alt={cmsStudy && typeof cmsStudy.heroImage === "object" ? cmsStudy.heroImage.alt || study.title : study.title} className="max-h-[640px] w-full rounded-lg object-contain" /> : null}
+          <img src={image} alt={typeof study.heroImage === "object" && study.heroImage ? study.heroImage.alt || study.title : study.title} className="block h-auto w-full" />
         </div>
       </section>
+      ) : null}
 
       <section id="project-overview" className="scroll-mt-28 border-y border-black/10 px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
         <div className="mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-[.72fr_1.28fr] lg:gap-20">

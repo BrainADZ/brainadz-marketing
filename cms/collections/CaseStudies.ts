@@ -28,6 +28,16 @@ export const CaseStudies: CollectionConfig = {
     update: authenticated,
   },
   defaultSort: "sortOrder",
+  hooks: {
+    beforeChange: [({ data, originalDoc }) => {
+      if (data._status === "published" && !data.publishedAt && !originalDoc?.publishedAt) {
+        data.publishedAt = originalDoc?._status === "published"
+          ? originalDoc.createdAt
+          : new Date().toISOString();
+      }
+      return data;
+    }],
+  },
   fields: editorLayout([
     { name: "title", type: "text", required: true, maxLength: 160 },
     {
@@ -54,6 +64,26 @@ export const CaseStudies: CollectionConfig = {
       admin: { position: "sidebar" },
     },
     { name: "industry", type: "text", required: true, maxLength: 100, admin: { position: "sidebar" } },
+    {
+      name: "authorName",
+      label: "Author / Byline",
+      type: "text",
+      defaultValue: "BrainADZ Marketing",
+      maxLength: 120,
+      admin: { position: "sidebar", description: "Public author name shown on the case study." },
+    },
+    {
+      name: "publishedAt",
+      type: "date",
+      admin: { position: "sidebar", date: { pickerAppearance: "dayAndTime" } },
+    },
+    {
+      name: "readTime",
+      type: "number",
+      min: 1,
+      max: 120,
+      admin: { position: "sidebar", description: "Reading time in minutes. Leave blank to estimate from content." },
+    },
     { name: "featured", type: "checkbox", defaultValue: false, admin: { position: "sidebar" } },
     { name: "sortOrder", type: "number", defaultValue: 100, min: 0, admin: { position: "sidebar" } },
     { name: "summary", type: "textarea", required: true, maxLength: 420 },
