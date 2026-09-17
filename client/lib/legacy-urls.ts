@@ -1,0 +1,41 @@
+/** Exact migrations only: unrelated removed pages must keep returning 404. */
+export const legacyRedirects: Record<string, string> = {
+  "/about": "/about-us",
+  "/contact-us": "/contact",
+  "/our-team": "/teams",
+  "/blogs": "/blog",
+  "/blogs/best-seo-aeo-tools": "/blog/best-seo-aeo-tools",
+  "/category/blog": "/blog",
+  "/website": "/services/web-design-development",
+  "/graphic-designing": "/services/creative-media/graphic-design-services",
+  "/social-media-marketing": "/services/digital-marketing/social-media-marketing-services-smm",
+  "/email-marketing": "/services/digital-marketing/email-marketing",
+  "/whatsapp-marketing": "/services/digital-marketing/whatsapp-marketing",
+  "/digital-campaigns-and-content": "/services/digital-marketing",
+  "/services/google-ads": "/services/performance-marketing/google-ads",
+  "/services/youtube-ads": "/services/performance-marketing/youtube-ads",
+  "/services/display-ads": "/services/performance-marketing/display-advertising",
+  "/services/ppc-audit-services": "/services/performance-marketing/ppc-audit-services",
+  "/services/ecommerce-ppc": "/services/performance-marketing/ecommerce-ppc",
+  "/services/google-shopping-ads": "/services/performance-marketing/google-shopping-ads",
+  "/services/lead-generation": "/services/performance-marketing/lead-generation-services",
+  "/services/meta-ads": "/services/performance-marketing/meta-ads",
+  "/services/ecommerce-seo-services": "/services/seo-services/ecommerce-seo-services",
+  "/services/local-seo-services": "/services/seo-services/local-seo-services",
+  "/services/seo-audit-services": "/services/seo-services/seo-audit-services",
+  "/services/technical-seo": "/services/seo-services/technical-seo",
+  "/services/international-seo": "/services/seo-services/international-seo-services",
+  "/services/on-page-seo": "/services/seo-services/on-page-seo",
+  "/services/off-page-seo": "/services/seo-services/off-page-seo",
+  "/services/enterprise-seo": "/services/seo-services/enterprise-seo-services",
+  "/services/digital-marketing/online-reputation-management": "/services/digital-marketing/online-reputation-management-orm",
+  "/services/digital-marketing/smo-services": "/services/digital-marketing/social-media-optimization-services-smo",
+  "/services/digital-marketing/sem-services": "/services/performance-marketing/search-engine-marketing-sem",
+  "/services/digital-marketing/content-marketing": "/services/digital-marketing/content-marketing-services",
+  "/services/web-design-development/web-development": "/services/web-design-development/web-development-services",
+  "/services/web-design-development/website-maintenance": "/services/web-design-development/website-maintenance-services",
+};
+
+export function isLegacyPostQuery(pathname: string, searchParams: URLSearchParams): boolean {
+  return pathname === "/" && /^\d+$/.test(searchParams.get("p") || "");
+}

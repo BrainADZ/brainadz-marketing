@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 import { getBlogPosts, getCaseStudies } from "@/lib/cms";
 
 const siteURL = "https://brainadz.marketing";
-const staticRoutes = ["", "/about", "/services", "/blog", "/case-studies", "/contact"];
+const staticRoutes = ["", "/about-us", "/services", "/blog", "/case-studies", "/contact"];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [posts, caseStudies] = await Promise.all([getBlogPosts(), getCaseStudies()]);

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isLegacyPostQuery } from "@/lib/legacy-urls";
 
 type RedirectDocument = {
   from?: string;
@@ -28,6 +29,15 @@ function resolveDestination(redirect: RedirectDocument): string | null {
 }
 
 export async function proxy(request: NextRequest) {
+  // Old WordPress post IDs have no mapping in the new CMS. Serving the
+  // homepage here falsely reports a successful page for removed content.
+  if (isLegacyPostQuery(request.nextUrl.pathname, request.nextUrl.searchParams)) {
+    return new NextResponse("This page could not be found.", {
+      status: 404,
+      headers: { "Content-Type": "text/plain; charset=utf-8" },
+    });
+  }
+
   try {
     const query = new URLSearchParams({
       depth: "1",

@@ -113,27 +113,58 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      {results.length > 0 ? <section className="bg-[#f6f5f3] px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
-        <div className="mx-auto max-w-[1400px]">
-          <p className="text-xs font-semibold uppercase tracking-[.18em] text-[#E1122B]">Project outcomes</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-[-.03em] sm:text-5xl">The results</h2>
-          <dl className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{results.map((result, index) => <div key={result.id || index} className="rounded-2xl border border-black/10 bg-white p-7 sm:p-9"><dd className="break-words text-4xl font-semibold tracking-[-.04em] text-[#E1122B] sm:text-5xl">{result.value}</dd><dt className="mt-4 text-base leading-7 text-black/65">{result.label}</dt></div>)}</dl>
-        </div>
-      </section> : null}
+      {results.length > 0 ? (
+        <section
+          aria-labelledby="case-study-results"
+          className="bg-[#f6f5f3] px-5 py-16 sm:px-8 lg:px-10 lg:py-24"
+        >
+          <div className="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-[.65fr_1.35fr] lg:gap-16">
+            <header className="self-start lg:sticky lg:top-28">
+              <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.18em] text-[#E1122B]">
+                <span aria-hidden="true" className="h-px w-8 bg-[#E1122B]" />
+                Project outcomes
+              </p>
+              <h2
+                id="case-study-results"
+                className="mt-5 text-4xl font-semibold leading-[1.1] tracking-[-.04em] sm:text-5xl lg:text-[56px]"
+              >
+                The results<span className="text-[#E1122B]">.</span>
+              </h2>
+            </header>
 
-      <section className="bg-[#E1122B] px-5 py-16 text-white sm:px-8 lg:px-10 lg:py-20">
-        <div className="mx-auto flex max-w-[1400px] flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-          <div><p className="text-sm font-semibold uppercase tracking-[.16em] text-white/70">Have a similar challenge?</p><h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-[-.03em] sm:text-5xl">Let&apos;s build the right growth system for your business.</h2></div>
-          <Link href="/contact" data-enquiry-trigger data-enquiry-source="Case Study Detail CTA" className="inline-flex min-h-14 shrink-0 items-center justify-center gap-4 rounded-full bg-white px-7 text-sm font-semibold text-black transition hover:bg-black hover:text-white">Start a Conversation <ArrowRight className="h-5 w-5"/></Link>
-        </div>
-      </section>
+            <ol className="grid min-w-0 gap-4 md:grid-cols-2 lg:gap-5">
+              {results.map((result, index) => (
+                <li
+                  key={result.id || index}
+                  className="min-w-0 rounded-2xl border border-[#e5e2dd] bg-white p-6 sm:p-8"
+                >
+                  <div className="mb-6 flex items-center gap-4" aria-hidden="true">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#fff1f2] text-xs font-semibold tabular-nums text-[#E1122B]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="h-px flex-1 bg-[#eeece8]" />
+                  </div>
+                  <h3 className="break-words text-xl font-semibold leading-snug tracking-[-.025em] text-[#191919] sm:text-2xl">
+                    {result.value}
+                  </h3>
+                  <p className="mt-3 break-words text-[15px] leading-7 text-[#626262]">
+                    {result.label}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      ) : null}
 
-      <section className="px-5 py-12 sm:px-8 lg:px-10">
+
+
+      {/* <section className="px-5 py-12 sm:px-8 lg:px-10">
         <div className="mx-auto flex max-w-[1400px] flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <Link href="/case-studies" className="inline-flex items-center gap-2 text-sm font-semibold text-[#E1122B]"><ArrowLeft className="h-4 w-4"/> All Case Studies</Link>
           {nextStudy ? <Link href={`/case-studies/${nextStudy.slug}`} className="group text-left sm:text-right"><span className="text-xs uppercase tracking-wider text-black/40">Next case study</span><span className="mt-1 flex max-w-lg items-center gap-2 font-semibold group-hover:text-[#E1122B]">{nextStudy.title}<ArrowRight className="h-4 w-4 shrink-0"/></span></Link> : null}
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }
