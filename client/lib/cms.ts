@@ -47,6 +47,20 @@ export type CMSCaseStudy = {
   publishedAt?: string | null;
   readTime?: number | null;
   approach?: Array<{ description: string; id?: string | null; title: string }> | null;
+  beforeAfter?: {
+    title?: string | null;
+    description?: string | null;
+    items?: Array<{ id?: string | null; label: string; beforeValue: string; afterValue: string }> | null;
+  } | null;
+  performanceEvidence?: {
+    title?: string | null;
+    description?: string | null;
+    images?: Array<{ id?: string | null; image: CMSImage | number | string; altText: string; caption?: string | null }> | null;
+  } | null;
+  finalOutcome?: {
+    title?: string | null;
+    description?: unknown;
+  } | null;
   category?: string | null;
   categoryRelation?: CMSCategory | number | string | null;
   challenge?: unknown;

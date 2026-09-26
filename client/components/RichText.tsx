@@ -16,6 +16,11 @@ type RichTextNode = {
 const nodeText = (node: RichTextNode): string =>
   node.text || node.children?.map(nodeText).join("") || "";
 
+export function hasRichTextContent(data: unknown): boolean {
+  const root = (data as { root?: RichTextNode } | null)?.root;
+  return Boolean(root && nodeText(root).trim());
+}
+
 const headingID = (node: RichTextNode): string =>
   nodeText(node)
     .toLowerCase()

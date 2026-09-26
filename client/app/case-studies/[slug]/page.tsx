@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, ArrowUpRight, CalendarDays, Clock3, UserRound } from "lucide-react";
-import { RichText } from "@/components/RichText";
-import { getCaseStudies, getCaseStudy, getCMSCategoryTitle, getCMSImageURL } from "@/lib/cms";
+import { ArrowUpRight, CalendarDays, Clock3, UserRound } from "lucide-react";
+import { hasRichTextContent, RichText } from "@/components/RichText";
+import { getCaseStudy, getCMSCategoryTitle, getCMSImageURL } from "@/lib/cms";
 import { getRobotsMetadata } from "@/lib/seo";
 import { estimateCaseStudyReadingTime } from "@/lib/case-study-reading-time";
 
@@ -44,13 +44,21 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
   if (!cmsStudy) notFound();
   const study = cmsStudy;
   const category = getCMSCategoryTitle(study.categoryRelation, study.category);
-  const nextStudy = (await getCaseStudies()).find((item) => item.slug !== slug);
   const services = (study.services ?? []).map((service) => service.name);
   const image = getCMSImageURL(study.heroImage);
   const approach = cmsStudy?.approach?.length
     ? cmsStudy.approach
     : [];
   const results = cmsStudy?.results || [];
+  const beforeAfter = study.beforeAfter;
+  const comparisons = beforeAfter?.items || [];
+  const evidence = study.performanceEvidence;
+  const evidenceImages = (evidence?.images || []).flatMap((item) => {
+    const src = getCMSImageURL(item.image);
+    return src ? [{ ...item, src }] : [];
+  });
+  const finalOutcome = study.finalOutcome;
+  const hasFinalDescription = hasRichTextContent(finalOutcome?.description);
   const authorName = study.authorName?.trim() || "BrainADZ Marketing";
   const readTime = study.readTime || estimateCaseStudyReadingTime(study);
   const publishedDate = new Date(study.publishedAt || study.createdAt || "");
@@ -71,7 +79,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
             <Link href="/case-studies" className="hover:text-white">Case Studies</Link><span>/</span>
             <span aria-current="page" className="min-w-0 break-words text-white">{study.title}</span>
           </nav>
-          <div className="mt-12 grid gap-10 lg:grid-cols-[1.1fr_.9fr] lg:items-end">
+          <div className="mt-12">
             <div>
               <div className="flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[.15em] text-[#ff8178]">
                 <span>{category}</span><span className="text-white/30">•</span><span>{study.industry}</span>
@@ -99,10 +107,6 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
                 </span>
               </div>
             </div>
-            <div className="border-l border-white/20 pl-6 lg:pb-2">
-              <p className="text-base leading-8 text-white/75 sm:text-lg">{study.summary}</p>
-              <a href="#project-overview" className="mt-7 inline-flex items-center gap-3 text-sm font-semibold text-white">Explore the project <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></a>
-            </div>
           </div>
         </div>
       </section>
@@ -115,6 +119,13 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         </div>
       </section>
       ) : null}
+
+      <section aria-labelledby="case-study-summary" className="px-5 py-12 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-[1400px]">
+          <h2 id="case-study-summary" className="text-3xl font-semibold tracking-[-.03em] sm:text-4xl">Summary</h2>
+          <p className="mt-6 max-w-4xl whitespace-pre-line text-base leading-8 text-black/65 sm:text-lg">{study.summary}</p>
+        </div>
+      </section>
 
       <section id="project-overview" className="scroll-mt-28 border-y border-black/10 px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
         <div className="mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-[.72fr_1.28fr] lg:gap-20">
@@ -145,6 +156,38 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {beforeAfter?.title?.trim() || beforeAfter?.description?.trim() || comparisons.length > 0 ? (
+        <section aria-labelledby="case-study-before-after" className="px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
+          <div className="mx-auto max-w-[1400px]">
+            <h2 id="case-study-before-after" className="break-words text-3xl font-semibold tracking-[-.03em] sm:text-5xl">{beforeAfter?.title || "Before vs After"}</h2>
+            {beforeAfter?.description ? <p className="mt-6 max-w-4xl whitespace-pre-line leading-8 text-black/65">{beforeAfter.description}</p> : null}
+            {comparisons.length > 0 ? (
+              <div className="mt-8 overflow-hidden rounded-2xl border border-black/10">
+                <table className="w-full table-fixed text-left text-sm sm:text-base">
+                  <caption className="sr-only">Before and after project comparisons</caption>
+                  <thead className="bg-[#faf9f7]">
+                    <tr>
+                      <th scope="col" className="w-[40%] p-3 font-semibold sm:p-6">Label</th>
+                      <th scope="col" className="p-3 font-semibold sm:p-6">Before</th>
+                      <th scope="col" className="bg-[#fff1f2] p-3 font-semibold text-[#E1122B] sm:p-6">After</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-black/10">
+                    {comparisons.map((item, index) => (
+                      <tr key={item.id || index}>
+                        <th scope="row" className="break-words p-3 font-medium sm:p-6">{item.label}</th>
+                        <td className="break-words p-3 text-black/65 sm:p-6">{item.beforeValue}</td>
+                        <td className="break-words bg-[#fff1f2]/50 p-3 font-semibold sm:p-6">{item.afterValue}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
 
       {results.length > 0 ? (
         <section
@@ -192,12 +235,35 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
 
 
 
-      {/* <section className="px-5 py-12 sm:px-8 lg:px-10">
-        <div className="mx-auto flex max-w-[1400px] flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <Link href="/case-studies" className="inline-flex items-center gap-2 text-sm font-semibold text-[#E1122B]"><ArrowLeft className="h-4 w-4"/> All Case Studies</Link>
-          {nextStudy ? <Link href={`/case-studies/${nextStudy.slug}`} className="group text-left sm:text-right"><span className="text-xs uppercase tracking-wider text-black/40">Next case study</span><span className="mt-1 flex max-w-lg items-center gap-2 font-semibold group-hover:text-[#E1122B]">{nextStudy.title}<ArrowRight className="h-4 w-4 shrink-0"/></span></Link> : null}
-        </div>
-      </section> */}
+      {evidence?.title?.trim() || evidence?.description?.trim() || evidenceImages.length > 0 ? (
+        <section aria-labelledby="case-study-evidence" className="px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
+          <div className="mx-auto max-w-[1400px]">
+            <h2 id="case-study-evidence" className="break-words text-3xl font-semibold tracking-[-.03em] sm:text-5xl">{evidence?.title || "Performance Evidence"}</h2>
+            {evidence?.description ? <p className="mt-6 max-w-4xl whitespace-pre-line leading-8 text-black/65">{evidence.description}</p> : null}
+            {evidenceImages.length > 0 ? (
+              <div className="mt-10 space-y-8">
+                {evidenceImages.map((item, index) => (
+                  <figure key={item.id || index} className="overflow-hidden rounded-2xl border border-black/10 bg-[#faf9f7]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={item.src} alt={item.altText || (typeof item.image === "object" ? item.image.alt : "") || "Performance evidence"} loading="lazy" className="block h-auto w-full" />
+                    {item.caption ? <figcaption className="whitespace-pre-line break-words p-5 text-sm leading-7 text-black/65 sm:p-6">{item.caption}</figcaption> : null}
+                  </figure>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
+
+      {finalOutcome?.title?.trim() || hasFinalDescription ? (
+        <section aria-labelledby="case-study-final-outcome" className="border-t border-black/10 px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
+          <div className="mx-auto max-w-[1400px]">
+            <h2 id="case-study-final-outcome" className="break-words text-3xl font-semibold tracking-[-.03em] sm:text-5xl">{finalOutcome?.title || "Final Outcome"}</h2>
+            {hasFinalDescription ? <div className="mt-7 max-w-4xl"><RichText data={finalOutcome?.description} /></div> : null}
+          </div>
+        </section>
+      ) : null}
+      {/* The shared Footer renders the site CTA immediately after this page. */}
     </main>
   );
 }

@@ -362,6 +362,21 @@ export interface CaseStudy {
     description: string;
     id?: string | null;
   }[];
+  /**
+   * Optional comparison section, displayed after Approach.
+   */
+  beforeAfter?: {
+    title?: string | null;
+    description?: string | null;
+    items?:
+      | {
+          label: string;
+          beforeValue: string;
+          afterValue: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   results?:
     | {
         value: string;
@@ -369,6 +384,42 @@ export interface CaseStudy {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Optional supporting images, displayed after Results.
+   */
+  performanceEvidence?: {
+    title?: string | null;
+    description?: string | null;
+    images?:
+      | {
+          image: string | Media;
+          altText: string;
+          caption?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Optional closing summary, displayed before the shared site CTA.
+   */
+  finalOutcome?: {
+    title?: string | null;
+    description?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
   /**
    * Search result and social sharing settings.
    */
@@ -802,12 +853,46 @@ export interface CaseStudiesSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
+  beforeAfter?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              label?: T;
+              beforeValue?: T;
+              afterValue?: T;
+              id?: T;
+            };
+      };
   results?:
     | T
     | {
         value?: T;
         label?: T;
         id?: T;
+      };
+  performanceEvidence?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        images?:
+          | T
+          | {
+              image?: T;
+              altText?: T;
+              caption?: T;
+              id?: T;
+            };
+      };
+  finalOutcome?:
+    | T
+    | {
+        title?: T;
+        description?: T;
       };
   seo?:
     | T

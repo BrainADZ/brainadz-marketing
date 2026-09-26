@@ -113,11 +113,60 @@ export const CaseStudies: CollectionConfig = {
       ],
     },
     {
+      name: "beforeAfter",
+      label: "Before vs After Section",
+      type: "group",
+      admin: { description: "Optional comparison section, displayed after Approach." },
+      fields: [
+        { name: "title", label: "Section Title", type: "text", maxLength: 160 },
+        { name: "description", type: "textarea" },
+        {
+          name: "items",
+          label: "Comparisons",
+          type: "array",
+          fields: [
+            { name: "label", type: "text", required: true },
+            { name: "beforeValue", label: "Before Value", type: "text", required: true },
+            { name: "afterValue", label: "After Value", type: "text", required: true },
+          ],
+        },
+      ],
+    },
+    {
       name: "results",
       type: "array",
       fields: [
         { name: "value", type: "text", required: true, maxLength: 40 },
         { name: "label", type: "text", required: true, maxLength: 120 },
+      ],
+    },
+    {
+      name: "performanceEvidence",
+      label: "Performance Evidence Section",
+      type: "group",
+      admin: { description: "Optional supporting images, displayed after Results." },
+      fields: [
+        { name: "title", label: "Section Title", type: "text", maxLength: 160 },
+        { name: "description", type: "textarea" },
+        {
+          name: "images",
+          type: "array",
+          fields: [
+            { name: "image", type: "upload", relationTo: "media", required: true },
+            { name: "altText", label: "Alt Text", type: "text", required: true, maxLength: 240 },
+            { name: "caption", type: "textarea" },
+          ],
+        },
+      ],
+    },
+    {
+      name: "finalOutcome",
+      label: "Final Outcome Section",
+      type: "group",
+      admin: { description: "Optional closing summary, displayed before the shared site CTA." },
+      fields: [
+        { name: "title", type: "text", maxLength: 160 },
+        { name: "description", type: "richText" },
       ],
     },
     seoFields,
