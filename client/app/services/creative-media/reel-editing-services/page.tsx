@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/creative-media/reel-editing-services" },
   title: "Reel Reel Editing Services | BrainADZ Marketing",
   description:
     "Professional Reel editing services by BrainADZ Marketing for product Reels, founder videos, educational content, campaign creatives, trend adaptations and monthly social media publishing.",

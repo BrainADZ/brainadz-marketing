@@ -25,14 +25,14 @@ export const metadata: Metadata = {
   description:
     "On Page SEO services by BrainADZ improve search intent alignment, titles, headings, content depth, internal links, schema, snippets and landing-page conversions.",
   alternates: {
-    canonical: "/services/on-page-seo",
+    canonical: "/services/seo-services/on-page-seo",
   },
   openGraph: {
     title: "On Page SEO Services | BrainADZ Marketing",
     description:
       "Improve rankings, relevance and conversions with structured On Page SEO for service pages, landing pages, blogs and commercial content.",
     type: "website",
-    url: "/services/on-page-seo",
+    url: "/services/seo-services/on-page-seo",
   },
   twitter: {
     card: "summary_large_image",
@@ -406,11 +406,11 @@ const serviceSchema = {
   serviceType: "On Page Search Engine Optimization",
   description:
     "On Page SEO services covering search-intent mapping, titles, metadata, headings, content optimisation, internal linking, structured data and conversion alignment.",
-  url: "https://www.brainadz.marketing/services/on-page-seo",
+  url: "https://brainadz.marketing/services/seo-services/on-page-seo",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

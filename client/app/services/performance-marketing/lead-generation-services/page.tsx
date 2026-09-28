@@ -31,14 +31,14 @@ export const metadata: Metadata = {
   description:
     "Lead generation services by BrainADZ cover multi-channel acquisition, offer strategy, forms, calls, CRM routing, lead qualification, sales feedback and cost-per-qualified-lead reporting.",
   alternates: {
-    canonical: "/services/lead-generation",
+    canonical: "/services/performance-marketing/lead-generation-services",
   },
   openGraph: {
     title: "Lead Generation Services | BrainADZ Marketing",
     description:
       "Generate and qualify business enquiries through paid search, social, native forms, landing pages, calls and CRM-connected optimisation.",
     type: "website",
-    url: "/services/lead-generation",
+    url: "/services/performance-marketing/lead-generation-services",
   },
   twitter: {
     card: "summary_large_image",
@@ -539,11 +539,11 @@ const serviceSchema = {
   serviceType: "Multi-Channel Paid Lead Generation",
   description:
     "Lead generation services covering channel strategy, paid campaigns, offers, forms, calls, CRM routing, lead qualification, sales feedback and qualified-lead reporting.",
-  url: "https://www.brainadz.marketing/services/lead-generation",
+  url: "https://brainadz.marketing/services/performance-marketing/lead-generation-services",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

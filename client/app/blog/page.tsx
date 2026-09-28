@@ -6,6 +6,7 @@ import { getBlogCategories, getBlogPosts, getCMSCategoryTitle, getCMSImageURL } 
 import BlogSidebar from "./BlogSidebar";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog" },
   title: "Blog & Insights | BrainADZ Marketing",
   description:
     "Explore practical insights from BrainADZ on social media, SEO, performance marketing, websites, content and digital growth.",

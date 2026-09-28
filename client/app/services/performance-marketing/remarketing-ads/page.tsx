@@ -33,14 +33,14 @@ export const metadata: Metadata = {
   description:
     "Remarketing Ads services by BrainADZ cover website and engagement audiences, audience windows, exclusions, dynamic product ads, creative sequencing, frequency control and conversion reporting.",
   alternates: {
-    canonical: "/services/remarketing-ads",
+    canonical: "/services/performance-marketing/remarketing-ads",
   },
   openGraph: {
     title: "Remarketing Ads Services | BrainADZ Marketing",
     description:
       "Re-engage relevant visitors, viewers, cart users and customer audiences with structured cross-channel remarketing campaigns.",
     type: "website",
-    url: "/services/remarketing-ads",
+    url: "/services/performance-marketing/remarketing-ads",
   },
   twitter: {
     card: "summary_large_image",
@@ -547,11 +547,11 @@ const serviceSchema = {
   serviceType: "Cross-Channel Remarketing and Retargeting Advertising",
   description:
     "Remarketing Ads services covering website and engagement audiences, audience windows, exclusions, dynamic product ads, creative sequencing, frequency control, measurement and reporting.",
-  url: "https://www.brainadz.marketing/services/remarketing-ads",
+  url: "https://brainadz.marketing/services/performance-marketing/remarketing-ads",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

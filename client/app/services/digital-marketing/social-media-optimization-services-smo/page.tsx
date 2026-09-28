@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   description:
     "Professional social media optimization services by BrainADZ Marketing. Improve profile visibility, content discoverability, engagement and conversion across major social platforms.",
   alternates: {
-    canonical: "/services/digital-marketing/smo-services",
+    canonical: "/services/digital-marketing/social-media-optimization-services-smo",
   },
   openGraph: {
     title: "SMO Services | BrainADZ Marketing",

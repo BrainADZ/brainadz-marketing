@@ -3,6 +3,7 @@ import AboutPageContent from "@/section/aboutPageContent";
 import BrandLogosCarousel from "@/section/brandslogoSection";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/company-overview" },
   title: "Company Overview | BrainADZ Marketing",
   description:
     "Learn about BrainADZ Marketing, a strategy-led digital growth partner for marketing, creative, web, performance, and brand execution.",

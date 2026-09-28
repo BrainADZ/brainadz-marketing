@@ -224,11 +224,11 @@ const serviceSchema = {
   serviceType: "Creative Design, Motion Graphics and Video Editing Services",
   description:
     "Creative and media services covering graphic design, branding, social media creatives, ad creative design, visual content, motion graphics, reels, video editing, corporate videos and YouTube thumbnails.",
-  url: "https://www.brainadz.marketing/services/creative-media",
+  url: "https://brainadz.marketing/services/creative-media",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

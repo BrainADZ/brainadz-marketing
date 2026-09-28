@@ -238,7 +238,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       {evidence?.title?.trim() || evidence?.description?.trim() || evidenceImages.length > 0 ? (
         <section aria-labelledby="case-study-evidence" className="px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1400px]">
-            <h2 id="case-study-evidence" className="break-words text-3xl font-semibold tracking-[-.03em] sm:text-5xl">{evidence?.title || "Performance Evidence"}</h2>
+            <h2 id="case-study-evidence" className="wrap-break-word text-3xl font-semibold tracking-[-.03em] sm:text-5xl">{evidence?.title || "Performance Evidence"}</h2>
             {evidence?.description ? <p className="mt-6 max-w-4xl whitespace-pre-line leading-8 text-black/65">{evidence.description}</p> : null}
             {evidenceImages.length > 0 ? (
               <div className="mt-10 space-y-8">
@@ -246,7 +246,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
                   <figure key={item.id || index} className="overflow-hidden rounded-2xl border border-black/10 bg-[#faf9f7]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={item.src} alt={item.altText || (typeof item.image === "object" ? item.image.alt : "") || "Performance evidence"} loading="lazy" className="block h-auto w-full" />
-                    {item.caption ? <figcaption className="whitespace-pre-line break-words p-5 text-sm leading-7 text-black/65 sm:p-6">{item.caption}</figcaption> : null}
+                    {item.caption ? <figcaption className="whitespace-pre-line wrap-break-word p-5 text-sm leading-7 text-black/65 sm:p-6">{item.caption}</figcaption> : null}
                   </figure>
                 ))}
               </div>
@@ -258,7 +258,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       {finalOutcome?.title?.trim() || hasFinalDescription ? (
         <section aria-labelledby="case-study-final-outcome" className="border-t border-black/10 px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1400px]">
-            <h2 id="case-study-final-outcome" className="break-words text-3xl font-semibold tracking-[-.03em] sm:text-5xl">{finalOutcome?.title || "Final Outcome"}</h2>
+            <h2 id="case-study-final-outcome" className="wrap-break-word text-3xl font-semibold tracking-[-.03em] sm:text-5xl">{finalOutcome?.title || "Final Outcome"}</h2>
             {hasFinalDescription ? <div className="mt-7 max-w-4xl"><RichText data={finalOutcome?.description} /></div> : null}
           </div>
         </section>

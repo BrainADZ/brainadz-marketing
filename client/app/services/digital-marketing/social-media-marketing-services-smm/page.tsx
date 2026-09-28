@@ -14,6 +14,7 @@ import PlatformsSection from "./PlatformsSection";
 import ProcessSection from "./ProcessSection";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/digital-marketing/social-media-marketing-services-smm" },
   title: "SMM Services | BrainADZ Marketing",
   description: "Social media marketing services by BrainADZ Marketing.",
 };

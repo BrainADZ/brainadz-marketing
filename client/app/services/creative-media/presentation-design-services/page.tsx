@@ -40,6 +40,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/creative-media/presentation-design-services" },
   title: "Presentation Design Services | BrainADZ Marketing",
   description:
     "Professional presentation design services by BrainADZ Marketing for sales decks, investor presentations, company profiles, corporate decks and reusable slide templates.",

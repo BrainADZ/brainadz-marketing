@@ -155,11 +155,11 @@ const serviceSchema = {
   serviceType: "Web Design and Development",
   description:
     "Web design and development services covering UI/UX design, websites, WordPress, Shopify, ecommerce, custom web applications, mobile apps and website maintenance.",
-  url: "https://www.brainadz.marketing/services/web-design-development",
+  url: "https://brainadz.marketing/services/web-design-development",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

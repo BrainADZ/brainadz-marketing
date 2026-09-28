@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/creative-media/youtube-thumbnail-design" },
   title: "YouTube Thumbnail Design Services | BrainADZ Marketing",
   description:
     "Professional YouTube thumbnail design services by BrainADZ Marketing for videos, Shorts, podcasts, tutorials, product content and channel-wide visual systems.",

@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     "Online reputation management services by BrainADZ Marketing for brand monitoring, review management, response strategy, crisis handling and measurable reputation growth.",
   alternates: {
     canonical:
-      "/services/digital-marketing/online-reputation-management",
+      "/services/digital-marketing/online-reputation-management-orm",
   },
   openGraph: {
     title: "Online Reputation Management Services | BrainADZ Marketing",

@@ -27,14 +27,14 @@ export const metadata: Metadata = {
   description:
     "Technical SEO services by BrainADZ covering crawling, indexing, canonicalisation, JavaScript SEO, Core Web Vitals, structured data, log analysis and implementation roadmaps.",
   alternates: {
-    canonical: "/services/technical-seo",
+    canonical: "/services/seo-services/technical-seo",
   },
   openGraph: {
     title: "Technical SEO Services | BrainADZ Marketing",
     description:
       "Improve crawlability, indexation, rendering, site performance and structured data with a practical Technical SEO roadmap.",
     type: "website",
-    url: "/services/technical-seo",
+    url: "/services/seo-services/technical-seo",
   },
   twitter: {
     card: "summary_large_image",
@@ -403,11 +403,11 @@ const serviceSchema = {
   serviceType: "Technical Search Engine Optimization",
   description:
     "Technical SEO services covering crawling, indexing, canonicalisation, JavaScript rendering, Core Web Vitals, structured data, log analysis and implementation support.",
-  url: "https://www.brainadz.marketing/services/technical-seo",
+  url: "https://brainadz.marketing/services/seo-services/technical-seo",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

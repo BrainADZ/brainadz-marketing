@@ -33,14 +33,14 @@ export const metadata: Metadata = {
   description:
     "Landing page optimization services by BrainADZ cover message match, UX, mobile performance, forms, trust, analytics, testing and qualified-conversion improvement.",
   alternates: {
-    canonical: "/services/landing-page-optimization",
+    canonical: "/services/performance-marketing/landing-page-optimization",
   },
   openGraph: {
     title: "Landing Page Optimization Services | BrainADZ Marketing",
     description:
       "Improve paid campaign conversion through stronger message match, page hierarchy, mobile UX, forms, trust and structured experimentation.",
     type: "website",
-    url: "/services/landing-page-optimization",
+    url: "/services/performance-marketing/landing-page-optimization",
   },
   twitter: {
     card: "summary_large_image",
@@ -547,11 +547,11 @@ const serviceSchema = {
   serviceType: "Landing Page and Conversion Rate Optimization",
   description:
     "Landing page optimization services covering message match, UX, mobile experience, forms, trust, analytics, experimentation and qualified-conversion improvement.",
-  url: "https://www.brainadz.marketing/services/landing-page-optimization",
+  url: "https://brainadz.marketing/services/performance-marketing/landing-page-optimization",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

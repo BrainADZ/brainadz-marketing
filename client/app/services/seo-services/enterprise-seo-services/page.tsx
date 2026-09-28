@@ -31,14 +31,14 @@ export const metadata: Metadata = {
   description:
     "Enterprise SEO services by BrainADZ help large websites manage technical scale, templates, content governance, internal linking, platform changes and executive reporting.",
   alternates: {
-    canonical: "/services/enterprise-seo",
+    canonical: "/services/seo-services/enterprise-seo-services",
   },
   openGraph: {
     title: "Enterprise SEO Services | BrainADZ Marketing",
     description:
       "Build scalable organic growth systems for large websites, complex platforms, multiple teams and high-value page portfolios.",
     type: "website",
-    url: "/services/enterprise-seo",
+    url: "/services/seo-services/enterprise-seo-services",
   },
   twitter: {
     card: "summary_large_image",
@@ -484,11 +484,11 @@ const serviceSchema = {
   serviceType: "Enterprise Search Engine Optimization",
   description:
     "Enterprise SEO services covering technical scale, information architecture, templates, content governance, migrations, automation, workflows and executive reporting.",
-  url: "https://www.brainadz.marketing/services/enterprise-seo",
+  url: "https://brainadz.marketing/services/seo-services/enterprise-seo-services",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/creative-media/corporate-video-editing" },
   title: "Corporate Corporate Video Corporate Video Types | BrainADZ Marketing",
   description:
     "Corporate video editing services by BrainADZ Marketing for company profile films, leadership messages, internal communications, training videos, CSR stories and event content.",

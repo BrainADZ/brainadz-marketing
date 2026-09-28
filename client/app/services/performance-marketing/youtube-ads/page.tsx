@@ -31,14 +31,14 @@ export const metadata: Metadata = {
   description:
     "YouTube Ads services by BrainADZ cover video campaign strategy, in-stream, in-feed, bumper and Shorts ads, audience planning, creative testing, conversion tracking and reporting.",
   alternates: {
-    canonical: "/services/youtube-ads",
+    canonical: "/services/performance-marketing/youtube-ads",
   },
   openGraph: {
     title: "YouTube Ads Services | BrainADZ Marketing",
     description:
       "Build measurable YouTube advertising campaigns across in-stream, in-feed, bumper and Shorts formats with stronger creative and conversion tracking.",
     type: "website",
-    url: "/services/youtube-ads",
+    url: "/services/performance-marketing/youtube-ads",
   },
   twitter: {
     card: "summary_large_image",
@@ -521,11 +521,11 @@ const serviceSchema = {
   serviceType: "YouTube Video Advertising Management",
   description:
     "YouTube Ads services covering campaign objectives, in-stream, in-feed, bumper and Shorts formats, audience planning, creative testing, conversion tracking, optimisation and reporting.",
-  url: "https://www.brainadz.marketing/services/youtube-ads",
+  url: "https://brainadz.marketing/services/performance-marketing/youtube-ads",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

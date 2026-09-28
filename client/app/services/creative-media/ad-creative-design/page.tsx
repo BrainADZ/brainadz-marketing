@@ -37,6 +37,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/creative-media/ad-creative-design" },
   title: "Ad Creative Design Services | BrainADZ Marketing",
   description:
     "Performance-focused ad creative design services by BrainADZ Marketing for social media ads, display campaigns, lead generation, product promotions and conversion-led creative testing.",

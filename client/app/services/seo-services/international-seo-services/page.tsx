@@ -29,14 +29,14 @@ export const metadata: Metadata = {
   description:
     "International SEO services by BrainADZ help brands manage country and language targeting, hreflang, global site architecture, localisation, regional authority and market-level reporting.",
   alternates: {
-    canonical: "/services/international-seo",
+    canonical: "/services/seo-services/international-seo-services",
   },
   openGraph: {
     title: "International SEO Services | BrainADZ Marketing",
     description:
       "Expand organic visibility across countries and languages with structured international SEO strategy, localisation and technical governance.",
     type: "website",
-    url: "/services/international-seo",
+    url: "/services/seo-services/international-seo-services",
   },
   twitter: {
     card: "summary_large_image",
@@ -493,11 +493,11 @@ const serviceSchema = {
   serviceType: "International Search Engine Optimization",
   description:
     "International SEO services covering country and language targeting, global architecture, hreflang, localisation, regional authority and market-level reporting.",
-  url: "https://www.brainadz.marketing/services/international-seo",
+  url: "https://brainadz.marketing/services/seo-services/international-seo-services",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: "Worldwide",
   audience: {

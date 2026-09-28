@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import AboutSection from "@/section/about";
 import BrandLogosCarousel from "@/section/brandslogoSection";
 import CaseStudiesSection from "@/section/caseStudies";
@@ -10,6 +11,10 @@ import GlobalPresenceSection from "@/section/Maps";
 import ServicesCardsSection from "@/section/serviceSection";
 import TeamShowcaseSection from "@/section/teamShowcase";
 import TestimonialSection from "@/section/Testimonials";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (

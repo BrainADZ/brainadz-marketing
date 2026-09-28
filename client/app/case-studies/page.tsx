@@ -4,6 +4,7 @@ import { getCaseStudies, getCaseStudyCategories, getCMSCategoryTitle, getCMSImag
 import CaseStudiesClient, { type CaseStudy } from "./CaseStudiesClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/case-studies" },
   title: "Case Studies | BrainADZ Marketing",
   description:
     "Explore BrainADZ case studies across SEO, paid media, digital marketing, web development and creative services.",

@@ -29,14 +29,14 @@ export const metadata: Metadata = {
   description:
     "PPC audit services by BrainADZ review account structure, tracking, search terms, audiences, bids, budgets, creative, landing pages and lead quality with a prioritised action plan.",
   alternates: {
-    canonical: "/services/ppc-audit-services",
+    canonical: "/services/performance-marketing/ppc-audit-services",
   },
   openGraph: {
     title: "PPC Audit Services | BrainADZ Marketing",
     description:
       "Identify paid media waste, tracking gaps and growth opportunities through a structured PPC account audit and remediation roadmap.",
     type: "website",
-    url: "/services/ppc-audit-services",
+    url: "/services/performance-marketing/ppc-audit-services",
   },
   twitter: {
     card: "summary_large_image",
@@ -509,11 +509,11 @@ const serviceSchema = {
   serviceType: "Paid Media Account Audit",
   description:
     "PPC audit services covering account structure, traffic quality, conversion tracking, bidding, budgets, creative, landing pages, lead quality and prioritised remediation.",
-  url: "https://www.brainadz.marketing/services/ppc-audit-services",
+  url: "https://brainadz.marketing/services/performance-marketing/ppc-audit-services",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

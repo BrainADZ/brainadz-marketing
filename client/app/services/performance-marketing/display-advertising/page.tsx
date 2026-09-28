@@ -33,14 +33,14 @@ export const metadata: Metadata = {
   description:
     "Display Ads services by BrainADZ cover responsive display creative, audience and contextual targeting, optimized targeting, placements, exclusions, frequency, conversion tracking and reporting.",
   alternates: {
-    canonical: "/services/display-ads",
+    canonical: "/services/performance-marketing/display-advertising",
   },
   openGraph: {
     title: "Display Ads Services | BrainADZ Marketing",
     description:
       "Build measurable Google Display campaigns with stronger creative assets, audience signals, placement controls, frequency management and conversion reporting.",
     type: "website",
-    url: "/services/display-ads",
+    url: "/services/performance-marketing/display-advertising",
   },
   twitter: {
     card: "summary_large_image",
@@ -577,11 +577,11 @@ const serviceSchema = {
   serviceType: "Google Display Advertising Management",
   description:
     "Display Ads services covering responsive and uploaded creative, audience and contextual targeting, optimized targeting, placements, exclusions, frequency, conversion tracking and reporting.",
-  url: "https://www.brainadz.marketing/services/display-ads",
+  url: "https://brainadz.marketing/services/performance-marketing/display-advertising",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

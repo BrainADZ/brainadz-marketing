@@ -35,14 +35,14 @@ export const metadata: Metadata = {
   description:
     "Google Shopping Ads services by BrainADZ cover Merchant Center, product feeds, Standard Shopping, Performance Max retail campaigns, bidding, promotions, tracking and profitability-led reporting.",
   alternates: {
-    canonical: "/services/google-shopping-ads",
+    canonical: "/services/performance-marketing/google-shopping-ads",
   },
   openGraph: {
     title: "Google Shopping Ads Services | BrainADZ Marketing",
     description:
       "Promote ecommerce products through Merchant Center-powered Shopping and Performance Max campaigns with stronger feeds, product control and revenue measurement.",
     type: "website",
-    url: "/services/google-shopping-ads",
+    url: "/services/performance-marketing/google-shopping-ads",
   },
   twitter: {
     card: "summary_large_image",
@@ -607,11 +607,11 @@ const serviceSchema = {
   serviceType: "Google Shopping and Retail Campaign Management",
   description:
     "Google Shopping Ads services covering Merchant Center, product feeds, Standard Shopping, Performance Max retail campaigns, bidding, promotions, tracking and product-level reporting.",
-  url: "https://www.brainadz.marketing/services/google-shopping-ads",
+  url: "https://brainadz.marketing/services/performance-marketing/google-shopping-ads",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

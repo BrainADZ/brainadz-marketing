@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   description:
     "Professional website maintenance services by BrainADZ Marketing for security updates, backups, uptime monitoring, bug fixes, performance optimization, content updates and technical support.",
   alternates: {
-    canonical: "/services/web-design-development/website-maintenance",
+    canonical: "/services/web-design-development/website-maintenance-services",
   },
   openGraph: {
     title: "Website Maintenance Services | BrainADZ Marketing",

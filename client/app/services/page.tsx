@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services" },
   title: "Services | BrainADZ Marketing",
   description:
     "Explore BrainADZ Marketing services across digital marketing, SEO, performance marketing, creative media, web design, development, and conversion-focused growth execution.",

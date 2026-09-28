@@ -30,14 +30,14 @@ export const metadata: Metadata = {
   description:
     "SEO audit services by BrainADZ uncover technical, content, architecture, authority, tracking and conversion issues with evidence, priorities and an implementation roadmap.",
   alternates: {
-    canonical: "/services/seo-audit-services",
+    canonical: "/services/seo-services/seo-audit-services",
   },
   openGraph: {
     title: "SEO Audit Services | BrainADZ Marketing",
     description:
       "Get a complete SEO audit covering crawling, indexing, content, internal linking, authority, user experience and implementation priorities.",
     type: "website",
-    url: "/services/seo-audit-services",
+    url: "/services/seo-services/seo-audit-services",
   },
   twitter: {
     card: "summary_large_image",
@@ -420,11 +420,11 @@ const serviceSchema = {
   serviceType: "Search Engine Optimization Audit",
   description:
     "SEO audit services covering technical SEO, site architecture, content, internal linking, authority, analytics, conversion tracking and implementation prioritisation.",
-  url: "https://www.brainadz.marketing/services/seo-audit-services",
+  url: "https://brainadz.marketing/services/seo-services/seo-audit-services",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

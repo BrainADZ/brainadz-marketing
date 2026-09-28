@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/seo-services/link-building-services" },
   title: "Link Building SEO Services | BrainADZ Marketing",
   description:
     "Earn relevant, editorial backlinks through strategic prospecting, digital PR, outreach, linkable assets and transparent quality controls with BrainADZ Marketing.",
@@ -364,7 +365,7 @@ const serviceSchema = {
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

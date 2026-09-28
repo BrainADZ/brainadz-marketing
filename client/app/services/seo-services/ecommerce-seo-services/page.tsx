@@ -35,14 +35,14 @@ export const metadata: Metadata = {
   description:
     "Ecommerce SEO services by BrainADZ improve category pages, product pages, faceted navigation, product schema, crawl efficiency and organic revenue tracking.",
   alternates: {
-    canonical: "/services/ecommerce-seo-services",
+    canonical: "/services/seo-services/ecommerce-seo-services",
   },
   openGraph: {
     title: "Ecommerce SEO Services | BrainADZ Marketing",
     description:
       "Grow ecommerce visibility and revenue with category-page SEO, product-page optimisation, crawl control, structured data and commercial reporting.",
     type: "website",
-    url: "/services/ecommerce-seo-services",
+    url: "/services/seo-services/ecommerce-seo-services",
   },
   twitter: {
     card: "summary_large_image",
@@ -446,11 +446,11 @@ const serviceSchema = {
   serviceType: "Ecommerce Search Engine Optimization",
   description:
     "Ecommerce SEO services covering category pages, product pages, faceted navigation, product schema, crawl management, internal linking and organic revenue tracking.",
-  url: "https://www.brainadz.marketing/services/ecommerce-seo-services",
+  url: "https://brainadz.marketing/services/seo-services/ecommerce-seo-services",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

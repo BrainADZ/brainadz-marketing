@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   description:
     "Search engine marketing services by BrainADZ Marketing for paid search campaigns, keyword targeting, conversion tracking, bidding and measurable lead generation.",
   alternates: {
-    canonical: "/services/digital-marketing/sem-services",
+    canonical: "/services/performance-marketing/search-engine-marketing-sem",
   },
   openGraph: {
     title: "SEM Services | BrainADZ Marketing",

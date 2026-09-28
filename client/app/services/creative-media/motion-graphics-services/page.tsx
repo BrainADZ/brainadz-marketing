@@ -36,6 +36,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/creative-media/motion-graphics-services" },
   title: "Motion Graphics Services | BrainADZ Marketing",
   description:
     "Motion graphics services by BrainADZ Marketing for animated explainers, social media videos, product communication, logo animation, kinetic typography and campaign content.",

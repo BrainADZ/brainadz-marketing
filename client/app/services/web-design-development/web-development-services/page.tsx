@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   description:
     "Professional web development services by BrainADZ Marketing for responsive websites, web applications, ecommerce platforms, CMS solutions, integrations and scalable digital products.",
   alternates: {
-    canonical: "/services/web-design-development/web-development",
+    canonical: "/services/web-design-development/web-development-services",
   },
   openGraph: {
     title: "Web Development Services | BrainADZ Marketing",

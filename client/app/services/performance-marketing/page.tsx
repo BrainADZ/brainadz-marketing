@@ -192,11 +192,11 @@ const serviceSchema = {
   serviceType: "Paid Media and Performance Marketing Management",
   description:
     "Performance marketing services covering Google Ads, Meta Ads, LinkedIn Ads, SEM, YouTube Ads, Shopping Ads, ecommerce PPC, lead generation, remarketing, display advertising, landing page optimisation and PPC audits.",
-  url: "https://www.brainadz.marketing/services/performance-marketing",
+  url: "https://brainadz.marketing/services/performance-marketing",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

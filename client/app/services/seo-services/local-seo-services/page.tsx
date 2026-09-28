@@ -35,14 +35,14 @@ export const metadata: Metadata = {
   description:
     "Local SEO services by BrainADZ improve Google Business Profile visibility, map-pack rankings, citations, reviews, location pages and local lead tracking.",
   alternates: {
-    canonical: "/services/local-seo-services",
+    canonical: "/services/seo-services/local-seo-services",
   },
   openGraph: {
     title: "Local SEO Services | BrainADZ Marketing",
     description:
       "Improve local search visibility, Google Maps presence and qualified enquiries with a structured Local SEO strategy.",
     type: "website",
-    url: "/services/local-seo-services",
+    url: "/services/seo-services/local-seo-services",
   },
   twitter: {
     card: "summary_large_image",
@@ -406,11 +406,11 @@ const serviceSchema = {
   serviceType: "Local Search Engine Optimization",
   description:
     "Local SEO services covering Google Business Profile optimization, local keywords, location pages, citations, reviews, local authority and lead tracking.",
-  url: "https://www.brainadz.marketing/services/local-seo-services",
+  url: "https://brainadz.marketing/services/seo-services/local-seo-services",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   description:
     "Content marketing services by BrainADZ Marketing for content strategy, SEO content, blogs, campaigns, distribution, lead generation and measurable business growth.",
   alternates: {
-    canonical: "/services/digital-marketing/content-marketing",
+    canonical: "/services/digital-marketing/content-marketing-services",
   },
   openGraph: {
     title: "Content Marketing Services | BrainADZ Marketing",

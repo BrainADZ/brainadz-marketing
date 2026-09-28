@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/creative-media/infographic-design-services" },
   title: "Infographic Design Services | BrainADZ Marketing",
   description:
     "Professional infographic design services by BrainADZ Marketing for data visualization, process graphics, comparison charts, timelines, reports, presentations, websites and social media.",

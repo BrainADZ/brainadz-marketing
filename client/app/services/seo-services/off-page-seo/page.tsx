@@ -32,14 +32,14 @@ export const metadata: Metadata = {
   description:
     "Off Page SEO services by BrainADZ strengthen authority through editorial links, digital PR, brand mentions, citations, reviews, partnerships and transparent reporting.",
   alternates: {
-    canonical: "/services/off-page-seo",
+    canonical: "/services/seo-services/off-page-seo",
   },
   openGraph: {
     title: "Off Page SEO Services | BrainADZ Marketing",
     description:
       "Build stronger search authority, brand trust and referral visibility through ethical Off Page SEO campaigns.",
     type: "website",
-    url: "/services/off-page-seo",
+    url: "/services/seo-services/off-page-seo",
   },
   twitter: {
     card: "summary_large_image",
@@ -428,11 +428,11 @@ const serviceSchema = {
   serviceType: "Off Page Search Engine Optimization",
   description:
     "Off Page SEO services covering editorial links, digital PR, brand mentions, citations, reviews, partnerships, reputation and authority reporting.",
-  url: "https://www.brainadz.marketing/services/off-page-seo",
+  url: "https://brainadz.marketing/services/seo-services/off-page-seo",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

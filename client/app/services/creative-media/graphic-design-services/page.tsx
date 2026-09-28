@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/creative-media/graphic-design-services" },
   title: "Graphic Design Services | BrainADZ Marketing",
   description:
     "Professional graphic design services by BrainADZ Marketing for brands, campaigns, social media, print, presentations and digital platforms.",

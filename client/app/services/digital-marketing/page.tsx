@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/digital-marketing" },
   title: "Digital Marketing Services | BrainADZ Marketing",
   description:
     "BrainADZ digital marketing services for SEO, SMO, SMM, email marketing, SEM, content marketing, ORM, influencer marketing, WhatsApp marketing, and visual content creation.",

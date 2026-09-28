@@ -198,11 +198,11 @@ const serviceSchema = {
   serviceType: "Search Engine Optimization Services",
   description:
     "SEO services covering technical SEO, on-page SEO, SEO audits, off-page SEO, link building, local SEO, ecommerce SEO, enterprise SEO and international SEO.",
-  url: "https://www.brainadz.marketing/services/seo-services",
+  url: "https://brainadz.marketing/services/seo-services",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

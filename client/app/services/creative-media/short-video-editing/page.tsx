@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/creative-media/short-video-editing" },
   title: "Short Video Editing Services | BrainADZ Marketing",
   description:
     "Professional short video editing services by BrainADZ Marketing for Instagram Reels, YouTube Shorts, social ads, product videos, talking-head content and branded short-form campaigns.",

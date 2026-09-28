@@ -34,14 +34,14 @@ export const metadata: Metadata = {
   description:
     "Ecommerce PPC services by BrainADZ cover paid acquisition, product and category strategy, feed readiness, bidding, remarketing, revenue tracking, profitability and scalable campaign growth.",
   alternates: {
-    canonical: "/services/ecommerce-ppc",
+    canonical: "/services/performance-marketing/ecommerce-ppc",
   },
   openGraph: {
     title: "Ecommerce PPC Services | BrainADZ Marketing",
     description:
       "Grow ecommerce sales through product-level paid media strategy, accurate revenue measurement, stronger merchandising and profitability-led optimisation.",
     type: "website",
-    url: "/services/ecommerce-ppc",
+    url: "/services/performance-marketing/ecommerce-ppc",
   },
   twitter: {
     card: "summary_large_image",
@@ -515,11 +515,11 @@ const serviceSchema = {
   serviceType: "Ecommerce Pay Per Click Advertising Management",
   description:
     "Ecommerce PPC services covering paid acquisition, product and category strategy, feed readiness, creative, bidding, remarketing, revenue tracking, profitability and reporting.",
-  url: "https://www.brainadz.marketing/services/ecommerce-ppc",
+  url: "https://brainadz.marketing/services/performance-marketing/ecommerce-ppc",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

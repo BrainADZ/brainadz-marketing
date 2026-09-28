@@ -32,14 +32,14 @@ export const metadata: Metadata = {
   description:
     "LinkedIn Ads services by BrainADZ cover professional audience targeting, Lead Gen Forms, Matched Audiences, website conversions, Insight Tag, CRM feedback and B2B pipeline reporting.",
   alternates: {
-    canonical: "/services/linkedin-ads",
+    canonical: "/services/performance-marketing/linkedin-ads",
   },
   openGraph: {
     title: "LinkedIn Ads Services | BrainADZ Marketing",
     description:
       "Generate and qualify B2B demand through professional audience targeting, native forms, website conversions, account-based campaigns and CRM-connected optimisation.",
     type: "website",
-    url: "/services/linkedin-ads",
+    url: "/services/performance-marketing/linkedin-ads",
   },
   twitter: {
     card: "summary_large_image",
@@ -591,11 +591,11 @@ const serviceSchema = {
   serviceType: "LinkedIn B2B Advertising Management",
   description:
     "LinkedIn Ads services covering professional audience targeting, Matched Audiences, Lead Gen Forms, website conversions, Insight Tag, CRM feedback, optimisation and B2B pipeline reporting.",
-  url: "https://www.brainadz.marketing/services/linkedin-ads",
+  url: "https://brainadz.marketing/services/performance-marketing/linkedin-ads",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

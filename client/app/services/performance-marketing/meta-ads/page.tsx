@@ -30,14 +30,14 @@ export const metadata: Metadata = {
   description:
     "Meta Ads services by BrainADZ cover Facebook and Instagram campaign strategy, creative testing, audience planning, Pixel and Conversions API measurement, lead quality and ongoing optimisation.",
   alternates: {
-    canonical: "/services/meta-ads",
+    canonical: "/services/performance-marketing/meta-ads",
   },
   openGraph: {
     title: "Meta Ads Services | BrainADZ Marketing",
     description:
       "Build measurable Facebook and Instagram advertising campaigns with objective-led strategy, creative testing, reliable tracking and continuous optimisation.",
     type: "website",
-    url: "/services/meta-ads",
+    url: "/services/performance-marketing/meta-ads",
   },
   twitter: {
     card: "summary_large_image",
@@ -483,11 +483,11 @@ const serviceSchema = {
   serviceType: "Facebook and Instagram Advertising Management",
   description:
     "Meta Ads services covering campaign objectives, audience strategy, creative testing, Facebook and Instagram placements, Pixel, Conversions API, optimisation and reporting.",
-  url: "https://www.brainadz.marketing/services/meta-ads",
+  url: "https://brainadz.marketing/services/performance-marketing/meta-ads",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",

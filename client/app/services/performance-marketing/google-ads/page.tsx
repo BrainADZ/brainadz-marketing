@@ -29,14 +29,14 @@ export const metadata: Metadata = {
   description:
     "Google Ads services by BrainADZ cover search strategy, keyword research, campaign structure, responsive search ads, bidding, conversion tracking and ongoing PPC optimisation.",
   alternates: {
-    canonical: "/services/google-ads",
+    canonical: "/services/performance-marketing/google-ads",
   },
   openGraph: {
     title: "Google Ads Services | BrainADZ Marketing",
     description:
       "Generate qualified search demand with structured Google Ads campaigns, accurate conversion measurement and continuous optimisation.",
     type: "website",
-    url: "/services/google-ads",
+    url: "/services/performance-marketing/google-ads",
   },
   twitter: {
     card: "summary_large_image",
@@ -482,11 +482,11 @@ const serviceSchema = {
   serviceType: "Google Search Ads and PPC Management",
   description:
     "Google Ads services covering search strategy, keyword research, campaign structure, responsive search ads, bidding, conversion tracking, optimisation and reporting.",
-  url: "https://www.brainadz.marketing/services/google-ads",
+  url: "https://brainadz.marketing/services/performance-marketing/google-ads",
   provider: {
     "@type": "Organization",
     name: "BrainADZ Marketing",
-    url: "https://www.brainadz.marketing",
+    url: "https://brainadz.marketing",
   },
   areaServed: {
     "@type": "Country",
