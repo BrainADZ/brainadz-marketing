@@ -69,10 +69,12 @@ h1 { letter-spacing: -.035em; }
 .field-type { margin-bottom: 25px; }
 .field-label { margin-bottom: 8px; color: var(--theme-elevation-800); font-size: 13px; font-weight: 650; letter-spacing: 0; }
 .field-description { color: var(--brainadz-muted); font-size: 12px; line-height: 1.6; }
-input, textarea, select, .react-select__control { min-height: 44px; border-color: var(--theme-elevation-250) !important; border-radius: 10px !important; background: var(--theme-elevation-0) !important; transition: border-color .15s ease, box-shadow .15s ease; }
+input:not(.rs__input), textarea, select, .react-select .rs__control { min-height: 44px; border-color: var(--theme-elevation-250) !important; border-radius: 10px !important; background: var(--theme-elevation-0) !important; transition: border-color .15s ease, box-shadow .15s ease; }
 textarea { padding-block: 12px; }
-input:hover, textarea:hover, select:hover, .react-select__control:hover { border-color: var(--theme-elevation-400) !important; }
-input:focus, textarea:focus, select:focus, .react-select__control--is-focused { border-color: var(--brainadz-blue) !important; box-shadow: 0 0 0 3px color-mix(in srgb,var(--brainadz-blue) 16%,transparent) !important; }
+input:not(.rs__input):hover, textarea:hover, select:hover, .react-select .rs__control:hover { border-color: var(--theme-elevation-400) !important; }
+input:not(.rs__input):focus, textarea:focus, select:focus, .react-select .rs__control--is-focused { border-color: var(--brainadz-blue) !important; box-shadow: 0 0 0 3px color-mix(in srgb,var(--brainadz-blue) 16%,transparent) !important; }
+.react-select .rs__input { min-height: 0 !important; height: auto !important; padding: 0 !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; outline: 0; }
+.react-select .rs__input:focus { border: 0 !important; box-shadow: none !important; }
 .btn { border-radius: 10px; font-weight: 650; }
 .btn--style-primary { border-color: var(--brainadz-blue-deep); color: #fff; background: linear-gradient(135deg,#2865d3,var(--brainadz-blue-deep)); box-shadow: 0 7px 18px rgba(23,70,162,.22); }
 .btn--style-primary:hover, .btn--style-primary:focus-visible { border-color: #09285f; background: linear-gradient(135deg,#1d55b9,#09285f); transform: translateY(-1px); }
