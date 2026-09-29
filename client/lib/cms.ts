@@ -29,7 +29,7 @@ export type BlogPost = {
   authorName?: string | null;
   category?: string | null;
   categoryRelation?: CMSCategory | number | string | null;
-  excerpt: string;
+  excerpt?: string | null;
   heroImage: CMSImage | string;
   id: number | string;
   publishedAt: string;
@@ -142,7 +142,7 @@ export const getBlogPosts = (): Promise<BlogPost[]> =>
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   const posts = await getCollection<BlogPost>(
     "blog-posts",
-    `depth=1&limit=1&where[_status][equals]=published&where[slug][equals]=${encodeURIComponent(slug)}`,
+    `depth=2&limit=1&where[_status][equals]=published&where[slug][equals]=${encodeURIComponent(slug)}`,
   );
   return posts[0] ?? null;
 }

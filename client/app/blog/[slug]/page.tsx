@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CalendarDays, ChevronRight, Clock3, UserRound } from "lucide-react";
 
-import { getTableOfContents, RichText } from "@/components/RichText";
+import { getRichTextPreview, getTableOfContents, RichText } from "@/components/RichText";
 import { getBlogPost, getBlogPosts, getCMSCategoryTitle, getCMSImageURL } from "@/lib/cms";
 import { getRobotsMetadata } from "@/lib/seo";
 
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const image = getCMSImageURL(post.heroImage);
   const socialImage = getCMSImageURL(post.seo?.ogImage || post.seo?.image || post.heroImage);
   const title = post.seo?.metaTitle || `${post.title} | BrainADZ`;
-  const description = post.seo?.metaDescription || post.excerpt;
+  const description = post.seo?.metaDescription || post.excerpt || getRichTextPreview(post.content, 200);
 
   return {
     title,
@@ -84,13 +84,13 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#E1122B]">Table of contents</p>
                 <nav className="mt-4 space-y-3" aria-label="Table of contents">
                   {tableOfContents.map((item) => (
-                    <a key={item.id} href={`#${item.id}`} className={`block text-sm leading-5 text-black/60 hover:text-[#E1122B] ${item.level === 3 ? "pl-3" : ""}`}>{item.label}</a>
+                    <a key={item.id} href={`#${item.id}`} className={`block text-sm leading-5 text-black/60 hover:text-[#E1122B] ${item.level === 4 ? "pl-6" : item.level === 3 ? "pl-3" : ""}`}>{item.label}</a>
                   ))}
                 </nav>
               </aside>
             ) : <div />}
             <div>
-              <p className="mb-10 text-xl leading-9 text-black/72">{post.excerpt}</p>
+              {post.excerpt ? <p className="mb-10 text-xl leading-9 text-black/72">{post.excerpt}</p> : null}
               <RichText data={post.content} />
             </div>
           </div>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock3 } from "lucide-react";
 import { getBlogCategories, getBlogPosts, getCMSCategoryTitle, getCMSImageURL } from "@/lib/cms";
+import { getRichTextPreview } from "@/components/RichText";
 import BlogSidebar from "./BlogSidebar";
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ export default async function BlogPage() {
   const [cmsPosts, cmsCategories] = await Promise.all([getBlogPosts(), getBlogCategories()]);
   const blogPosts = cmsPosts.map((post) => ({
         category: getCMSCategoryTitle(post.categoryRelation, post.category),
-        excerpt: post.excerpt,
+        excerpt: getRichTextPreview(post.content, 200),
         id: post.slug,
         image: getCMSImageURL(post.heroImage),
         imageAlt:

@@ -257,11 +257,18 @@ export interface BlogPost {
   id: string;
   title: string;
   category?: string | null;
-  excerpt: string;
+  tags?: (string | Tag)[] | null;
+  /**
+   * Optional article introduction. Blog cards show the first 200 characters of Content instead.
+   */
+  excerpt?: string | null;
   /**
    * Select an image with descriptive Alt Text for accessibility and SEO.
    */
   heroImage: string | Media;
+  /**
+   * Write the article here. Uploaded images and heading levels appear on the website as entered.
+   */
   content: {
     root: {
       type: string;
@@ -289,9 +296,12 @@ export interface BlogPost {
      * Recommended length: 120–160 characters.
      */
     metaDescription?: string | null;
+    /**
+     * Add several search phrases at once, separated by commas.
+     */
     focusKeyword?: string | null;
     /**
-     * Optional. Leave blank to use the page's default URL.
+     * Generated automatically from the blog slug when you save.
      */
     canonicalURL?: string | null;
     robots?: ('index, follow' | 'index, nofollow' | 'noindex, follow' | 'noindex, nofollow') | null;
@@ -313,12 +323,15 @@ export interface BlogPost {
   slug: string;
   categoryRelation: string | BlogCategory;
   author: string | User;
-  tags?: (string | Tag)[] | null;
+  tagsText?: string | null;
   publishedAt: string;
   /**
    * Estimated reading time in minutes.
    */
   readTime?: number | null;
+  /**
+   * Mark this post as a featured editorial pick. The current blog page lists posts by date and does not use this flag for placement.
+   */
   featured?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -432,6 +445,9 @@ export interface CaseStudy {
      * Recommended length: 120–160 characters.
      */
     metaDescription?: string | null;
+    /**
+     * Add several search phrases at once, separated by commas.
+     */
     focusKeyword?: string | null;
     /**
      * Optional. Leave blank to use the page's default URL.
@@ -802,6 +818,7 @@ export interface TagsSelect<T extends boolean = true> {
 export interface BlogPostsSelect<T extends boolean = true> {
   title?: T;
   category?: T;
+  tags?: T;
   excerpt?: T;
   heroImage?: T;
   content?: T;
@@ -822,7 +839,7 @@ export interface BlogPostsSelect<T extends boolean = true> {
   slug?: T;
   categoryRelation?: T;
   author?: T;
-  tags?: T;
+  tagsText?: T;
   publishedAt?: T;
   readTime?: T;
   featured?: T;

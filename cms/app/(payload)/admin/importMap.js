@@ -24,6 +24,7 @@ import { UploadFeatureClient as UploadFeatureClient_e70f5e05f09f93e00b997edb1ef0
 import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { InlineToolbarFeatureClient as InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { CharacterCounter as CharacterCounter_a542eff4aac17d14724efa957619d707 } from '../../../components/CharacterCounter'
+import { CommaSeparatedField as CommaSeparatedField_8a017bb1db9d29f230e2ee512804045e } from '../../../components/CommaSeparatedField'
 import { BrainADZIcon as BrainADZIcon_697670bfe7afeb140dc6ec965f80901b } from '../../../components/BrainADZBrand'
 import { BrainADZLogo as BrainADZLogo_697670bfe7afeb140dc6ec965f80901b } from '../../../components/BrainADZBrand'
 import { LogoutNavLink as LogoutNavLink_4e9a2cc31782b9a8386f9623e3a069bf } from '../../../components/LogoutNavLink'
@@ -58,6 +59,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient": InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "/components/CharacterCounter#CharacterCounter": CharacterCounter_a542eff4aac17d14724efa957619d707,
+  "/components/CommaSeparatedField#CommaSeparatedField": CommaSeparatedField_8a017bb1db9d29f230e2ee512804045e,
   "/components/BrainADZBrand#BrainADZIcon": BrainADZIcon_697670bfe7afeb140dc6ec965f80901b,
   "/components/BrainADZBrand#BrainADZLogo": BrainADZLogo_697670bfe7afeb140dc6ec965f80901b,
   "/components/LogoutNavLink#LogoutNavLink": LogoutNavLink_4e9a2cc31782b9a8386f9623e3a069bf,

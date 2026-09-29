@@ -1,7 +1,7 @@
 import type { CollectionConfig } from "payload";
 
 import { authenticated } from "../access/contentAccess";
-import { populateSlug } from "../hooks/formatSlug";
+import { formatSlug, populateSlug } from "../hooks/formatSlug";
 
 export const Tags: CollectionConfig = {
   slug: "tags",
@@ -24,7 +24,8 @@ export const Tags: CollectionConfig = {
       required: true,
       unique: true,
       index: true,
-      hooks: { beforeValidate: [populateSlug] },
+      admin: { readOnly: true, description: "Automatically generated from the tag name." },
+      hooks: { beforeValidate: [({ data, ...args }) => formatSlug(data?.title) || populateSlug({ data, ...args })] },
     },
     { name: "description", type: "textarea", maxLength: 240 },
   ],

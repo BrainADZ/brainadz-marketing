@@ -3,9 +3,10 @@ import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from "@payloadcms/r
 
 import { authenticated, publishedOrAuthenticated } from "../access/contentAccess";
 import { FAQBlock } from "../blocks/FAQ";
-import { seoFields } from "../fields/seoFields";
+import { blogSeoFields } from "../fields/seoFields";
 import { editorLayout } from "../fields/editorLayout";
 import { populateSlug } from "../hooks/formatSlug";
+import { populateBlogTagNames, prepareBlogFields } from "../hooks/blogFields";
 
 export const BlogPosts: CollectionConfig = {
   slug: "blog-posts",
@@ -26,6 +27,7 @@ export const BlogPosts: CollectionConfig = {
   },
   defaultSort: "-publishedAt",
   hooks: {
+    beforeChange: [prepareBlogFields],
     afterRead: [async ({ doc, req }) => {
       // Expose only the byline; user accounts remain private.
       const authorID = typeof doc.author === "object" ? doc.author?.id : doc.author;
@@ -46,7 +48,7 @@ export const BlogPosts: CollectionConfig = {
         }
       }
       return doc;
-    }],
+    }, populateBlogTagNames],
   },
   fields: editorLayout([
     {
@@ -91,7 +93,16 @@ export const BlogPosts: CollectionConfig = {
       type: "relationship",
       relationTo: "tags",
       hasMany: true,
-      admin: { position: "sidebar" },
+      admin: { hidden: true },
+    },
+    {
+      name: "tagsText",
+      label: "Tags",
+      type: "text",
+      admin: {
+        position: "sidebar",
+        components: { Field: "/components/CommaSeparatedField#CommaSeparatedField" },
+      },
     },
     {
       name: "publishedAt",
@@ -112,13 +123,12 @@ export const BlogPosts: CollectionConfig = {
       name: "featured",
       type: "checkbox",
       defaultValue: false,
-      admin: { position: "sidebar" },
+      admin: { position: "sidebar", description: "Mark this post as a featured editorial pick. The current blog page lists posts by date and does not use this flag for placement." },
     },
     {
       name: "excerpt",
       type: "textarea",
-      required: true,
-      maxLength: 320,
+      admin: { description: "Optional article introduction. Blog cards show the first 200 characters of Content instead." },
     },
     {
       name: "heroImage",
@@ -131,6 +141,7 @@ export const BlogPosts: CollectionConfig = {
       name: "content",
       type: "richText",
       required: true,
+      admin: { description: "Write the article here. Uploaded images and heading levels appear on the website as entered." },
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,
@@ -139,7 +150,7 @@ export const BlogPosts: CollectionConfig = {
         ],
       }),
     },
-    seoFields,
+    blogSeoFields,
   ]),
   versions: {
     drafts: {

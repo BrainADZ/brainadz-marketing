@@ -1,6 +1,6 @@
-import type { Field } from "payload";
+import type { GroupField } from "payload";
 
-export const seoFields: Field = {
+export const seoFields: GroupField = {
   name: "seo",
   label: "SEO & Social Sharing",
   type: "group",
@@ -30,9 +30,12 @@ export const seoFields: Field = {
     },
     {
       name: "focusKeyword",
-      label: "Focus Keyword",
+      label: "Focus Keywords",
       type: "text",
-      maxLength: 120,
+      admin: {
+        components: { Field: "/components/CommaSeparatedField#CommaSeparatedField" },
+        description: "Add several search phrases at once, separated by commas.",
+      },
     },
     {
       name: "canonicalURL",
@@ -101,4 +104,20 @@ export const seoFields: Field = {
       admin: { hidden: true },
     },
   ],
+};
+
+export const blogSeoFields: GroupField = {
+  ...seoFields,
+  fields: seoFields.fields.map((field) =>
+    field.type === "text" && field.name === "canonicalURL"
+      ? {
+          ...field,
+          admin: {
+            ...field.admin,
+            readOnly: true,
+            description: "Generated automatically from the blog slug when you save.",
+          },
+        }
+      : field,
+  ),
 };

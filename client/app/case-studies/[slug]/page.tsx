@@ -77,7 +77,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
           <nav className="flex flex-wrap items-center gap-2 text-sm text-white/60" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-white">Home</Link><span>/</span>
             <Link href="/case-studies" className="hover:text-white">Case Studies</Link><span>/</span>
-            <span aria-current="page" className="min-w-0 break-words text-white">{study.title}</span>
+            <span aria-current="page" className="min-w-0 wrap-break-wordword text-white">{study.title}</span>
           </nav>
           <div className="mt-12">
             <div>
@@ -160,7 +160,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       {beforeAfter?.title?.trim() || beforeAfter?.description?.trim() || comparisons.length > 0 ? (
         <section aria-labelledby="case-study-before-after" className="px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1400px]">
-            <h2 id="case-study-before-after" className="break-words text-3xl font-semibold tracking-[-.03em] sm:text-5xl">{beforeAfter?.title || "Before vs After"}</h2>
+            <h2 id="case-study-before-after" className="wrap-break-word text-3xl font-semibold tracking-[-.03em] sm:text-5xl">{beforeAfter?.title || "Before vs After"}</h2>
             {beforeAfter?.description ? <p className="mt-6 max-w-4xl whitespace-pre-line leading-8 text-black/65">{beforeAfter.description}</p> : null}
             {comparisons.length > 0 ? (
               <div className="mt-8 overflow-hidden rounded-2xl border border-black/10">
@@ -176,9 +176,9 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
                   <tbody className="divide-y divide-black/10">
                     {comparisons.map((item, index) => (
                       <tr key={item.id || index}>
-                        <th scope="row" className="break-words p-3 font-medium sm:p-6">{item.label}</th>
-                        <td className="break-words p-3 text-black/65 sm:p-6">{item.beforeValue}</td>
-                        <td className="break-words bg-[#fff1f2]/50 p-3 font-semibold sm:p-6">{item.afterValue}</td>
+                        <th scope="row" className="wrap-break-word p-3 font-medium sm:p-6">{item.label}</th>
+                        <td className="wrap-break-wordword p-3 text-black/65 sm:p-6">{item.beforeValue}</td>
+                        <td className="wrap-break-word bg-[#fff1f2]/50 p-3 font-semibold sm:p-6">{item.afterValue}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -220,10 +220,10 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
                     </span>
                     <span className="h-px flex-1 bg-[#eeece8]" />
                   </div>
-                  <h3 className="break-words text-xl font-semibold leading-snug tracking-[-.025em] text-[#191919] sm:text-2xl">
+                  <h3 className="wrap-break-word text-xl font-semibold leading-snug tracking-[-.025em] text-[#191919] sm:text-2xl">
                     {result.value}
                   </h3>
-                  <p className="mt-3 break-words text-[15px] leading-7 text-[#626262]">
+                  <p className="mt-3 wrap-break-word text-[15px] leading-7 text-[#626262]">
                     {result.label}
                   </p>
                 </li>
