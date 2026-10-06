@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { nodemailerAdapter } from "@payloadcms/email-nodemailer";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { EXPERIMENTAL_TableFeature, FixedToolbarFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
 import { redirectsPlugin } from "@payloadcms/plugin-redirects";
 import { buildConfig } from "payload";
 import sharp from "sharp";
@@ -97,7 +97,13 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URL || "",
   }),
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      FixedToolbarFeature(),
+      EXPERIMENTAL_TableFeature(),
+    ],
+  }),
   email,
   secret: process.env.PAYLOAD_SECRET || "",
   serverURL,

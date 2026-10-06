@@ -34,9 +34,9 @@ const baseStudy = {
   approach: [{ title: "Approach fixture", description: "Our strategy" }],
   results: [{ value: "Results fixture", label: "Qualified leads" }],
 };
-const richTextModule = loadTS("../components/RichText.tsx");
-const readingTime = loadTS("../lib/case-study-reading-time.ts");
 const cms = loadTS("../lib/cms.ts", {});
+const richTextModule = loadTS("../components/RichText.tsx", { "@/lib/cms": cms });
+const readingTime = loadTS("../lib/case-study-reading-time.ts");
 
 async function renderStudy(study) {
   const { default: Page } = loadTS("../app/case-studies/[slug]/page.tsx", {
@@ -91,4 +91,60 @@ test("reading time includes the final outcome and retains the one-minute minimum
   assert.equal(readingTime.estimateCaseStudyReadingTime({
     summary: "Short summary", finalOutcome: { description: richText("word ".repeat(400)) },
   }), 3);
+});
+
+const tableContent = {
+  root: { children: [{
+    type: "table", children: [
+      { type: "tablerow", children: [
+        { type: "tablecell", headerState: 1, colSpan: 2, children: richText("Results").root.children },
+      ] },
+      { type: "tablerow", children: [
+        { type: "tablecell", headerState: 2, rowSpan: 2, children: richText("Leads").root.children },
+        { type: "tablecell", headerState: 0, children: richText("120").root.children },
+      ] },
+      { type: "tablerow", children: [
+        { type: "tablecell", headerState: 0, children: richText("240").root.children },
+      ] },
+    ],
+  }] },
+};
+
+test("rich text renders table rows, headers, merged cells and formatted content", () => {
+  const html = renderToStaticMarkup(richTextModule.RichText({ data: tableContent }));
+  assert.match(html, /overflow-x-auto/);
+  assert.match(html, /<table[^>]*><tbody>/);
+  assert.equal((html.match(/<tr>/g) || []).length, 3);
+  assert.match(html, /<th[^>]*colSpan="2"[^>]*scope="col"/i);
+  assert.match(html, /<th[^>]*rowSpan="2"[^>]*scope="row"/i);
+  assert.equal((html.match(/<td\b/g) || []).length, 2);
+  assert.match(html, /<strong>Results<\/strong>/);
+  assert.equal(richTextModule.getRichTextPreview(tableContent), "Results Leads 120 240");
+});
+
+test("case study challenge and final outcome preserve authored tables", async () => {
+  const html = await renderStudy({
+    ...baseStudy,
+    challenge: tableContent,
+    finalOutcome: { title: "Table outcome", description: tableContent },
+  });
+  assert.equal((html.match(/<table\b/g) || []).length, 2);
+  assert.match(html, /Table outcome/);
+});
+
+test("blog content preserves authored tables", async () => {
+  const { default: Page } = loadTS("../app/blog/[slug]/page.tsx", {
+    "@/components/RichText": richTextModule,
+    "@/lib/cms": {
+      ...cms,
+      getBlogPost: async () => ({
+        title: "Table article", slug: "table-article", heroImage: "",
+        category: "Marketing", publishedAt: "2026-10-06", content: tableContent,
+      }),
+    },
+    "@/lib/seo": { getRobotsMetadata: () => undefined },
+  });
+  const html = renderToStaticMarkup(await Page({ params: Promise.resolve({ slug: "table-article" }) }));
+  assert.match(html, /<table[^>]*><tbody>/);
+  assert.match(html, /<strong>Results<\/strong>/);
 });

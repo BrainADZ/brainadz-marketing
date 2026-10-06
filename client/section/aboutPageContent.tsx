@@ -331,7 +331,7 @@ function OriginStorySection() {
             </p>
 
             <Link
-              href="/about"
+              href="/about-us"
               className="mt-9 inline-flex items-center gap-3 text-[15px] font-semibold text-[#E1122B] transition hover:text-black"
             >
               Learn more about our rich history

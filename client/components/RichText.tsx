@@ -5,6 +5,9 @@ import { getCMSImageURL, type CMSImage } from "@/lib/cms";
 
 type RichTextNode = {
   children?: RichTextNode[];
+  colSpan?: number;
+  headerState?: number;
+  rowSpan?: number;
   fields?: {
     blockType?: string;
     heading?: string;
@@ -26,7 +29,7 @@ const getRoot = (data: unknown): RichTextNode | undefined =>
 
 const nodeText = (node: RichTextNode): string => {
   if (node.text) return node.text;
-  const separator = node.type === "root" || node.type === "list" ? " " : "";
+  const separator = ["root", "list", "table", "tablerow", "tablecell"].includes(node.type || "") ? " " : "";
   return node.children?.map(nodeText).join(separator) || "";
 };
 
@@ -66,6 +69,32 @@ function renderNode(node: RichTextNode, key: string): ReactNode {
   }
 
   const children = node.children?.map((child, index) => renderNode(child, `${key}-${index}`));
+
+  if (node.type === "table") {
+    return (
+      <div key={key} className="my-8 max-w-full overflow-x-auto rounded-xl border border-black/15">
+        <table className="w-full border-collapse text-left text-sm sm:text-base">
+          <tbody>{children}</tbody>
+        </table>
+      </div>
+    );
+  }
+  if (node.type === "tablerow") return <tr key={key}>{children}</tr>;
+  if (node.type === "tablecell") {
+    const isHeader = Boolean(node.headerState);
+    const Cell = isHeader ? "th" : "td";
+    return (
+      <Cell
+        key={key}
+        colSpan={node.colSpan && node.colSpan > 1 ? node.colSpan : undefined}
+        rowSpan={node.rowSpan && node.rowSpan > 1 ? node.rowSpan : undefined}
+        scope={node.headerState === 1 ? "col" : node.headerState === 2 ? "row" : undefined}
+        className={`min-w-32 border border-black/15 px-4 py-3 align-top [&>p]:text-inherit [&>p]:leading-7 ${isHeader ? "bg-black/5 font-semibold text-black" : "text-black/70"}`}
+      >
+        {children}
+      </Cell>
+    );
+  }
 
   if (node.type === "heading") {
     const headings = { h1: "h1", h2: "h2", h3: "h3", h4: "h4", h5: "h5", h6: "h6" } as const;

@@ -1,15 +1,16 @@
 import assert from "node:assert/strict";
 import { legacyRedirects } from "../lib/legacy-urls.ts";
 
-// Run against a production build: node scripts/check-legacy-redirects.mjs http://localhost:3107
+// Check a local production build or the live site:
+// node scripts/check-legacy-redirects.mjs https://brainadz.marketing
 const base = process.argv[2];
-if (!base) throw new Error("Provide the local production server URL.");
+if (!base) throw new Error("Provide the site base URL.");
 
 for (const [source, destination] of Object.entries(legacyRedirects)) {
   const response = await fetch(new URL(source, base), { redirect: "manual" });
   assert.equal(response.status, 301, source);
   assert.equal(new URL(response.headers.get("location"), base).pathname, destination, source);
-  const target = await fetch(new URL(destination, base));
+  const target = await fetch(new URL(destination, base), { redirect: "manual" });
   assert.equal(target.status, 200, destination);
 }
 

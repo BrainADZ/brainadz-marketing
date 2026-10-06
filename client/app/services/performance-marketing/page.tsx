@@ -70,7 +70,7 @@ const PERFORMANCE_SERVICES = [
   },
   {
     title: "Search Engine Marketing (SEM)",
-    slug: "search-engine-marketing",
+    slug: "search-engine-marketing-sem",
     description:
       "Coordinate paid search strategy, keywords, bids, ads, landing pages and conversion tracking around clear commercial outcomes.",
     icon: BarChart3,

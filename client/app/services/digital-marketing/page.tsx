@@ -48,7 +48,7 @@ const SERVICE_NAV = [
 const DIGITAL_SERVICES = [
   {
     title: "Social Media Marketing Services (SMM)",
-    slug: "social-media-marketing-services",
+    slug: "social-media-marketing-services-smm",
     description:
       "Create, manage, and grow social media campaigns across Instagram, Facebook, LinkedIn, and other relevant platforms.",
     icon: Users,
@@ -56,7 +56,7 @@ const DIGITAL_SERVICES = [
   },
   {
     title: "Social Media Optimization Services (SMO)",
-    slug: "social-media-optimization-services",
+    slug: "social-media-optimization-services-smo",
     description:
       "Improve social profiles, content presentation, publishing consistency, and audience engagement across platforms.",
     icon: Share2,
@@ -72,7 +72,7 @@ const DIGITAL_SERVICES = [
   },
   {
     title: "Online Reputation Management (ORM)",
-    slug: "online-reputation-management",
+    slug: "online-reputation-management-orm",
     description:
       "Protect and improve your brand image through reviews, feedback handling, reputation monitoring, and response strategy.",
     icon: ShieldCheck,

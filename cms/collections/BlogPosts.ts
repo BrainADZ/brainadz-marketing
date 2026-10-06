@@ -1,5 +1,5 @@
 import type { CollectionConfig } from "payload";
-import { BlocksFeature, FixedToolbarFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
+import { BlocksFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
 
 import { authenticated, publishedOrAuthenticated } from "../access/contentAccess";
 import { FAQBlock } from "../blocks/FAQ";
@@ -143,9 +143,8 @@ export const BlogPosts: CollectionConfig = {
       required: true,
       admin: { description: "Write the article here. Uploaded images and heading levels appear on the website as entered." },
       editor: lexicalEditor({
-        features: ({ defaultFeatures }) => [
-          ...defaultFeatures,
-          FixedToolbarFeature(),
+        features: ({ rootFeatures }) => [
+          ...rootFeatures,
           BlocksFeature({ blocks: [FAQBlock] }),
         ],
       }),

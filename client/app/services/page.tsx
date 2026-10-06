@@ -23,15 +23,15 @@ const SERVICE_CATEGORIES = [
     imageAlt: "Digital marketing and social media work by BrainADZ",
     metrics: ["Social growth", "Content planning", "Lead journeys"],
     services: [
-      "SMO Services",
-      "SMM Services",
-      "Email Marketing",
-      "SEM Services",
-      "Content Marketing",
-      "Online Reputation Management (ORM)",
-      "Influencer Marketing",
-      "WhatsApp Marketing",
-      "Visual Content Creation",
+      { label: "SMO Services", href: "/services/digital-marketing/social-media-optimization-services-smo" },
+      { label: "SMM Services", href: "/services/digital-marketing/social-media-marketing-services-smm" },
+      { label: "Email Marketing", href: "/services/digital-marketing/email-marketing" },
+      { label: "SEM Services", href: "/services/performance-marketing/search-engine-marketing-sem" },
+      { label: "Content Marketing", href: "/services/digital-marketing/content-marketing-services" },
+      { label: "Online Reputation Management (ORM)", href: "/services/digital-marketing/online-reputation-management-orm" },
+      { label: "Influencer Marketing", href: "/services/digital-marketing/influencer-marketing" },
+      { label: "WhatsApp Marketing", href: "/services/digital-marketing/whatsapp-marketing" },
+      { label: "Visual Content Creation", href: "/services/creative-media/visual-content-creation" },
     ],
   },
   {
@@ -44,14 +44,14 @@ const SERVICE_CATEGORIES = [
     imageAlt: "Website design and development project by BrainADZ",
     metrics: ["Fast websites", "UI/UX flows", "Conversion pages"],
     services: [
-      "Web Development Services",
-      "E-Commerce Development",
-      "Custom Web Application Development",
-      "Mobile App Development",
-      "WordPress Development",
-      "Shopify Development",
-      "Website Maintenance",
-      "UI/UX Design",
+      { label: "Web Development Services", href: "/services/web-design-development/web-development-services" },
+      { label: "E-Commerce Development", href: "/services/web-design-development/e-commerce-development" },
+      { label: "Custom Web Application Development", href: "/services/web-design-development/custom-web-application-development" },
+      { label: "Mobile App Development", href: "/services/web-design-development/mobile-app-development" },
+      { label: "WordPress Development", href: "/services/web-design-development/wordpress-development" },
+      { label: "Shopify Development", href: "/services/web-design-development/shopify-development" },
+      { label: "Website Maintenance", href: "/services/web-design-development/website-maintenance-services" },
+      { label: "UI/UX Design", href: "/services/web-design-development/ui-ux-design" },
     ],
   },
   {
@@ -64,19 +64,19 @@ const SERVICE_CATEGORIES = [
     imageAlt: "BrainADZ creative media and brand event work",
     metrics: ["Brand design", "Video edits", "Ad creatives"],
     services: [
-      "Graphic Design Services",
-      "Creative Design Services",
-      "Motion Graphics Services",
-      "Branding Design Services",
-      "Social Media Creative Design",
-      "Presentation Design Services",
-      "Ad Creative Design",
-      "Infographic Design Services",
-      "YouTube Thumbnail Design",
-      "Short Video Editing",
-      "Video Editing Services",
-      "Corporate Video Editing",
-      "Reel Editing Services",
+      { label: "Graphic Design Services", href: "/services/creative-media/graphic-design-services" },
+      { label: "Creative Design Services", href: "/services/creative-media/creative-design-services" },
+      { label: "Motion Graphics Services", href: "/services/creative-media/motion-graphics-services" },
+      { label: "Branding Design Services", href: "/services/creative-media/branding-design-services" },
+      { label: "Social Media Creative Design", href: "/services/creative-media/social-media-creative-design" },
+      { label: "Presentation Design Services", href: "/services/creative-media/presentation-design-services" },
+      { label: "Ad Creative Design", href: "/services/creative-media/ad-creative-design" },
+      { label: "Infographic Design Services", href: "/services/creative-media/infographic-design-services" },
+      { label: "YouTube Thumbnail Design", href: "/services/creative-media/youtube-thumbnail-design" },
+      { label: "Short Video Editing", href: "/services/creative-media/short-video-editing" },
+      { label: "Video Editing Services", href: "/services/creative-media/video-editing-services" },
+      { label: "Corporate Video Editing", href: "/services/creative-media/corporate-video-editing" },
+      { label: "Reel Editing Services", href: "/services/creative-media/reel-editing-services" },
     ],
   },
   {
@@ -89,15 +89,15 @@ const SERVICE_CATEGORIES = [
     imageAlt: "SEO targeting and growth strategy visual",
     metrics: ["Keyword growth", "Technical fixes", "Local visibility"],
     services: [
-      "Local SEO Services",
-      "Ecommerce SEO Services",
-      "Link Building SEO Services",
-      "Technical SEO",
-      "On Page SEO",
-      "Off Page SEO",
-      "SEO Audit Services",
-      "Enterprise SEO",
-      "International SEO",
+      { label: "Local SEO Services", href: "/services/seo-services/local-seo-services" },
+      { label: "Ecommerce SEO Services", href: "/services/seo-services/ecommerce-seo-services" },
+      { label: "Link Building SEO Services", href: "/services/seo-services/link-building-services" },
+      { label: "Technical SEO", href: "/services/seo-services/technical-seo" },
+      { label: "On Page SEO", href: "/services/seo-services/on-page-seo" },
+      { label: "Off Page SEO", href: "/services/seo-services/off-page-seo" },
+      { label: "SEO Audit Services", href: "/services/seo-services/seo-audit-services" },
+      { label: "Enterprise SEO", href: "/services/seo-services/enterprise-seo-services" },
+      { label: "International SEO", href: "/services/seo-services/international-seo-services" },
     ],
   },
   {
@@ -110,31 +110,23 @@ const SERVICE_CATEGORIES = [
     imageAlt: "Performance marketing and growth chart visual",
     metrics: ["Google Ads", "Meta Ads", "Lead generation"],
     services: [
-      "Google Ads",
-      "Meta Ads",
-      "YouTube Ads",
-      "Ecommerce PPC",
-      "Remarketing Ads",
-      "Lead Generation",
-      "Landing Page Optimization",
-      "PPC Audit Services",
-      "Google Shopping Ads",
-      "Display Ads",
-      "Performance Marketing",
-      "LinkedIn Ads",
+      { label: "Google Ads", href: "/services/performance-marketing/google-ads" },
+      { label: "Meta Ads", href: "/services/performance-marketing/meta-ads" },
+      { label: "YouTube Ads", href: "/services/performance-marketing/youtube-ads" },
+      { label: "Ecommerce PPC", href: "/services/performance-marketing/ecommerce-ppc" },
+      { label: "Remarketing Ads", href: "/services/performance-marketing/remarketing-ads" },
+      { label: "Lead Generation", href: "/services/performance-marketing/lead-generation-services" },
+      { label: "Landing Page Optimization", href: "/services/performance-marketing/landing-page-optimization" },
+      { label: "PPC Audit Services", href: "/services/performance-marketing/ppc-audit-services" },
+      { label: "Google Shopping Ads", href: "/services/performance-marketing/google-shopping-ads" },
+      { label: "Display Ads", href: "/services/performance-marketing/display-advertising" },
+      { label: "Performance Marketing", href: "/services/performance-marketing" },
+      { label: "LinkedIn Ads", href: "/services/performance-marketing/linkedin-ads" },
     ],
   },
 ];
 
 const FEATURED_SERVICE = SERVICE_CATEGORIES[0];
-
-const slugify = (value: string) =>
-  value
-    .toLowerCase()
-    .replace(/&/g, "and")
-    .replace(/\//g, "-")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
 
 export default function ServicesPage() {
   return (
@@ -438,12 +430,12 @@ function ServiceDirectoryRow({
         <div className="mt-7 grid gap-x-8 gap-y-3 sm:grid-cols-2 xl:grid-cols-3">
           {category.services.map((service) => (
             <Link
-              key={service}
-              href={`${category.href}/${slugify(service)}`}
+              key={service.href}
+              href={service.href}
               className="group flex items-start gap-3 border-b border-white/10 pb-3 text-[14px] font-medium leading-6 text-white/70 transition hover:border-[#1467f5] hover:text-white"
             >
               <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-[#1467f5]" />
-              <span>{service}</span>
+              <span>{service.label}</span>
             </Link>
           ))}
         </div>
