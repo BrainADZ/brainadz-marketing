@@ -5,15 +5,13 @@ import { notFound } from "next/navigation";
 import { CalendarDays, ChevronRight, Clock3, UserRound } from "lucide-react";
 
 import { getRichTextPreview, getTableOfContents, RichText } from "@/components/RichText";
-import { getBlogPost, getBlogPosts, getCMSCategoryTitle, getCMSImageURL } from "@/lib/cms";
+import { getBlogPost, getCMSCategoryTitle, getCMSImageURL } from "@/lib/cms";
 import { getRobotsMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
-export async function generateStaticParams() {
-  const cmsPosts = await getBlogPosts();
-  return cmsPosts.map((post) => ({ slug: post.slug }));
-}
+// CMS content is fetched fresh for each request, including newly published slugs.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const slug = (await params).slug;

@@ -6,6 +6,8 @@ import { getBlogCategories, getBlogPosts, getCMSCategoryTitle, getCMSImageURL } 
 import { getRichTextPreview } from "@/components/RichText";
 import BlogSidebar from "./BlogSidebar";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
   title: "Blog & Insights | BrainADZ Marketing",

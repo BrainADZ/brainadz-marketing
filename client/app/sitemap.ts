@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 
 import { getBlogPosts, getCaseStudies } from "@/lib/cms";
 
+export const dynamic = "force-dynamic";
+
 const siteURL = "https://brainadz.marketing";
 const staticRoutes = ["", "/about-us", "/services", "/blog", "/case-studies", "/contact"];
 const serviceRoutes = [

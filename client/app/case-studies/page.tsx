@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { getCaseStudies, getCaseStudyCategories, getCMSCategoryTitle, getCMSImageURL } from "@/lib/cms";
 import CaseStudiesClient, { type CaseStudy } from "./CaseStudiesClient";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   alternates: { canonical: "/case-studies" },
   title: "Case Studies | BrainADZ Marketing",
