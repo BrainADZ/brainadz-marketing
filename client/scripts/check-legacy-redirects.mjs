@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { legacyRedirects } from "../lib/legacy-urls.ts";
+import { legacyRedirects, removedServicePaths } from "../lib/legacy-urls.ts";
 
 // Check a local production build or the live site:
 // node scripts/check-legacy-redirects.mjs https://brainadz.marketing
@@ -14,10 +14,10 @@ for (const [source, destination] of Object.entries(legacyRedirects)) {
   assert.equal(target.status, 200, destination);
 }
 
-for (const path of ["/?p=22129", "/2025/09/11/peter-sons", "/downloads", "/not-a-real-page"]) {
-  assert.equal((await fetch(new URL(path, base))).status, 404, path);
+for (const path of [...removedServicePaths, "/?p=22129", "/2025/09/11/peter-sons", "/downloads", "/not-a-real-page"]) {
+  assert.equal((await fetch(new URL(path, base), { redirect: "manual" })).status, 404, path);
 }
 const sitemap = await (await fetch(new URL("/sitemap.xml", base))).text();
 assert.ok(sitemap.includes("https://brainadz.marketing/about-us</loc>"));
 assert.ok(!sitemap.includes("https://brainadz.marketing/about</loc>"));
-console.log(`PASS: ${Object.keys(legacyRedirects).length} redirects return 301 and resolve to 200; removed URLs return 404; sitemap uses /about-us.`);
+console.log(`PASS: ${Object.keys(legacyRedirects).length} redirects return 301 and resolve to 200; all ${removedServicePaths.length} retired service aliases and other removed URLs return direct 404; sitemap uses /about-us.`);

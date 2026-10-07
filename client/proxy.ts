@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isLegacyPostQuery } from "@/lib/legacy-urls";
+import { isLegacyPostQuery, isRemovedServicePath } from "@/lib/legacy-urls";
 
 type RedirectDocument = {
   from?: string;
@@ -29,6 +29,12 @@ function resolveDestination(redirect: RedirectDocument): string | null {
 }
 
 export async function proxy(request: NextRequest) {
+  // Let the missing route render the site's 404 page. Ignore stale CMS
+  // redirects for service aliases explicitly retired by the site owner.
+  if (isRemovedServicePath(request.nextUrl.pathname)) {
+    return NextResponse.next();
+  }
+
   // Old WordPress post IDs have no mapping in the new CMS. Serving the
   // homepage here falsely reports a successful page for removed content.
   if (isLegacyPostQuery(request.nextUrl.pathname, request.nextUrl.searchParams)) {

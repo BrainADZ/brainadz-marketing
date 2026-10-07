@@ -1,5 +1,7 @@
 # Search Console URL audit — 17 September 2026
 
+> Policy update, 7 October 2026: at the site owner's request, 22 former service aliases now return 404 instead of redirecting. The other 12 configured redirects remain. The counts and checks below describe the original September audit.
+
 All 606 rows from the supplied export were classified against current routes.
 This is not a live crawl of all 606 URLs. Representative live responses and
 all 34 configured redirects were checked separately.

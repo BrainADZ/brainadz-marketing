@@ -1,6 +1,6 @@
 import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { isLegacyPostQuery, legacyRedirects } from "../lib/legacy-urls.ts";
+import { isLegacyPostQuery, isRemovedServicePath, legacyRedirects } from "../lib/legacy-urls.ts";
 
 // Usage: node scripts/audit-legacy-urls.mjs <Search Console TSV export>
 const input = process.argv[2];
@@ -13,7 +13,8 @@ for (const line of entries) {
   const url = new URL(line.split(/\s/)[0]);
   const path = url.pathname.replace(/\/$/, "") || "/";
   let classification;
-  if (legacyRedirects[path]) classification = "redirect";
+  if (isRemovedServicePath(path)) classification = "removedServiceURL";
+  else if (legacyRedirects[path]) classification = "redirect";
   else if (isLegacyPostQuery(path, url.searchParams)) classification = "removedWordPressID";
   else if (existsSync(fileURLToPath(new URL(`../app${path}/page.tsx`, import.meta.url)))) classification = "existingRoute";
   else if (path.startsWith("/2025/09/11/")) classification = "unrelatedHistoricalURL";

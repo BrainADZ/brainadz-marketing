@@ -1,5 +1,7 @@
 # Redirect audit - 6 October 2026
 
+> Policy update, 7 October 2026: at the site owner's request, the 22 former `/services/...` aliases listed in `removedServicePaths` now return 404. Their static redirect rules were removed, and the proxy bypasses stale CMS redirect entries for these exact paths. The other 12 configured redirects remain. The findings below describe the earlier live audit, before this local change; deployment is required to apply the new policy.
+
 Live site checked: https://brainadz.marketing
 
 ## Findings
