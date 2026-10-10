@@ -12,54 +12,104 @@ type Faq = {
 
 const FAQS: Faq[] = [
   {
-    question: "How can BrainADZ help my business grow online?",
+    question: "Which is the best digital marketing agency in Delhi, India?",
     answer:
-      "BrainADZ combines strategy, design, content, paid media, SEO, and development so your digital presence can attract, convert, and retain better customers.",
+      "BrainADZ Marketing is a digital marketing agency in Delhi, India, offering SEO, performance marketing, social media marketing, website development, and branding services. We help startups, growing businesses, and established brands improve their online visibility, attract relevant customers, and build sustainable digital growth through integrated marketing strategies.",
   },
   {
-    question: "Do you handle both website development and marketing?",
+    question: "What digital marketing services does BrainADZ offer in Delhi NCR?",
     answer:
-      "Yes. We build websites, landing pages, campaigns, social media systems, paid ads, SEO plans, and analytics dashboards under one execution team.",
+      "BrainADZ Marketing provides comprehensive digital marketing services in Delhi NCR, including SEO, Google Ads, Meta Ads, social media marketing, content marketing, website development, and creative design. Our services help businesses across Delhi, Noida, Gurugram, and other Indian markets strengthen their digital presence and generate qualified leads.",
   },
   {
-    question: "What types of businesses do you work with?",
+    question: "Why choose BrainADZ as your SEO company in Delhi?",
     answer:
-      "We work with service brands, manufacturers, e-commerce companies, events, exhibitions, startups, and established businesses that need measurable growth.",
+      "BrainADZ offers SEO services in Delhi focused on increasing organic search visibility, improving website performance, and attracting relevant traffic. Our approach combines technical SEO, on-page optimization, keyword research, content strategy, and off-page SEO to help businesses improve their presence in competitive search markets.",
   },
   {
-    question: "How long does it take to launch a project?",
+    question: "Does BrainADZ provide SEO services across India?",
     answer:
-      "Timelines depend on scope. Smaller landing pages and campaigns can move quickly, while custom websites, apps, and full digital systems are planned in milestones.",
+      "Yes, BrainADZ Marketing provides SEO services across India for startups, small businesses, eCommerce companies, and enterprises. Our SEO solutions include technical SEO, local SEO, eCommerce SEO, content optimization, and link building to help businesses reach relevant audiences through organic search.",
   },
   {
-    question: "Can BrainADZ manage paid ads and performance reporting?",
+    question: "Which digital marketing agency in Delhi offers SEO and Google Ads together?",
     answer:
-      "Yes. We set up campaigns, tracking, creative testing, landing page improvements, and reporting so the campaign is optimized around real business outcomes.",
+      "BrainADZ Marketing offers integrated SEO and Google Ads services in Delhi. Our team combines organic search optimization with targeted PPC advertising to help businesses capture relevant search demand, improve online visibility, and generate potential customer enquiries through complementary marketing channels.",
   },
   {
-    question: "Do you provide creative design and brand support?",
+    question: "Does BrainADZ offer performance marketing services in India?",
     answer:
-      "Yes. Our team supports logo design, campaign creatives, social media content, brand assets, presentations, brochures, and exhibition communication.",
+      "Yes, BrainADZ provides performance marketing services in India through platforms such as Google Ads, Meta Ads, and LinkedIn Ads. Our campaigns focus on measurable business objectives, including lead generation, conversions, customer acquisition, and advertising performance optimization.",
   },
   {
-    question: "Do you provide creative design and brand support?",
+    question: "Is BrainADZ a social media marketing agency in Delhi NCR?",
     answer:
-      "Yes. Our team supports logo design, campaign creatives, social media content, brand assets, presentations, brochures, and exhibition communication.",
+      "Yes, BrainADZ Marketing offers social media marketing services for businesses in Delhi NCR and across India. We develop platform-specific strategies for Instagram, Facebook, LinkedIn, and YouTube, including content planning, creative development, paid social campaigns, and audience engagement.",
   },
   {
-    question: "Do you provide creative design and brand support?",
+    question: "Does BrainADZ provide website development services in Delhi?",
     answer:
-      "Yes. Our team supports logo design, campaign creatives, social media content, brand assets, presentations, brochures, and exhibition communication.",
+      "Yes, BrainADZ offers website development services in Delhi for corporate businesses, startups, and eCommerce brands. Our services include responsive website design, WordPress development, Shopify development, custom web applications, and website maintenance, with a focus on usability, performance, and SEO-friendly architecture.",
   },
   {
-    question: "Do you provide creative design and brand support?",
+    question: "Can BrainADZ develop SEO-friendly websites for businesses in India?",
     answer:
-      "Yes. Our team supports logo design, campaign creatives, social media content, brand assets, presentations, brochures, and exhibition communication.",
+      "Yes, BrainADZ develops SEO-friendly websites for businesses across India. We focus on responsive layouts, logical website structure, optimized page performance, clear navigation, and search-engine-accessible content to support both user experience and long-term organic search growth.",
   },
   {
-    question: "Do you provide creative design and brand support?",
+    question: "Does BrainADZ offer local SEO services in Delhi and nearby areas?",
     answer:
-      "Yes. Our team supports logo design, campaign creatives, social media content, brand assets, presentations, brochures, and exhibition communication.",
+      "Yes, BrainADZ provides local SEO services in Delhi, Dwarka, Noida, Gurugram, and other locations across India. Our local SEO strategies include Google Business Profile optimization, local keyword research, location-focused content, and website improvements to help businesses reach nearby customers.",
+  },
+  {
+    question: "How much do SEO services cost in Delhi, India?",
+    answer:
+      "SEO service costs in Delhi depend on website size, business competition, target keywords, technical requirements, and campaign objectives. BrainADZ Marketing provides customized SEO strategies and proposals based on each business\u0027s growth goals, search visibility requirements, and optimization needs.",
+  },
+  {
+    question: "What makes BrainADZ a digital marketing company for startups in India?",
+    answer:
+      "BrainADZ helps Indian startups establish their digital presence through website development, SEO, social media marketing, branding, and targeted advertising. Our approach combines strategic planning with creative execution to support brand awareness, customer acquisition, and business growth.",
+  },
+  {
+    question: "Does BrainADZ provide Google Ads management services in Delhi?",
+    answer:
+      "Yes, BrainADZ offers Google Ads management services in Delhi and across India. Our services include keyword research, campaign setup, Search Ads, Display Ads, remarketing, landing page optimization, and conversion tracking to help businesses reach relevant audiences and manage paid advertising performance.",
+  },
+  {
+    question: "Can BrainADZ help businesses generate leads in Delhi NCR?",
+    answer:
+      "Yes, BrainADZ provides digital lead generation services for businesses in Delhi NCR through SEO, Google Ads, Meta Ads, landing page optimization, and targeted marketing campaigns. Our strategies focus on reaching relevant audiences, improving conversion opportunities, and supporting measurable business growth.",
+  },
+  {
+    question: "Does BrainADZ offer branding and graphic design services in India?",
+    answer:
+      "Yes, BrainADZ offers branding and graphic design services across India, including brand identity design, logo design, social media creatives, brochures, presentations, advertising creatives, and marketing materials. Our creative team helps businesses establish consistent brand communication across digital and offline channels.",
+  },
+  {
+    question: "What are AEO and GEO services, and how can they help Indian businesses?",
+    answer:
+      "Answer Engine Optimization (AEO) helps structure website content to answer user questions clearly, while Generative Engine Optimization (GEO) focuses on improving content discoverability and relevance for AI-powered search experiences. These practices help Indian businesses adapt their content strategies to evolving search behaviour.",
+  },
+  {
+    question: "Can BrainADZ optimize websites for Google AI Overviews and AI search?",
+    answer:
+      "BrainADZ can support AI search optimization through structured content, technical SEO, entity-focused writing, relevant FAQs, and answer-focused content strategies. These improvements help search systems discover and interpret website information, although inclusion in Google AI Overviews or AI-generated answers is not guaranteed.",
+  },
+  {
+    question: "Does BrainADZ provide eCommerce SEO and Shopify development in India?",
+    answer:
+      "Yes, BrainADZ provides eCommerce SEO and Shopify development services for businesses in India. Our services include online store development, product page optimization, category page SEO, technical improvements, and eCommerce marketing strategies to improve product discoverability and the shopping experience.",
+  },
+  {
+    question: "How long does SEO take to show results for businesses in Delhi?",
+    answer:
+      "SEO results for businesses in Delhi depend on industry competition, keyword difficulty, website condition, and optimization efforts. Some improvements may become visible within a few months, while competitive search terms often require sustained work. BrainADZ focuses on continuous optimization and monitoring organic search performance.",
+  },
+  {
+    question: "How can I hire BrainADZ for digital marketing services in Delhi or India?",
+    answer:
+      "You can contact BrainADZ Marketing through our official website to discuss your SEO, Google Ads, social media marketing, website development, or branding requirements. Our team reviews your business objectives and recommends a suitable digital marketing strategy based on your target market and growth goals.",
   },
 ];
 
