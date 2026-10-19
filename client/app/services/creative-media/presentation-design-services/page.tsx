@@ -405,19 +405,19 @@ const WORK_ITEMS = [
   {
     title: "Sales presentation and solution narrative",
     category: "Sales Deck",
-    image: "/portfolio/instagram/2.png",
+    image: "/poster/Presentation Design 1.webp",
     imageAlt: "Professionally designed sales presentation by BrainADZ",
   },
   {
     title: "Corporate profile and capability deck",
     category: "Corporate Presentation",
-    image: "/portfolio/instagram/3.png",
+    image: "/poster/Presentation Design 2.webp",
     imageAlt: "Corporate presentation and company profile designed by BrainADZ",
   },
   {
     title: "Data-led strategy presentation",
     category: "Business Report",
-    image: "/portfolio/instagram/4.png",
+    image: "/poster/Presentation Design 3.webp",
     imageAlt: "Data visualization and strategy presentation designed by BrainADZ",
   },
 ];
@@ -581,7 +581,7 @@ export default function PresentationDesignServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/poster/Presentation-Design-Services-Overview.webp"
+                  src="/poster/Presentation Design.webp"
                   alt="Professional business presentation designed by BrainADZ"
                   className="h-full w-full object-cover object-top"
                 />

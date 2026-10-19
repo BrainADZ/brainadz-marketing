@@ -380,19 +380,19 @@ const WORK_ITEMS = [
   {
     title: "Data-led social infographic series",
     category: "Social Content",
-    image: "/portfolio/instagram/2.png",
+    image: "/poster/Infographic Design 1.webp",
     imageAlt: "Social media infographic designed by BrainADZ",
   },
   {
     title: "Process and service explainer graphic",
     category: "Business Communication",
-    image: "/portfolio/instagram/3.png",
+    image: "/poster/Infographic Design 2.webp",
     imageAlt: "Process infographic designed by BrainADZ",
   },
   {
     title: "Report and presentation data story",
     category: "Corporate Design",
-    image: "/portfolio/instagram/4.png",
+    image: "/poster/Infographic Design 3.webp",
     imageAlt: "Corporate report infographic designed by BrainADZ",
   },
 ];
@@ -555,7 +555,7 @@ export default function InfographicDesignServicesPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/poster/Infographic-Design-Services-Overview.webp"
+                  src="/poster/Infographic Design.webp"
                   alt="Infographic and data visualisation design by BrainADZ"
                   className="h-full w-full object-cover object-top"
                 />

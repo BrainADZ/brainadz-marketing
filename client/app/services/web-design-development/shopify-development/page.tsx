@@ -829,7 +829,7 @@ export default function ShopifyDevelopmentPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/shopify-development/shopify-dashboard.jpg"
+                  src="/poster/Shopify.webp"
                   alt="Shopify store and ecommerce management dashboard"
                   className="h-full w-full object-cover object-top"
                 />

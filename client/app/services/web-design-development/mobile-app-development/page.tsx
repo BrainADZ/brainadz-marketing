@@ -752,7 +752,7 @@ export default function MobileAppDevelopmentPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/mobile-app-development/app-dashboard.jpg"
+                  src="/poster/Mobile App Development Services.webp"
                   alt="Mobile application interface and management dashboard"
                   className="h-full w-full object-cover object-top"
                 />

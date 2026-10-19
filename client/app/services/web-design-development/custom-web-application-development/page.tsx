@@ -761,7 +761,7 @@ export default function CustomWebApplicationDevelopmentPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/custom-web-application/application-dashboard.jpg"
+                  src="/poster/Custom Web Application Development.webp"
                   alt="Custom web application dashboard and business workflow"
                   className="h-full w-full object-cover object-top"
                 />

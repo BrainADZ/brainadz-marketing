@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 const ACTIVE_ATTRIBUTE = "data-active-service-nav";
-const SERVICE_IMAGE_FALLBACK = "/poster/poster-img.jpeg";
+const SERVICE_IMAGE_FALLBACK = "/poster/Creative-Design-Services-Overview.webp";
 const SINGLE_OPEN_SECTION_IDS = new Set([
   "capabilities",
   "features",
@@ -23,6 +23,8 @@ export default function ServicePageInteractions() {
       if (image.dataset.serviceImageFallback === "true") return;
 
       image.dataset.serviceImageFallback = "true";
+      image.removeAttribute("srcset");
+      image.removeAttribute("sizes");
       image.src = SERVICE_IMAGE_FALLBACK;
     };
 

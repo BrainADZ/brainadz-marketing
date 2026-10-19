@@ -403,7 +403,7 @@ const WORK_ITEMS = [
   {
     title: "Multi-format platform adaptations",
     category: "Social Creative Adaptation",
-    image: "/poster/Social-Media-Creative-Design-Social-Creative-Adaptation.webp",
+    image: "/poster/Social-Media-Creative-Social-Creative-Adaptation.jpeg",
     imageAlt: "Multi-format social media creatives designed by BrainADZ",
   },
 ];
@@ -576,7 +576,7 @@ export default function SocialMediaCreativeDesignPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/poster/Social-Media-Creative-Overview.webp"
+                  src="/poster/Social-Media-Creative-Design-Overview.webp"
                   alt="Social media creative design and content system by BrainADZ"
                   className="h-full w-full object-cover object-top"
                 />

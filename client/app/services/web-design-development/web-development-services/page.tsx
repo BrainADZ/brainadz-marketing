@@ -731,7 +731,7 @@ export default function WebDevelopmentPage() {
             <figure>
               <div className="relative aspect-video overflow-hidden rounded-[14px] border border-black/10 bg-[#f7f7f7] shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/web-development/development-dashboard.jpg"
+                  src="/poster/Web Devlopment service.webp"
                   alt="Web development project and application dashboard"
                   className="h-full w-full object-cover object-top"
                 />
