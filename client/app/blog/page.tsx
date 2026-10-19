@@ -125,16 +125,12 @@ export default async function BlogPage() {
                   key={post.id}
                   className="group scroll-mt-28 overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_16px_42px_rgba(0,0,0,0.05)] transition duration-300 hover:-translate-y-1 hover:border-[#E1122B]/45 hover:shadow-[0_24px_60px_rgba(0,0,0,0.08)]"
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden border-b border-black/10 bg-white">
+                  <div className="relative aspect-[16/9] overflow-hidden border-b border-black/10 bg-white">
                     {post.image ? <Image
                       src={post.image}
                       alt={post.imageAlt}
                       fill
-                      className={`transition-transform duration-500 group-hover:scale-[1.03] ${
-                        post.image === "/perfomance.png"
-                          ? "object-contain p-8"
-                          : "object-cover object-top"
-                      }`}
+                      className="object-contain object-center"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 38vw"
                     /> : null}
                   </div>
