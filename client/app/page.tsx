@@ -11,6 +11,7 @@ import GlobalPresenceSection from "@/section/Maps";
 import ServicesCardsSection from "@/section/serviceSection";
 import TeamShowcaseSection from "@/section/teamShowcase";
 import TestimonialSection from "@/section/Testimonials";
+import { homeSchemas } from "@/lib/home-schemas";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -19,6 +20,15 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div>
+      {homeSchemas.map((schema) => (
+        <script
+          key={schema["@id"]}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
+          }}
+        />
+      ))}
       <main >
         {/* <Hero/> */}
         <Hero/>
