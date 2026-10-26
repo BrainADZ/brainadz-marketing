@@ -227,11 +227,11 @@ export default function Footer() {
                 <h3 className="text-[15px] font-semibold text-white">Contact</h3>
                 <div className="mt-6 space-y-4 text-[12px] font-medium leading-5 text-white/72">
                   <a
-                    href="mailto:enquiry@brainadz.com"
+                    href="mailto:preeti@brainadz.com"
                     className="flex items-start gap-2.5 transition hover:text-white"
                   >
                     <Mail className="mt-0.5 h-4 w-4 shrink-0" />
-                    enquiry@brainadz.com
+                    preeti@brainadz.com
                   </a>
                   <a
                     href="tel:+919540468023"
