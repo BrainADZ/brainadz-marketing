@@ -9,6 +9,7 @@ import Navbar from "@/components/header";
 import Footer from "@/components/Footer";
 import ServicePageInteractions from "@/components/ServicePageInteractions";
 import EnquiryPopup from "@/components/Popup";
+import TitleCaseContent from "@/components/TitleCaseContent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -86,6 +87,7 @@ export default function RootLayout({
           `}
         </Script>
         <AosInit />
+        <TitleCaseContent />
         <ServicePageInteractions />
         <Navbar />
         {children}

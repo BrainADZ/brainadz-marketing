@@ -25,6 +25,12 @@ body {
   font-optical-sizing: auto;
 }
 
+/* Text casing is handled by TitleCaseContent so connecting words stay lowercase. */
+.uppercase,
+.lowercase {
+  text-transform: none;
+}
+
 html {
   scroll-behavior: smooth;
 }
