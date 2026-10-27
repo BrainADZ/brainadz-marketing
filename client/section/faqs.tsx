@@ -222,6 +222,7 @@ export default function FaqSection() {
                 return (
                   <div
                     key={`${faq.question}-${index}`}
+                    data-title-case
                     className={`border-b border-black/10 transition-colors last:border-b-0 ${
                       isOpen ? "bg-[#fff7f7]" : "bg-white hover:bg-[#fbfbfb]"
                     }`}

@@ -25,7 +25,7 @@ body {
   font-optical-sizing: auto;
 }
 
-/* Text casing is handled by TitleCaseContent so connecting words stay lowercase. */
+/* Text casing is handled by TitleCaseContent. */
 .uppercase,
 .lowercase {
   text-transform: none;

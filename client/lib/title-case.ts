@@ -31,3 +31,23 @@ export function toWebsiteTitleCase(value: string): string {
     return lower.charAt(0).toLocaleUpperCase("en") + lower.slice(1);
   });
 }
+
+export function toWebsiteSentenceCase(value: string): string {
+  let startsSentence = true;
+
+  return value.replace(WORD, (word, offset: number) => {
+    const before = value.slice(0, offset);
+    if (/[.!?]\s*["'“”‘’([{]*\s*$/.test(before)) startsSentence = true;
+
+    const tokenStart = Math.max(before.lastIndexOf(" "), before.lastIndexOf("\n"), before.lastIndexOf("\t")) + 1;
+    const token = value.slice(tokenStart).split(/\s/)[0];
+    const protectedWord = /[@:/\\]/.test(token) || /^\d/.test(word) || ACRONYMS.has(word) ||
+      /[a-z][A-Z]|[A-Z][a-z]+[A-Z]/.test(word);
+    const lower = word.toLocaleLowerCase("en");
+    const result = protectedWord ? word : startsSentence
+      ? lower.charAt(0).toLocaleUpperCase("en") + lower.slice(1)
+      : lower;
+    startsSentence = false;
+    return result;
+  });
+}

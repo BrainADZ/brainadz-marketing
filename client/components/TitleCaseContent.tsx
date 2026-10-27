@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { toWebsiteTitleCase } from "@/lib/title-case";
+import { toWebsiteSentenceCase, toWebsiteTitleCase } from "@/lib/title-case";
 
 const SKIP = "script, style, noscript, textarea, input, select, option, code, pre, svg, [contenteditable], [data-preserve-case]";
 
@@ -17,7 +17,9 @@ export default function TitleCaseContent() {
         if (!parent || parent.closest(SKIP)) continue;
         const original = node.nodeValue;
         if (!original || !/[a-z]/i.test(original)) continue;
-        const formatted = toWebsiteTitleCase(original);
+        const formatted = parent.closest("h1, h2, h3, h4, h5, h6, [data-title-case]")
+          ? toWebsiteTitleCase(original)
+          : toWebsiteSentenceCase(original);
         if (formatted !== original) node.nodeValue = formatted;
       }
     };
