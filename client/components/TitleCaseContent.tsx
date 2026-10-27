@@ -17,7 +17,7 @@ export default function TitleCaseContent() {
         if (!parent || parent.closest(SKIP)) continue;
         const original = node.nodeValue;
         if (!original || !/[a-z]/i.test(original)) continue;
-        const formatted = parent.closest("h1, h2, h3, h4, h5, h6, [data-title-case]")
+        const formatted = parent.closest('h1, h2, h3, h4, h5, h6, [data-title-case], [id="faqs"], [id="all-faqs"]')
           ? toWebsiteTitleCase(original)
           : toWebsiteSentenceCase(original);
         if (formatted !== original) node.nodeValue = formatted;
