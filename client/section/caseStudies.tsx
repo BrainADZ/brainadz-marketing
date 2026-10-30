@@ -165,7 +165,7 @@ export default function CaseStudiesSection() {
             </p>
           </div>
             <h2 className="mt-3 text-[38px] font-semibold leading-[1.05] text-black sm:text-[48px] lg:text-[58px]">
-              Case Studies
+              Portfolio
             </h2>
           </div>
 

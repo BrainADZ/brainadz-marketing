@@ -104,19 +104,54 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
   ],
   SEO: [
     {
-      title: "National Engineers SEO",
-      image: "/portfolio/seo/",
+      title: "National Engineers GSC (6 Months)",
+      image: "/portfolio/seo/National Engineers-GSC.webp",
       href: "https://nationalengrs.com",
     },
     {
-      title: "Dairy Best Organic Reach",
-      image: "/portfolio/seo/",
-      href: "https://livlite.co.in",
+      title: "National Engineers GA4 (6 Months)",
+      image: "/portfolio/seo/National Engineers-GA4.webp",
+      href: "https://nationalengrs.com",
+    },
+    {
+      title: "Packology GSC (2 Months)",
+      image: "/portfolio/seo/Packology-GSC.webp",
+      href: "https://packology.in",
+    },
+    {
+      title: "Packology GA4 (2 Months)",
+      image: "/portfolio/seo/Packology-GA4.webp",
+      href: "https://packology.in",
+    },
+    {
+      title: "Comac India GSC (6 Months)",
+      image: "/portfolio/seo/Comac India-GSC.webp",
+      href: "https://comacindia.com",
     },
     {
       title: "Lords Xtra Search Performance",
       image: "/portfolio/seo/",
       href: "https://lordsxtra.in",
+    },
+    {
+      title: "Bullet Master GSC (6 Months)",
+      image: "/portfolio/seo/Bullet Master-GSC.webp",
+      href: "https://bulletmaster.in/",
+    },
+    {
+      title: "Bullet Master GA4 (6 Months)",
+      image: "/portfolio/seo/Bullet Master-GA4.webp",
+      href: "https://bulletmaster.in/",
+    },
+    {
+      title: "Rubber Hose India GSC (6 Months)",
+      image: "/portfolio/seo/Rubber Hose India-GSC.webp",
+      href: "https://rubberhoseindia.com/",
+    },
+    {
+      title: "Rubber Hose India GA4 (6 Months)",
+      image: "/portfolio/seo/Rubber Hose India-GA4.webp",
+      href: "https://rubberhoseindia.com/",
     },
   ],
 

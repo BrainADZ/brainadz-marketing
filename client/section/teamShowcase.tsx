@@ -21,7 +21,7 @@ type TeamGroup = {
 const PROJECT_MANAGERS: TeamMember[] = [
   {
     name: "Aastha Singh",
-    designation: "Sr. Business Development Manager",
+    designation: "Business Development Manager",
     image: "/teams/Aastha.webp",
     linkedin: "https://www.linkedin.com/in/aastha-singh-78a531211/",
     email: "bdm@brainadz.marketing",
@@ -36,11 +36,11 @@ const PROJECT_MANAGERS: TeamMember[] = [
     phone: "+91 95602 73794", // Replace with actual number
   },
   {
-    name: "Pooja Paswan",
+    name: "Ravneet Kaur",
     designation: "Business Development Manager",
-    image: "/teams/Pooja.webp",
-    linkedin: "https://www.linkedin.com/in/pooja-paswan-620693245/",
-    email: "info@brainadzlive.com",
+    image: "/teams/Ravneet.webp",
+    linkedin: "https://www.linkedin.com/in/ravneetkaur2001/",
+    email: "srbd@brainadz.marketing",
     phone: "+91 70489 15802", // Replace with actual number
   },
   {

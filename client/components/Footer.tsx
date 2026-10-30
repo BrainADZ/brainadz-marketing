@@ -68,11 +68,11 @@ const FOOTER_LINKS = [
   {
   title: "Portfolio",
   links: [
-    { label: "Digital Marketing", href: "/case-studies?category=digital-marketing#portfolio" },
-    { label: "Performance Marketing", href: "/case-studies?category=performance-marketing#portfolio" },
-    { label: "Web Design", href: "/case-studies?category=web-design#portfolio" },
-    { label: "SEO", href: "/case-studies?category=seo#portfolio" },
-    { label: "Creative Media", href: "/case-studies?category=creative-media#portfolio" },
+    { label: "Digital Marketing", href: "portfolio?category=digital-marketing#portfolio" },
+    { label: "Performance Marketing", href: "portfolio?category=performance-marketing#portfolio" },
+    { label: "Web Design", href: "portfolio?category=web-design#portfolio" },
+    { label: "SEO", href: "portfolio?category=seo#portfolio" },
+    { label: "Creative Media", href: "portfolio?category=creative-media#portfolio" },
   ],
 },
   {
