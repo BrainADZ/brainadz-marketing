@@ -129,8 +129,13 @@ const PORTFOLIO_DATA: Record<TabKey, PortfolioItem[]> = {
       href: "https://comacindia.com",
     },
     {
-      title: "Lords Xtra Search Performance",
-      image: "/portfolio/seo/",
+      title: "Lords Xtra GSC (6 Months)",
+      image: "/portfolio/seo/Lords Xtra-GSC.webp",
+      href: "https://lordsxtra.in",
+    },
+    {
+      title: "Lords Xtra GA4 (6 Months)",
+      image: "/portfolio/seo/Lords Xtra-GA4.webp",
       href: "https://lordsxtra.in",
     },
     {
