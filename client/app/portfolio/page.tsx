@@ -735,7 +735,7 @@ function PortfolioCard({
       </div>
 
       <div className="pt-4">
-        <h4 className="text-[18px] font-semibold leading-tight text-black">
+        <h4 data-preserve-case className="text-[18px] font-semibold leading-tight text-black">
           {item.title}
         </h4>
 

@@ -21,7 +21,7 @@ type TeamGroup = {
 const PROJECT_MANAGERS: TeamMember[] = [
   {
     name: "Aastha Singh",
-    designation: "Business Development Manager",
+    designation: "Sr. Business Development Manager",
     image: "/teams/Aastha.webp",
     linkedin: "https://www.linkedin.com/in/aastha-singh-78a531211/",
     email: "bdm@brainadz.marketing",
@@ -363,13 +363,13 @@ function TeamCard({ member }: { member: TeamMember }) {
       </div>
 
       <div className="pt-4">
-        <h4 className="inline-block text-[17px] font-semibold leading-tight text-black">
+        <h4 data-preserve-case className="inline-block text-[17px] font-semibold leading-tight text-black">
           <span className="bg-[linear-gradient(#E1122B,#E1122B)] bg-size-[0%_2px] bg-bottom-left bg-no-repeat pb-0.5 transition-[background-size] duration-300 group-hover:bg-size-[100%_2px]">
             {member.name}
           </span>
         </h4>
 
-        <p className="mt-1 text-[14px] font-medium leading-5 text-black/50">
+        <p data-preserve-case className="mt-1 text-[14px] font-medium leading-5 text-black/50">
           {member.designation}
         </p>
 

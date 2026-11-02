@@ -116,7 +116,7 @@ export default function Footer() {
     <>
       <FooterCta />
 
-      <footer className="relative isolate overflow-hidden bg-[#111013] text-white">
+      <footer data-preserve-case className="relative isolate overflow-hidden bg-[#111013] text-white">
   {/* Full-footer background image */}
   <div
     aria-hidden="true"

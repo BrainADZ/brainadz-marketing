@@ -17,7 +17,13 @@ export default function TitleCaseContent() {
         if (!parent || parent.closest(SKIP)) continue;
         const original = node.nodeValue;
         if (!original || !/[a-z]/i.test(original)) continue;
-        const formatted = parent.closest('h1, h2, h3, h4, h5, h6, [data-title-case], [id="faqs"], [id="all-faqs"]')
+        const isHeading = parent.closest('h1, h2, h3, h4, h5, h6, [data-title-case]');
+        const paragraph = parent.closest("p");
+        // Short paragraphs often contain names, roles, locations, or UI labels.
+        // Only prose paragraphs should be rewritten as sentences.
+        const isProse = paragraph && (original.trim().split(/\s+/).length >= 8 || /[.!?]\s*$/.test(original.trim()));
+        if (!isHeading && !isProse) continue;
+        const formatted = isHeading
           ? toWebsiteTitleCase(original)
           : toWebsiteSentenceCase(original);
         if (formatted !== original) node.nodeValue = formatted;
