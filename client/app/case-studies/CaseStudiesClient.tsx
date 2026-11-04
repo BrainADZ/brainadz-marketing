@@ -480,7 +480,7 @@ export default function CaseStudiesClient({
                   href={caseStudy.href}
                   className="group flex h-full flex-col overflow-hidden rounded-[14px] border border-black/10 bg-white shadow-[0_12px_36px_rgba(0,0,0,0.04)] transition duration-300 hover:-translate-y-1 hover:border-[#E1122B]/40 hover:shadow-[0_20px_55px_rgba(0,0,0,0.08)]"
                 >
-                  <div className="relative h-64 overflow-hidden bg-[#f1ecea]">
+                  <div className="relative h-auto overflow-hidden bg-[#f1ecea]">
                     <img
                       src={caseStudy.image}
                       alt={caseStudy.title}
