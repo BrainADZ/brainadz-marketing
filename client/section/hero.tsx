@@ -1,8 +1,8 @@
 ﻿export default function Hero() {
   return (
-    <section className="relative min-h-[calc(100vh-58px)] overflow-hidden bg-black text-white">
+    <section className="relative overflow-hidden bg-black text-white lg:h-[calc(100vh-58px)]">
       <video
-        className="absolute inset-0 h-full w-full object-cover"
+        className="block h-auto w-full lg:absolute lg:inset-0 lg:h-full lg:object-cover"
         autoPlay
         muted
         loop
